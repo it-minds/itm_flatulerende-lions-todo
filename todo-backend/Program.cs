@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
 using todo_backend.Models;
 
@@ -20,50 +21,61 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// Add data context
 using var db = new ListContext();
 // Note: This sample requires the database to be created before running.
 Console.WriteLine($"Database path: {db.DbPath}.");
 
 // Create
-Console.WriteLine("Laver liste 1");
-db.Add(new Lists { ListsId = 1, ListsName = "Liste1"});
-db.SaveChanges();
+//Console.WriteLine("Laver liste 1");
+//db.Add(new Lists { ListsId = 1, ListsName = "Liste1"});
+//db.SaveChanges();
 
-Console.WriteLine("Laver liste 2");
-db.Add(new Lists { ListsId = 2, ListsName = "Liste2" });
-db.SaveChanges();
+//Console.WriteLine("Laver liste 2");
+//db.Add(new Lists { ListsId = 2, ListsName = "Liste2" });
+//db.SaveChanges();
 
 // Read
 
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+//var summaries = new[]
+//{
+//    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+//};
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateTime.Now.AddDays(index),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+//app.MapGet("/weatherforecast", () =>
+//{
+//    var forecast =  Enumerable.Range(1, 5).Select(index =>
+//        new WeatherForecast
+//        (
+//            DateTime.Now.AddDays(index),
+//            Random.Shared.Next(-20, 55),
+//            summaries[Random.Shared.Next(summaries.Length)]
+//        ))
+//        .ToArray();
+//    return forecast;
+//})
+//.WithName("GetWeatherForecast");
+
+app.MapGet("/", () => "Hello Todo-list");
+
+app.MapGet("/todoitems", async () =>
+    await db.Lists.ToListAsync());
 
 app.MapGet("/lists", () =>
 {
-    Console.WriteLine("Querying for a blog");
     var list = db.Lists
-        .OrderBy(l => l.ListsId)
-        .First();
+        .OrderBy(l => l.ListsId);
     return list;
 })
 .WithName("GetListList");
+
+// List of endpoints
+    /*
+     * All lists
+     * Specific list
+     * 
+     */
 
 app.Run();
 
