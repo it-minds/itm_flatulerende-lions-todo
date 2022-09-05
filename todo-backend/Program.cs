@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
+using todo_backend;
 using todo_backend.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,13 +27,13 @@ using var db = new ListContext();
 // Note: This sample requires the database to be created before running.
 Console.WriteLine($"Database path: {db.DbPath}.");
 
-// Create
+//Create
 //Console.WriteLine("Laver liste 1");
-//db.Add(new Lists { ListsId = 1, ListsName = "Liste1"});
+//db.Add(new TodoList { TodoListName = "Liste1", TodoListDesc = "Bare lige en tester nummer 1", TodoListDeleted = false });
 //db.SaveChanges();
 
-//Console.WriteLine("Laver liste 2");
-//db.Add(new Lists { ListsId = 2, ListsName = "Liste2" });
+//Console.WriteLine("Laver liste 1");
+//db.Add(new TodoList { TodoListName = "Liste2", TodoListDesc = "Bare lige en tester nummer 2", TodoListDeleted = false });
 //db.SaveChanges();
 
 // Read
@@ -59,22 +60,37 @@ Console.WriteLine($"Database path: {db.DbPath}.");
 
 app.MapGet("/", () => "Hello Todo-list");
 
+app.MapGet("/seedLists", () =>
+{
+    SeedLists.SeedTodoLists(db);
+});
+
 app.MapGet("/todoitems", async () =>
-    await db.Lists.ToListAsync());
+    await db.TodoList.ToListAsync());
 
 app.MapGet("/lists", () =>
 {
-    var list = db.Lists
-        .OrderBy(l => l.ListsId);
+    var list = db.TodoList
+        .OrderBy(l => l.TodoListId);
     return list;
 })
 .WithName("GetListList");
 
 // List of endpoints
     /*
-     * All lists
-     * Specific list
-     * 
+     * Get All todo-lists
+     * Get Specific todo-list
+     * Get Tasks on a specific todo-list
+     * Get Subtasks for a specific task
+     * Add todo-list
+     * Add task to todo-list
+     * Add subtask to task
+     * Change todo-list
+     * Change task
+     * Change subtask
+     * Delete todo-list
+     * Delete task
+     * Delete subtask
      */
 
 app.Run();

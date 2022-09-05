@@ -6,7 +6,6 @@ namespace todo_backend.Models
     {
         public string DbPath { get; }
 
-        public DbSet<Lists> Lists { get; set; }
         public DbSet<TodoList> TodoList { get; set; }
         public DbSet<TodoTask> TodoTask { get; set; }
         public DbSet<SubTask> SubTask { get; set; }

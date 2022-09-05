@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using todo_backend.Models;
 
@@ -10,9 +11,10 @@ using todo_backend.Models;
 namespace todo_backend.Migrations
 {
     [DbContext(typeof(ListContext))]
-    partial class ListContextModelSnapshot : ModelSnapshot
+    [Migration("20220905125317_RemoveListTable")]
+    partial class RemoveListTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.8");
@@ -26,10 +28,10 @@ namespace todo_backend.Migrations
                     b.Property<bool>("SubComplete")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("SubCompletionTime")
+                    b.Property<DateTime>("SubCompletionTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("SubDeadline")
+                    b.Property<DateTime>("SubDeadline")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("SubDeleted")
@@ -81,13 +83,13 @@ namespace todo_backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("CompletionTime")
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("TaskComplete")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("TaskCompletionTime")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("TaskDeadline")
+                    b.Property<DateTime>("TaskDeadline")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("TaskDeleted")
