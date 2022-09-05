@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata;
+using todo_backend.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -15,6 +19,22 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+using var db = new ListContext();
+// Note: This sample requires the database to be created before running.
+Console.WriteLine($"Database path: {db.DbPath}.");
+
+// Create
+Console.WriteLine("Laver liste 1");
+db.Add(new Lists { ListsId = 1, ListsName = "Liste1"});
+db.SaveChanges();
+
+Console.WriteLine("Laver liste 2");
+db.Add(new Lists { ListsId = 2, ListsName = "Liste2" });
+db.SaveChanges();
+
+// Read
+
 
 var summaries = new[]
 {
@@ -34,6 +54,16 @@ app.MapGet("/weatherforecast", () =>
     return forecast;
 })
 .WithName("GetWeatherForecast");
+
+app.MapGet("/lists", () =>
+{
+    Console.WriteLine("Querying for a blog");
+    var list = db.Lists
+        .OrderBy(l => l.ListsId)
+        .First();
+    return list;
+})
+.WithName("GetListList");
 
 app.Run();
 
