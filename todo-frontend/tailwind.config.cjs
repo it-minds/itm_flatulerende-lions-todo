@@ -1,15 +1,9 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
-  mode: 'jit',
-	future: {
-		hoverOnlyWhenSupported: true,
-	},
 	content: [
-		'./pages/**/*.{html,js,ts,jsx,tsx}',
-		'./src/**/**/**/**/**/*.{html,js,ts,jsx,tsx}',
+	  "./src/**/*.{js,jsx,ts,tsx}",
 	],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
+	theme: {
+	  extend: {},
+	},
+	plugins: [],
+  }
