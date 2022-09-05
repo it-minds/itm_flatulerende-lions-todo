@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>todo_backend</RootNamespace>
+    <UserSecretsId>60a4d0bc-8bab-4861-a58a-f9eba54ad1cc</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
