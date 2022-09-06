@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./index.css";
 import reactLogo from "./assets/react.svg";
 import { getTodo, getTodos } from "./utils/api";
+import { Link } from "react-router-dom";
 
 function App() {
 	const [count, setCount] = useState(0);
@@ -26,6 +27,11 @@ function App() {
 			<p className="read-the-docs">
 				Click on the Vite and React logos to learn more
 			</p>
+			<nav>
+				<Link to="/">App</Link>
+				<Link to="/Home">Home</Link>
+				<Link to="/TodoList">Todo List</Link>
+			</nav>
 		</div>
 	);
 }
