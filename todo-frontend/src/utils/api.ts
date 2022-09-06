@@ -7,7 +7,12 @@ export async function getTodos() {
 }
 
 export async function getTodo(id: number) {
-	fetch(`${BASE_PATH}/todoitems/${id}`)
-		.then((response) => response.json())
-		.then((data) => console.log(data));
+	const response: Response = await fetch(`${BASE_PATH}/todoitems/${id}`);
+
+	const data: JSON = await response.json();
+
+	if (response.ok) {
+		return data;
+	}
+	return false;
 }
