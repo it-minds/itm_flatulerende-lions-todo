@@ -98,6 +98,21 @@ await db.TodoList.FindAsync(id) is TodoList todoList ? Results.Ok(todoList) : Re
  * Delete subtask
  */
 
+
+
+app.MapDelete("/subtask/{subId}", async (int subId) =>
+{
+	
+	if (await db.SubTask.FindAsync(subId) is SubTask subTask)
+	{
+		db.SubTask.Remove(subTask);
+		await db.SaveChangesAsync();
+		return Results.Ok(subTask);
+	}
+		return Results.NotFound();
+});
+
+
 app.Run();
 
 record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
