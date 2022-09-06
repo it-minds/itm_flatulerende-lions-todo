@@ -38,16 +38,19 @@ app.MapGet("/seedLists", () =>
 app.MapGet("/todoitems", async () =>
     await db.TodoList.ToListAsync());
 
-app.MapGet("/todoitems/{id}", async (int id) =>
-await db.TodoList.FindAsync(id) is TodoList todoList ? Results.Ok(todoList) : Results.NotFound());
+app.MapGet("/todoitems/{id}", async (int todoId) =>
+await db.TodoList.FindAsync(todoId) 
+is TodoList todoList 
+? Results.Ok(todoList) 
+: Results.NotFound());
 
 app.MapGet("/tasks", async () =>
     await db.TodoTask.ToListAsync());
 
-app.MapGet("/tasks/{id}", async (int id) =>
+app.MapGet("/tasks/{todoId}", async (int todoId) =>
 {
     var tasks = await db.TodoTask
-        .Where(t => t.TodoListId == id)
+        .Where(t => t.TodoListId == todoId)
         .ToListAsync();
 
     if (tasks.Count < 1)
@@ -60,10 +63,10 @@ app.MapGet("/tasks/{id}", async (int id) =>
 app.MapGet("/subtasks", async () =>
     await db.SubTask.ToListAsync());
 
-app.MapGet("/subtasks/{id}", async (int id) =>
+app.MapGet("/subtasks/{taskId}", async (int taskId) =>
 {
     var subtasks = await db.SubTask
-        .Where(t => t.TodoTaskId == id)
+        .Where(t => t.TodoTaskId == taskId)
         .ToListAsync();
 
     if (subtasks.Count < 1)
