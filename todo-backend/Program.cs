@@ -76,22 +76,27 @@ app.MapGet("/lists", () =>
 })
 .WithName("GetListList");
 
+app.MapGet("/todoitems/{id}", async (int id) =>
+await db.TodoList.FindAsync(id) is TodoList todoList ? Results.Ok(todoList) : Results.NotFound()
+
+);
+
 // List of endpoints
-    /*
-     * Get All todo-lists
-     * Get Specific todo-list
-     * Get Tasks on a specific todo-list
-     * Get Subtasks for a specific task
-     * Add todo-list
-     * Add task to todo-list
-     * Add subtask to task
-     * Change todo-list
-     * Change task
-     * Change subtask
-     * Delete todo-list
-     * Delete task
-     * Delete subtask
-     */
+/*
+ * Get All todo-lists
+ * Get Specific todo-list
+ * Get Tasks on a specific todo-list
+ * Get Subtasks for a specific task
+ * Add todo-list
+ * Add task to todo-list
+ * Add subtask to task
+ * Change todo-list
+ * Change task
+ * Change subtask
+ * Delete todo-list
+ * Delete task
+ * Delete subtask
+ */
 
 app.Run();
 
