@@ -68,14 +68,6 @@ app.MapGet("/seedLists", () =>
 app.MapGet("/todoitems", async () =>
     await db.TodoList.ToListAsync());
 
-app.MapGet("/lists", () =>
-{
-    var list = db.TodoList
-        .OrderBy(l => l.TodoListId);
-    return list;
-})
-.WithName("GetListList");
-
 app.MapGet("/todoitems/{id}", async (int id) =>
 await db.TodoList.FindAsync(id) is TodoList todoList ? Results.Ok(todoList) : Results.NotFound()
 
@@ -83,8 +75,8 @@ await db.TodoList.FindAsync(id) is TodoList todoList ? Results.Ok(todoList) : Re
 
 // List of endpoints
 /*
- * Get All todo-lists
- * Get Specific todo-list
+ * Get All todo-lists - Done
+ * Get Specific todo-list 
  * Get Tasks on a specific todo-list
  * Get Subtasks for a specific task
  * Add todo-list
