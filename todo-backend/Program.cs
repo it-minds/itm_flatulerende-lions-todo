@@ -87,6 +87,9 @@ app.MapGet("/tasks/{id}", async (int id) =>
     return Results.Ok(tasks);
 });
 
+app.MapGet("/subtasks", async () =>
+    await db.SubTask.ToListAsync());
+
 app.MapGet("/subtasks/{id}", async (int id) =>
 {
     var subtasks = await db.SubTask
