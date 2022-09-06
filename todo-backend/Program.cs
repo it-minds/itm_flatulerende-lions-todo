@@ -28,37 +28,6 @@ using var db = new ListContext();
 // Note: This sample requires the database to be created before running.
 Console.WriteLine($"Database path: {db.DbPath}.");
 
-//Create
-//Console.WriteLine("Laver liste 1");
-//db.Add(new TodoList { TodoListName = "Liste1", TodoListDesc = "Bare lige en tester nummer 1", TodoListDeleted = false });
-//db.SaveChanges();
-
-//Console.WriteLine("Laver liste 1");
-//db.Add(new TodoList { TodoListName = "Liste2", TodoListDesc = "Bare lige en tester nummer 2", TodoListDeleted = false });
-//db.SaveChanges();
-
-// Read
-
-
-//var summaries = new[]
-//{
-//    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-//};
-
-//app.MapGet("/weatherforecast", () =>
-//{
-//    var forecast =  Enumerable.Range(1, 5).Select(index =>
-//        new WeatherForecast
-//        (
-//            DateTime.Now.AddDays(index),
-//            Random.Shared.Next(-20, 55),
-//            summaries[Random.Shared.Next(summaries.Length)]
-//        ))
-//        .ToArray();
-//    return forecast;
-//})
-//.WithName("GetWeatherForecast");
-
 app.MapGet("/", () => "Hello Todo-list");
 
 app.MapGet("/seedLists", () =>
@@ -145,10 +114,10 @@ app.MapPost("/subtasks", async (SubTask subtask) =>
  * Add subtask to task - Problematisk
  * Change todo-list
  * Change task
- * Change subtask
- * Delete todo-list
- * Delete task
- * Delete subtask
+ * Change subtask 
+ * Delete todo-list - Done
+ * Delete task - Done
+ * Delete subtask - Done
  * 
  * Eventuelt validering (Model validation - se docs)
  */
