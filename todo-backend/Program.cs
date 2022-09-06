@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
@@ -98,11 +99,67 @@ app.MapPost("/subtasks", async (SubTask subtask) =>
     await db.SaveChangesAsync();
 
     return Results.Created($"/todoitems/{subtask.SubTaskId}", subtask);
-
-    // Vi kommer til at oprette en ny task hver gang vi poster!!
 });
 
+app.MapPut("/todoitems/{id}", async (TodoList inputTodoList) =>
+{
+	var todoList = await db.TodoList.FindAsync(inputTodoList.TodoListId);
 
+	if (todoList is null)
+	{
+		return Results.NotFound();
+	}
+
+	todoList.TodoListName = inputTodoList.TodoListName;
+	todoList.TodoListDesc = inputTodoList.TodoListDesc;
+	todoList.TodoListDeleted = inputTodoList.TodoListDeleted;
+
+    await db.SaveChangesAsync();
+
+	return Results.NoContent();
+});
+
+app.MapPut("/tasks/{id}", async (TodoTask inputTask) =>
+{
+    var task = await db.TodoTask.FindAsync(inputTask.TodoTaskId);
+
+    if (task is null)
+    {
+        return Results.NotFound();
+    }
+
+    task.TaskName = inputTask.TaskName;
+    task.TaskDesc = inputTask.TaskDesc;
+    task.TaskComplete = inputTask.TaskComplete;
+    task.TaskDeleted = inputTask.TaskDeleted;
+    task.TaskDeadline = inputTask.TaskDeadline;
+    task.TaskCompletionTime = inputTask.TaskCompletionTime;
+
+    await db.SaveChangesAsync();
+
+    return Results.NoContent();
+});
+
+app.MapPut("/subtasks/{id}", async (SubTask inputSubtask) =>
+{
+    var subtask = await db.SubTask.FindAsync(inputSubtask.SubTaskId);
+
+    if (subtask is null)
+    {
+        return Results.NotFound();
+    }
+
+    subtask.SubName = inputSubtask.SubName;
+    subtask.SubDesc = inputSubtask.SubDesc;
+    subtask.SubComplete = inputSubtask.SubComplete;
+    subtask.SubDeleted = inputSubtask.SubDeleted;
+    subtask.SubDeadline = inputSubtask.SubDeadline;
+    subtask.SubCompletionTime = inputSubtask.SubCompletionTime;
+
+    await db.SaveChangesAsync();
+
+    return Results.NoContent();
+});
 
 // List of endpoints
 /*
@@ -111,8 +168,8 @@ app.MapPost("/subtasks", async (SubTask subtask) =>
  * Get Tasks on a specific todo-list - Done
  * Get Subtasks for a specific task - Done
  * Add todo-list - Done
- * Add task to todo-list - Problematisk
- * Add subtask to task - Problematisk
+ * Add task to todo-list - Done
+ * Add subtask to task - Done
  * Change todo-list
  * Change task
  * Change subtask 
@@ -121,6 +178,8 @@ app.MapPost("/subtasks", async (SubTask subtask) =>
  * Delete subtask - Done
  * 
  * Eventuelt validering (Model validation - se docs)
+ * Det var nok en god ide at bruge DTO til tasks og subtasks
+ * Eventuelt antal af tasks på de forskellige todolister og antal subtasks for en task i database-modellen
  */
 
 app.MapDelete("/todolists/{todoId}", async (int todoId) =>
