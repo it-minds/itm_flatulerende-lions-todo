@@ -11,6 +11,5 @@
         public DateTime? SubCompletionTime { get; set; }
 
         public int TodoTaskId { get; set; }
-        public TodoTask TodoTask { get; set; }
     }
 }

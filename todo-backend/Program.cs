@@ -103,7 +103,16 @@ app.MapPost("/todoitems", async (TodoList todoList) =>
 // Skal blot modtage et TodoListId og ikke et helt object
 app.MapPost("/tasks", async (TodoTask task) =>
 {
-    db.TodoTask.Add(task);
+
+	try
+	{
+		db.TodoTask.Add(task);
+	}
+	catch
+	{
+		Console.WriteLine("Couldn't add task");
+	}
+	
     await db.SaveChangesAsync();
 
     return Results.Created($"/todoitems/{task.TodoTaskId}", task);

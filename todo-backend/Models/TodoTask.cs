@@ -1,4 +1,6 @@
-﻿namespace todo_backend.Models
+﻿using System.Collections.ObjectModel;
+
+namespace todo_backend.Models
 {
     public class TodoTask
     {
@@ -11,6 +13,7 @@
         public DateTime? TaskCompletionTime { get; set; }
 
         public int TodoListId { get; set; }
-        public TodoList TodoList { get; set; }
-    }
+		//public virtual Collection<SubTask>? SubTasks { get; set; }
+
+	}
 }

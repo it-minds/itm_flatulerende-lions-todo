@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using todo_backend.Models;
 
@@ -10,9 +11,10 @@ using todo_backend.Models;
 namespace todo_backend.Migrations
 {
     [DbContext(typeof(ListContext))]
-    partial class ListContextModelSnapshot : ModelSnapshot
+    [Migration("20220906132416_NullablePropsv9")]
+    partial class NullablePropsv9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.8");
@@ -47,6 +49,8 @@ namespace todo_backend.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("SubTaskId");
+
+                    b.HasIndex("TodoTaskId");
 
                     b.ToTable("SubTask");
                 });
@@ -109,6 +113,15 @@ namespace todo_backend.Migrations
                     b.ToTable("TodoTask");
                 });
 
+            modelBuilder.Entity("todo_backend.Models.SubTask", b =>
+                {
+                    b.HasOne("todo_backend.Models.TodoTask", null)
+                        .WithMany("SubTasks")
+                        .HasForeignKey("TodoTaskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("todo_backend.Models.TodoTask", b =>
                 {
                     b.HasOne("todo_backend.Models.TodoList", null)
@@ -121,6 +134,11 @@ namespace todo_backend.Migrations
             modelBuilder.Entity("todo_backend.Models.TodoList", b =>
                 {
                     b.Navigation("TodoTasks");
+                });
+
+            modelBuilder.Entity("todo_backend.Models.TodoTask", b =>
+                {
+                    b.Navigation("SubTasks");
                 });
 #pragma warning restore 612, 618
         }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using todo_backend.Models;
 
@@ -10,9 +11,10 @@ using todo_backend.Models;
 namespace todo_backend.Migrations
 {
     [DbContext(typeof(ListContext))]
-    partial class ListContextModelSnapshot : ModelSnapshot
+    [Migration("20220906125139_NullablePropsv2")]
+    partial class NullablePropsv2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.8");
@@ -47,6 +49,8 @@ namespace todo_backend.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("SubTaskId");
+
+                    b.HasIndex("TodoTaskId");
 
                     b.ToTable("SubTask");
                 });
@@ -109,18 +113,26 @@ namespace todo_backend.Migrations
                     b.ToTable("TodoTask");
                 });
 
+            modelBuilder.Entity("todo_backend.Models.SubTask", b =>
+                {
+                    b.HasOne("todo_backend.Models.TodoTask", "TodoTask")
+                        .WithMany()
+                        .HasForeignKey("TodoTaskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TodoTask");
+                });
+
             modelBuilder.Entity("todo_backend.Models.TodoTask", b =>
                 {
-                    b.HasOne("todo_backend.Models.TodoList", null)
-                        .WithMany("TodoTasks")
+                    b.HasOne("todo_backend.Models.TodoList", "TodoList")
+                        .WithMany()
                         .HasForeignKey("TodoListId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("todo_backend.Models.TodoList", b =>
-                {
-                    b.Navigation("TodoTasks");
+                    b.Navigation("TodoList");
                 });
 #pragma warning restore 612, 618
         }
