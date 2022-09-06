@@ -29,8 +29,6 @@ using var db = new ListContext();
 // Note: This sample requires the database to be created before running.
 Console.WriteLine($"Database path: {db.DbPath}.");
 
-app.MapGet("/", () => "Hello Todo-list");
-
 app.MapGet("/seedLists", () =>
 {
     SeedLists.SeedTodoLists(db);
@@ -164,26 +162,7 @@ app.MapPut("/subtasks/{id}", async (SubTask inputSubtask) =>
     return Results.NoContent();
 });
 
-// List of endpoints
-/*
- * Get All todo-lists - Done
- * Get Specific todo-list - Done
- * Get Tasks on a specific todo-list - Done
- * Get Subtasks for a specific task - Done
- * Add todo-list - Done
- * Add task to todo-list - Done
- * Add subtask to task - Done
- * Change todo-list
- * Change task
- * Change subtask 
- * Delete todo-list - Done
- * Delete task - Done
- * Delete subtask - Done
- * 
- * Eventuelt validering (Model validation - se docs)
- * Det var nok en god ide at bruge DTO til tasks og subtasks
- * Eventuelt antal af tasks på de forskellige todolister og antal subtasks for en task i database-modellen
- */
+
 
 app.MapDelete("/todolists/{todoId}", async (int todoId) =>
 {
@@ -244,11 +223,11 @@ app.MapDelete("/subtask/{subId}", async (int subId) =>
 		return Results.NotFound();
 });
 
-
 app.Run();
 
-
-record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+/*
+ * Eventuelt validering (Model validation - se docs)
+ * Det var nok en god ide at bruge DTO til tasks og subtasks
+ * Eventuelt antal af tasks på de forskellige todolister og antal subtasks for en task i database-modellen
+ * Tjek op på cascade-delete om det er nemmere end den måde der deletes på nu
+ */
