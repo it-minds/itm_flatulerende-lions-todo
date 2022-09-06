@@ -69,15 +69,33 @@ app.MapGet("/todoitems", async () =>
     await db.TodoList.ToListAsync());
 
 app.MapGet("/todoitems/{id}", async (int id) =>
-await db.TodoList.FindAsync(id) is TodoList todoList ? Results.Ok(todoList) : Results.NotFound()
+await db.TodoList.FindAsync(id) is TodoList todoList ? Results.Ok(todoList) : Results.NotFound());
 
-);
+app.MapGet("/tasks", async () =>
+    await db.TodoTask.ToListAsync());
+
+app.MapGet("/tasks/{id}", async (int id) =>
+{
+    var tasks = await db.TodoTask
+        .Where(t => t.TodoListId == id)
+        .ToListAsync();
+
+    if (tasks.Count < 1)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(tasks);
+});
+
+
+
+
 
 // List of endpoints
 /*
  * Get All todo-lists - Done
- * Get Specific todo-list 
- * Get Tasks on a specific todo-list
+ * Get Specific todo-list - Done
+ * Get Tasks on a specific todo-list - Done
  * Get Subtasks for a specific task
  * Add todo-list
  * Add task to todo-list
