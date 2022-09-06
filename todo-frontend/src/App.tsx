@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./index.css";
 import reactLogo from "./assets/react.svg";
 import { getTodo, getTodos } from "./utils/api";
-import { Link } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 
 function App() {
 	const [count, setCount] = useState(0);
@@ -32,6 +32,7 @@ function App() {
 				<Link to="/Home">Home</Link>
 				<Link to="/TodoList">Todo List</Link>
 			</nav>
+			<Outlet />
 		</div>
 	);
 }
