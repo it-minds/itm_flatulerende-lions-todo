@@ -23,7 +23,7 @@ namespace todo_backend.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<TodoList>().HasMany(x => x.TodoTasks).WithOne().HasForeignKey(x => x.TodoListId);
-			//modelBuilder.Entity<TodoTask>().HasMany(x => x.SubTasks).WithOne().HasForeignKey(x => x.TodoTaskId);
-		}
+            modelBuilder.Entity<TodoTask>().HasMany(x => x.SubTasks).WithOne().HasForeignKey(x => x.TodoTaskId);
+        }
 	}
 }

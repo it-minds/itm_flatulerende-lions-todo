@@ -13,7 +13,7 @@ namespace todo_backend.Models
         public DateTime? TaskCompletionTime { get; set; }
 
         public int TodoListId { get; set; }
-		//public virtual Collection<SubTask>? SubTasks { get; set; }
+		public virtual Collection<SubTask>? SubTasks { get; set; }
 
 	}
 }
