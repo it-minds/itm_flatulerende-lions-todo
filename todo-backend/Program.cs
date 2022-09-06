@@ -81,6 +81,7 @@ app.MapPost("/todoitems", async (TodoList todoList) =>
     return Results.Created($"/todoitems/{todoList.TodoListId}", todoList);
 });
 
+// Skal blot modtage et TodoListId og ikke et helt object
 app.MapPost("/tasks", async (TodoTask task) =>
 {
     db.TodoTask.Add(task);
@@ -88,9 +89,9 @@ app.MapPost("/tasks", async (TodoTask task) =>
 
     return Results.Created($"/todoitems/{task.TodoTaskId}", task);
 
-    // Vi kommer til at oprette en ny todolist hver gang vi poster!!
 });
 
+// Skal blot modtage et TodoTaskId og ikke et helt object
 app.MapPost("/subtasks", async (SubTask subtask) =>
 {
     db.SubTask.Add(subtask);
