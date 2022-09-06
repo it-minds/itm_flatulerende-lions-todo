@@ -69,34 +69,88 @@ app.MapGet("/seedLists", () =>
 app.MapGet("/todoitems", async () =>
     await db.TodoList.ToListAsync());
 
-app.MapGet("/lists", () =>
-{
-    var list = db.TodoList
-        .OrderBy(l => l.TodoListId);
-    return list;
-})
-.WithName("GetListList");
-
 app.MapGet("/todoitems/{id}", async (int id) =>
-await db.TodoList.FindAsync(id) is TodoList todoList ? Results.Ok(todoList) : Results.NotFound()
+await db.TodoList.FindAsync(id) is TodoList todoList ? Results.Ok(todoList) : Results.NotFound());
 
-);
+app.MapGet("/tasks", async () =>
+    await db.TodoTask.ToListAsync());
+
+app.MapGet("/tasks/{id}", async (int id) =>
+{
+    var tasks = await db.TodoTask
+        .Where(t => t.TodoListId == id)
+        .ToListAsync();
+
+    if (tasks.Count < 1)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(tasks);
+});
+
+app.MapGet("/subtasks", async () =>
+    await db.SubTask.ToListAsync());
+
+app.MapGet("/subtasks/{id}", async (int id) =>
+{
+    var subtasks = await db.SubTask
+        .Where(t => t.TodoTaskId == id)
+        .ToListAsync();
+
+    if (subtasks.Count < 1)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(subtasks);
+});
+
+app.MapPost("/todoitems", async (TodoList todoList) =>
+{
+    db.TodoList.Add(todoList);
+    await db.SaveChangesAsync();
+
+    return Results.Created($"/todoitems/{todoList.TodoListId}", todoList);
+});
+
+app.MapPost("/tasks", async (TodoTask task) =>
+{
+    db.TodoTask.Add(task);
+    await db.SaveChangesAsync();
+
+    return Results.Created($"/todoitems/{task.TodoTaskId}", task);
+
+    // Vi kommer til at oprette en ny todolist hver gang vi poster!!
+});
+
+app.MapPost("/subtasks", async (SubTask subtask) =>
+{
+    db.SubTask.Add(subtask);
+    await db.SaveChangesAsync();
+
+    return Results.Created($"/todoitems/{subtask.SubTaskId}", subtask);
+
+    // Vi kommer til at oprette en ny task hver gang vi poster!!
+});
+
+
 
 // List of endpoints
 /*
- * Get All todo-lists
- * Get Specific todo-list
- * Get Tasks on a specific todo-list
- * Get Subtasks for a specific task
- * Add todo-list
- * Add task to todo-list
- * Add subtask to task
+ * Get All todo-lists - Done
+ * Get Specific todo-list - Done
+ * Get Tasks on a specific todo-list - Done
+ * Get Subtasks for a specific task - Done
+ * Add todo-list - Done
+ * Add task to todo-list - Problematisk
+ * Add subtask to task - Problematisk
  * Change todo-list
  * Change task
  * Change subtask
  * Delete todo-list
  * Delete task
  * Delete subtask
+ * 
+ * Eventuelt validering (Model validation - se docs)
  */
 
 app.MapDelete("/todolists/{todoId}", async (int todoId) =>
