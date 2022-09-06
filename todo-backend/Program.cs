@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
+using System.Threading.Tasks;
 using todo_backend;
 using todo_backend.Models;
 
@@ -98,7 +99,52 @@ await db.TodoList.FindAsync(id) is TodoList todoList ? Results.Ok(todoList) : Re
  * Delete subtask
  */
 
+app.MapDelete("/todolists/{todoId}", async (int todoId) =>
+{
 
+	if (await db.TodoList.FindAsync(todoId) is TodoList todoList)
+	{
+		int taskId = -1;
+		db.TodoList.Remove(todoList);
+
+		// Deleting all Tasks on list
+		await db.TodoTask.ForEachAsync(t =>
+		{
+			if (t.TodoListId == todoId) {
+				taskId = t.TodoTaskId;
+				db.TodoTask.Remove(t);
+			};
+		});
+
+		// Deleting all subtasks on task
+		await db.SubTask.ForEachAsync(st =>
+		{
+			if (st.TodoTaskId == taskId) db.SubTask.Remove(st);
+		});
+
+		await db.SaveChangesAsync();
+		return Results.Ok(todoList);
+	}
+	return Results.NotFound();
+});
+
+app.MapDelete("/task/{taskId}", async (int taskId) =>
+{
+
+	if (await db.TodoTask.FindAsync(taskId) is TodoTask todoTask)
+	{
+		db.TodoTask.Remove(todoTask);
+
+		await db.SubTask.ForEachAsync(st =>
+		{
+			if (st.TodoTaskId == taskId) db.SubTask.Remove(st);
+		});
+		await db.SaveChangesAsync();
+
+		return Results.Ok(todoTask);
+	}
+	return Results.NotFound();
+});
 
 app.MapDelete("/subtask/{subId}", async (int subId) =>
 {
@@ -114,6 +160,7 @@ app.MapDelete("/subtask/{subId}", async (int subId) =>
 
 
 app.Run();
+
 
 record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
 {
