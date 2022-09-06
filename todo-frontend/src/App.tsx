@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./index.css";
 import reactLogo from "./assets/react.svg";
+import { getTodo, getTodos } from "./utils/api";
 
 function App() {
 	const [count, setCount] = useState(0);
@@ -16,10 +17,8 @@ function App() {
 				</a>
 			</div>
 			<h1>Vite + React</h1>
-			<div className="card bg-red-500">
-				<button onClick={() => setCount((count) => count + 1)}>
-					count is {count}
-				</button>
+			<div className="card bg-slate-200">
+				<button onClick={() => getTodo(4)}>Get Todos!</button>
 				<p>
 					Edit <code>src/App.tsx</code> and save to test HMR
 				</p>
