@@ -87,7 +87,46 @@ app.MapGet("/tasks/{id}", async (int id) =>
     return Results.Ok(tasks);
 });
 
+app.MapGet("/subtasks/{id}", async (int id) =>
+{
+    var subtasks = await db.SubTask
+        .Where(t => t.TodoTaskId == id)
+        .ToListAsync();
 
+    if (subtasks.Count < 1)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(subtasks);
+});
+
+app.MapPost("/todoitems", async (TodoList todoList) =>
+{
+    db.TodoList.Add(todoList);
+    await db.SaveChangesAsync();
+
+    return Results.Created($"/todoitems/{todoList.TodoListId}", todoList);
+});
+
+app.MapPost("/tasks", async (TodoTask task) =>
+{
+    db.TodoTask.Add(task);
+    await db.SaveChangesAsync();
+
+    return Results.Created($"/todoitems/{task.TodoTaskId}", task);
+
+    // Vi kommer til at oprette en ny todolist hver gang vi poster!!
+});
+
+app.MapPost("/subtasks", async (SubTask subtask) =>
+{
+    db.SubTask.Add(subtask);
+    await db.SaveChangesAsync();
+
+    return Results.Created($"/todoitems/{subtask.SubTaskId}", subtask);
+
+    // Vi kommer til at oprette en ny task hver gang vi poster!!
+});
 
 
 
@@ -96,16 +135,18 @@ app.MapGet("/tasks/{id}", async (int id) =>
  * Get All todo-lists - Done
  * Get Specific todo-list - Done
  * Get Tasks on a specific todo-list - Done
- * Get Subtasks for a specific task
- * Add todo-list
- * Add task to todo-list
- * Add subtask to task
+ * Get Subtasks for a specific task - Done
+ * Add todo-list - Done
+ * Add task to todo-list - Problematisk
+ * Add subtask to task - Problematisk
  * Change todo-list
  * Change task
  * Change subtask
  * Delete todo-list
  * Delete task
  * Delete subtask
+ * 
+ * Eventuelt validering (Model validation - se docs)
  */
 
 app.Run();
