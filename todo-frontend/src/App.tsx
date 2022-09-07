@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "./index.css";
 import reactLogo from "./assets/react.svg";
-import { getTodo, getTodos } from "./utils/api";
 import { Outlet, Link } from "react-router-dom";
 
 function App() {
