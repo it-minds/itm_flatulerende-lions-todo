@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import "./../styles/components/modal.css";
+import "./../../styles/components/modal.css";
 type Modal = {
 	isOpen: boolean;
 	onClose: () => void;
