@@ -5,6 +5,7 @@ import './index.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import TodoList from "./pages/TodoList";
+import InvalidURLReroute from './components/InvalidURLReroute';
 
 
 
@@ -15,11 +16,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <Route path="/" element={<App />}>
           <Route path="/Home" element={<Home />} />
           <Route path="/TodoList" element={<TodoList />} />
-          <Route path="*" element={
-            <main style={{ padding: "1rem" }}>
-              <p>There's nothing here!</p>
-            </main>
-          }/>
+          <Route path="*" element={<InvalidURLReroute/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
