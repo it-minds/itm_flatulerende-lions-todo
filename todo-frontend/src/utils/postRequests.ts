@@ -1,6 +1,7 @@
 import BASE_PATH from "./getRequests";
+import { SubTask, TodoList, TodoTask } from "./todoTypes";
 
-export async function addTodoList(todoItems: object): Promise<boolean> {
+export async function addTodoList(todoItems: TodoList): Promise<boolean> {
 	const response = await fetch(`${BASE_PATH}/todoitems`, {
 		method: "POST",
 		headers: {
@@ -19,7 +20,7 @@ export async function addTodoList(todoItems: object): Promise<boolean> {
 	return false;
 }
 
-export async function addTask(task: object): Promise<boolean> {
+export async function addTask(task: TodoTask): Promise<boolean> {
 	const response = await fetch(`${BASE_PATH}/tasks`, {
 		method: "POST",
 		headers: {
@@ -38,7 +39,7 @@ export async function addTask(task: object): Promise<boolean> {
 	return false;
 }
 
-export async function addSubTask(subTask: object): Promise<boolean> {
+export async function addSubTask(subTask: SubTask): Promise<boolean> {
 	const response = await fetch(`${BASE_PATH}/subtasks`, {
 		method: "POST",
 		headers: {
@@ -57,30 +58,33 @@ export async function addSubTask(subTask: object): Promise<boolean> {
 	return false;
 }
 
-export const TEST_TODO: object = {
+export const TEST_TODO: TodoList = {
+	todoListId: 1,
 	todoListName: "Test Todo List",
-	todoListDesc: "Test Todo List Description",
+	todoListDesc: "Test Todo List Description asodfjæasdf",
 	todoListDeleted: false,
+	todoTasks: [],
 };
 
-export const TEST_TASK: object = {
-	todoTaskId: 0,
+export const TEST_TASK: TodoTask = {
+	todoTaskId: 1,
 	taskName: "Test Task",
-	taskDesc: "Test Task Description",
+	taskDesc: "Test Task Description LSADJHFLASDHFLKASJHDFLKSJ",
 	taskComplete: false,
 	taskDeleted: false,
 	taskDeadline: "2022-09-06T12:12:52.772Z",
 	taskCompletionTime: "2022-09-06T12:12:52.772Z",
-	todoListId: 40,
+	todoListId: 1,
+	subTasks: [],
 };
 
-export const TEST_SUBTASK: object = {
-	subTaskId: 0,
+export const TEST_SUBTASK: SubTask = {
+	subTaskId: 1,
 	subName: "Test Subtask",
-	subDesc: "Test Subtask Description",
+	subDesc: "KOM SÅ MAND!",
 	subComplete: false,
 	subDeleted: false,
 	subDeadline: "2022-09-06T12:12:52.772Z",
 	subCompletionTime: "2022-09-06T12:12:52.772Z",
-	todoTaskId: 0,
+	todoTaskId: 1,
 };

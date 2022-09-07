@@ -1,5 +1,6 @@
 const BASE_PATH = "https://localhost:7277";
 export default BASE_PATH;
+
 //* SEED DB
 export async function seedDB() {
 	const response = await fetch(`${BASE_PATH}/seedLists`);
