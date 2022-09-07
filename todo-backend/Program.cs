@@ -128,7 +128,7 @@ app.MapPost("/subtasks", async (SubTask subtask) =>
     return Results.Created($"/todoitems/{subtask.SubTaskId}", subtask);
 });
 
-app.MapPut("/todoitems/{id}", async (TodoList inputTodoList) =>
+app.MapPut("/todoitems/{todoId}", async (TodoList inputTodoList) =>
 {
 	var todoList = await db.TodoList.FindAsync(inputTodoList.TodoListId);
 
@@ -146,7 +146,7 @@ app.MapPut("/todoitems/{id}", async (TodoList inputTodoList) =>
 	return Results.NoContent();
 });
 
-app.MapPut("/tasks/{id}", async (TodoTask inputTask) =>
+app.MapPut("/tasks/{taskId}", async (TodoTask inputTask) =>
 {
     var task = await db.TodoTask.FindAsync(inputTask.TodoTaskId);
 
@@ -167,7 +167,7 @@ app.MapPut("/tasks/{id}", async (TodoTask inputTask) =>
     return Results.NoContent();
 });
 
-app.MapPut("/subtasks/{id}", async (SubTask inputSubtask) =>
+app.MapPut("/subtasks/{subId}", async (SubTask inputSubtask) =>
 {
     var subtask = await db.SubTask.FindAsync(inputSubtask.SubTaskId);
 
@@ -190,7 +190,7 @@ app.MapPut("/subtasks/{id}", async (SubTask inputSubtask) =>
 
 
 
-app.MapDelete("/todolists/{todoId}", async (int todoId) =>
+app.MapDelete("/todoitems/{todoId}", async (int todoId) =>
 {
 
 	if (await db.TodoList.FindAsync(todoId) is TodoList todoList)
@@ -219,7 +219,7 @@ app.MapDelete("/todolists/{todoId}", async (int todoId) =>
 	return Results.NotFound();
 });
 
-app.MapDelete("/task/{taskId}", async (int taskId) =>
+app.MapDelete("/tasks/{taskId}", async (int taskId) =>
 {
 
 	if (await db.TodoTask.FindAsync(taskId) is TodoTask todoTask)
@@ -237,7 +237,7 @@ app.MapDelete("/task/{taskId}", async (int taskId) =>
 	return Results.NotFound();
 });
 
-app.MapDelete("/subtask/{subId}", async (int subId) =>
+app.MapDelete("/subtasks/{subId}", async (int subId) =>
 {
 	
 	if (await db.SubTask.FindAsync(subId) is SubTask subTask)
