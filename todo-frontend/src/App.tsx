@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./index.css";
 import reactLogo from "./assets/react.svg";
-import Modal from "./components/Modal";
+import Modal from "./components/UI/Modal";
+import { Link } from "react-router-dom";
 
 function App() {
 	const [count, setCount] = useState(0);
