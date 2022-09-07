@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import HomepageTodoListView from "../components/HomepageTodoListView";
 import { getTodoLists } from "../dummy-data";
 
 
@@ -7,17 +8,9 @@ const Home = () => {
     let todoLists = getTodoLists();
 
 	return (
-		<div>
-			<h2>Det her er forsiden</h2>
-			<div>
-                {
-                    todoLists.map((todoList) => (
-                        <div>
-                            {todoList.todoListName};
-                        </div>
-                    ))
-                }
-            </div>
+		<div className="p-2.5">
+			<h1>Todo-lists:</h1>
+			<HomepageTodoListView/>
 			<div>
 				<Link to="/">Tilbage til forsiden</Link>
 			</div>
