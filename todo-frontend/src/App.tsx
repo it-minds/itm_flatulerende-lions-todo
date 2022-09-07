@@ -1,7 +1,23 @@
 import { useState } from "react";
 import "./index.css";
 import reactLogo from "./assets/react.svg";
-import { getTodo, getTodos } from "./utils/api";
+import {
+	getSubTasks,
+	getTasks,
+	getTodo,
+	getTodos,
+	getTodoTasks,
+} from "./utils/getRequests";
+import {
+	addSubTask,
+	addTask,
+	addTodoList,
+	TEST_SUBTASK,
+	TEST_TASK,
+	TEST_TODO,
+} from "./utils/postRequests";
+import { updateSubTask, updateTask, updateTodoList } from "./utils/putRequests";
+import { deleteTodoList } from "./utils/deleteRequest";
 
 function App() {
 	const [count, setCount] = useState(0);
@@ -18,7 +34,7 @@ function App() {
 			</div>
 			<h1>Vite + React</h1>
 			<div className="card bg-slate-200">
-				<button onClick={() => getTodo(4)}>Get Todos!</button>
+				<button onClick={() => deleteTodoList(4)}>Get Todos!</button>
 				<p>
 					Edit <code>src/App.tsx</code> and save to test HMR
 				</p>
