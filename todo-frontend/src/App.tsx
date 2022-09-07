@@ -9,7 +9,7 @@ function App() {
 	const [modalOpen, setModalOpen] = useState(false);
 
 	return (
-		<div className="app-root bg">
+		<div className="app-root">
 			<div>
 				<a href="https://vitejs.dev" target="_blank">
 					<img src="/vite.svg" className="logo" alt="Vite logo" />
@@ -36,7 +36,7 @@ function App() {
 				}}
 				className="fade"
 			>
-				<h1>Modal</h1>
+				<h1></h1>
 			</Modal>
 			<nav>
 				<Link to="/">Home</Link>
