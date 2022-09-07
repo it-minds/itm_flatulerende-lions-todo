@@ -37,6 +37,9 @@ function App() {
 			>
 				<h1>Modal</h1>
 			</Modal>
+			<nav>
+				<Link to="/">Home</Link>
+			</nav>
 		</div>
 	);
 }
