@@ -28,11 +28,8 @@ function App() {
 				Click on the Vite and React logos to learn more
 			</p>
 			<nav>
-				<Link to="/">App</Link>
-				<Link to="/Home">Home</Link>
-				<Link to="/TodoList">Todo List</Link>
+				<Link to="/">Home</Link>
 			</nav>
-			<Outlet />
 		</div>
 	);
 }

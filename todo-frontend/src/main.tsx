@@ -13,11 +13,12 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />}>
-          <Route path="/Home" element={<Home />} />
-          <Route path="/TodoList" element={<TodoList />} />
-          <Route path="*" element={<InvalidURLReroute/>}/>
+        <Route path="/" element={<Home />}>
         </Route>
+        <Route path="/TodoList" element={<TodoList />}>
+          <Route path=":todoListId" element={<TodoList />} />
+        </Route>
+        <Route path="*" element={<InvalidURLReroute/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

@@ -14,6 +14,7 @@ const Home = () => {
 			<div>
 				<Link to="/">Tilbage til forsiden</Link>
 			</div>
+			<button><Link to="/TodoList">Til TodoLists!</Link></button>
 		</div>
 	);
 };
