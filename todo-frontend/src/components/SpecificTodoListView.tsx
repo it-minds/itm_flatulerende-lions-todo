@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { getTasksDummy } from '../dummy-data';
 import { useFetch } from '../Hooks/useFetch';
@@ -13,7 +13,7 @@ import CompressedTask from './CompressedTask';
 const SpecificTodoListView = () => {
     
     const {todoListId} = useParams();    
-
+    const [showSubTasks, setShowSubTasks] = useState(false);
     const {data, loading, error} = useFetch<TodoTask[]>({url: `${BASE_PATH}/tasks/${todoListId}`});
 
 	return (

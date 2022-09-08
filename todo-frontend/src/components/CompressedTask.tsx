@@ -1,6 +1,9 @@
 import React, { FC, useEffect, useState } from 'react'
 import { TbTrash } from 'react-icons/tb'
-import { TodoTask } from '../utils/todoTypes'
+import { useFetch } from '../Hooks/useFetch'
+import BASE_PATH from '../utils/getRequests'
+import { SubTask, TodoTask } from '../utils/todoTypes'
+import CompressedSubTask from './CompressedSubTask'
 
 type Props = {
     task: TodoTask
@@ -9,9 +12,12 @@ type Props = {
 const CompressedTask:FC<Props> = ({task}) => {
     
     const [checkBoxState, setCheckBoxState] = useState(false);
+    const [subTaskShowState, setSubTaskShowState] = useState(false);
+
+    const {data, loading, error} = useFetch<SubTask[]>({url: `${BASE_PATH}/subtasks/${task.todoTaskId}`});
 
     useEffect(() => {
-
+        
     },[])
 
     function handleCheckBoxClick() {
@@ -32,22 +38,42 @@ const CompressedTask:FC<Props> = ({task}) => {
 
     const handleEditButtonClick = () => {
         // Open task modal
+        console.log("Opening task modal");
+        
+    }
+
+    const handleTaskClick = () => {
+        // Fold out subtasks
+        console.log("Fold out subtasks");
+        console.log(data);
+        
+        setSubTaskShowState(!subTaskShowState);
+        console.log(subTaskShowState);
+        
     }
 
     return (
-        <div className="m-1 py-2 px-4 font-medium text-left text-black rounded-lg bg-zinc-50 hover:bg-zinc-100 active:bg-zinc-200 border-b border-gray-500 cursor-pointer "
-            >
-            <div className="grid grid-cols-11 gap-4">
-                <label className='col-span-2'>
-                    Complete: <input type="checkbox" checked={checkBoxState} onChange={handleCheckBoxClick}/>
-                </label>
-                <div className="col-span-3">{task.taskName}</div>
-                <div className="col-span-3">{task.taskDesc}</div>
-                <div className="col-span-1"></div>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded col-span-1" onClick={handleEditButtonClick}>Edit task</button>
-                <div className="col-span-1 content-around ml-2" onClick={handleDeleteIconClick}><TbTrash size={35}/></div>
+        <div className="m-1 py-2 px-4 font-medium text-left text-black rounded-lg bg-zinc-50 hover:bg-zinc-100 active:bg-zinc-200 border-b border-gray-500 cursor-pointer ">
+            <div className='flex w-full items-center'>
+                <div className='w-28'>Complete: <input type="checkbox" checked={checkBoxState} onChange={handleCheckBoxClick}/></div>
+                <div className='flex flex-1 items-center w-12' onClick={handleTaskClick}>
+                    <div className='w-1/2'>{task.taskName}</div>
+                    <div className='w-1/2'>{task.taskDesc}</div>
+                </div>
+                <div className='w-20'>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded col-span-1" onClick={handleEditButtonClick}>Edit task</button>
+                </div>
+                <div className='w-8' onClick={handleDeleteIconClick}><TbTrash size={35}/></div>
+            </div>
+            <div className='ml-6'>
+                {subTaskShowState && data?.map((subTask) => (
+                    <CompressedSubTask subTask={subTask} />
+                ))}
+                
             </div>
         </div>
+        
+        // subtasks der skal renderes conditionelt på baggrund af showsubtask state
     )
 }
 
