@@ -4,7 +4,7 @@ export type TaskModel = {
     taskDesc: string;
     taskComplete: boolean;
     taskDeleted: boolean;
-    taskDeadline: Date;
-    taskCompletionTime: Date;
+    taskDeadline: Date | string;
+    taskCompletionTime: Date | string | null;
     todoListId: number;
 }
