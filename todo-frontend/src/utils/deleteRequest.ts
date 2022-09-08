@@ -16,9 +16,9 @@ export async function deleteTodoList(todoId: number): Promise<boolean> {
 	return false;
 }
 
-export async function updateTask(taskId: number): Promise<boolean> {
+export async function deleteTask(taskId: number): Promise<boolean> {
 	const response = await fetch(`${BASE_PATH}/tasks/${taskId}`, {
-		method: "PUT",
+		method: "DELETE",
 	});
 
 	const data: JSON = await response.json();
@@ -31,9 +31,9 @@ export async function updateTask(taskId: number): Promise<boolean> {
 	return false;
 }
 
-export async function updateSubTask(subId: number): Promise<boolean> {
+export async function deleteSubTask(subId: number): Promise<boolean> {
 	const response = await fetch(`${BASE_PATH}/subtasks/${subId}`, {
-		method: "PUT",
+		method: "DELETE",
 	});
 
 	const data: JSON = await response.json();

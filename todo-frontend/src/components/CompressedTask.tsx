@@ -12,7 +12,9 @@ const CompressedTask: FC<Props> = ({ task }) => {
 	const [checkBoxState, setCheckBoxState] = useState(false);
 	const [modalOpen, setModalOpen] = useState(false);
 
-	useEffect(() => {}, []);
+	useEffect(() => {
+		console.log("task: ", task);
+	}, []);
 
 	function handleCheckBoxClick() {
 		setCheckBoxState(!checkBoxState);
@@ -32,10 +34,6 @@ const CompressedTask: FC<Props> = ({ task }) => {
 		console.log("Deletion cancelled");
 	};
 
-	const handleEditButtonClick = () => {
-		// Open task modal
-	};
-
 	return (
 		<div className="m-1 py-2 px-4 font-medium text-left text-black rounded-lg bg-zinc-50 hover:bg-zinc-100 active:bg-zinc-200 border-b border-gray-500 cursor-pointer ">
 			<div className="grid grid-cols-11 gap-4">
@@ -52,7 +50,10 @@ const CompressedTask: FC<Props> = ({ task }) => {
 				<div className="col-span-1"></div>
 				<button
 					className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded col-span-1"
-					onClick={() => setModalOpen(true)}
+					onClick={() => {
+						setModalOpen(true);
+						console.log("task: ", task);
+					}}
 				>
 					Edit task
 				</button>
@@ -69,11 +70,13 @@ const CompressedTask: FC<Props> = ({ task }) => {
 				onClose={() => setModalOpen(false)}
 			>
 				<TaskDetailed
+					taskId={task.todoTaskId}
 					onAddTask={() => console.log("Task added")}
 					header={task.taskName}
 					onClose={() => setModalOpen(false)}
 					name={task.taskName}
 					desc={task.taskDesc}
+					subTasks={task.subTasks || []}
 				/>
 			</Modal>
 		</div>

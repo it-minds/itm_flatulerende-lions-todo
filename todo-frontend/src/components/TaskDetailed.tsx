@@ -1,18 +1,12 @@
 import React, { FC, useEffect, useState } from "react";
+import { deleteSubTask } from "../utils/deleteRequest";
+import { getSubTasks } from "../utils/getRequests";
 import { SubTask, TodoList } from "../utils/todoTypes";
 import SubTaskItem from "./SubTaskItem";
 import SubTasks from "./SubTasks";
 import Button from "./UI/Button";
 import TextArea from "./UI/TextArea";
 import TextInput from "./UI/TextInput";
-
-type Props = {
-	header: string;
-	onAddTask: (task: TodoList) => void;
-	onClose: () => void;
-	name?: string;
-	desc?: string;
-};
 
 const dummySubtasks: SubTask[] = [
 	{
@@ -47,7 +41,19 @@ const dummySubtasks: SubTask[] = [
 	},
 ];
 
+type Props = {
+	taskId: number;
+	header: string;
+	onAddTask: (task: TodoList) => void;
+	onClose: () => void;
+	name?: string;
+	desc?: string;
+	subTasks?: SubTask[];
+};
+
 const TaskDetailed: FC<Props> = ({
+	taskId,
+	subTasks,
 	header,
 	onAddTask,
 	onClose,
@@ -59,23 +65,24 @@ const TaskDetailed: FC<Props> = ({
 	const [canAdd, setCanAdd] = useState<boolean>(taskName.length > 0);
 
 	useEffect(() => {
+		fetchSubTasks(taskId);
+		console.log(taskId);
+	}, []);
+
+	const fetchSubTasks = async (id: number) => {
+		const subs = await getSubTasks(taskId);
+		return subs;
+	};
+	const handleRemoveSubTask = async (subTaskId: number) => {
+		console.log("Remove subtask", subTaskId);
+		const success = await deleteSubTask(subTaskId);
+		if (success) console.log("Subtask deleted successfully");
+		else console.log("Subtask deletion failed");
+	};
+
+	useEffect(() => {
 		setCanAdd(taskName.length > 0);
 	}, [taskName]);
-
-	const handleAddTask = () => {
-		const newTask: TodoList = {
-			todoListId: 0,
-			todoListName: taskName,
-			todoListDesc: description,
-			todoListDeleted: false,
-			todoTasks: [],
-		};
-		onAddTask(newTask);
-		// probably not necessary because of close
-		// setTaskName("");
-		// setDescription("");
-		onClose();
-	};
 
 	return (
 		<div className="flex flex-col w-full md:w-[30vw] h-full bg-off-white p-2 gap-y-1 md:gap-y-8">
@@ -103,16 +110,16 @@ const TaskDetailed: FC<Props> = ({
 			<div className="flex flex-col gap-1 w-full h-fit">
 				<SubTasks
 					onAddSubTask={(subTask: SubTask) => console.log(subTask)}
-					onRemoveSubTask={(subId: number) => console.log(subId)}
+					onRemoveSubTask={(subId: number) => handleRemoveSubTask(subId)}
 					onSubTaskCompleted={(subId: number) => console.log(subId)}
 					onDescriptionChange={(subId: number, desc: string) =>
 						console.log(subId, desc)
 					}
-					subTasks={dummySubtasks}
+					subTasks={subTasks || dummySubtasks}
 				/>
 			</div>
 			<div className="flex justify-between mt-5">
-				<Button disabled={!canAdd} onClick={handleAddTask}>
+				<Button disabled={!canAdd} onClick={() => ({})}>
 					Save
 				</Button>
 				<Button

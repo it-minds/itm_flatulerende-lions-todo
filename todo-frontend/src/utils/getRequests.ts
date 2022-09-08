@@ -83,6 +83,8 @@ export async function getSubTasks(taskId: number) {
 
 	const data: JSON = await response.json();
 
+	console.log("data", data);
+
 	if (response.ok) {
 		console.log(data);
 
