@@ -3,15 +3,18 @@ import React, { FC } from "react";
 type Props = {
 	children: React.ReactNode | string;
 	onClick: () => void;
+	className?: string;
+	disabled?: boolean;
 };
 
-const Button: FC<Props> = ({ children, onClick }) => {
+const Button: FC<Props> = ({ children, onClick, className, disabled }) => {
 	return (
 		<button
-			className="btn"
+			disabled={disabled}
+			className={"btn" + " " + className}
 			onClick={() => onClick()}
 		>
-			Open modal
+			{children}
 		</button>
 	);
 };

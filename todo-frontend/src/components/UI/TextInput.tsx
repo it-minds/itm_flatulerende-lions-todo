@@ -22,9 +22,9 @@ const TextInput: FC<Props> = ({
 	value,
 }) => {
 	return (
-		<Fragment>
+		<div className="flex flex-col">
 			<label
-				className="opacity-50 mb-0.5 text-sm border-b-2  w-fit border-light-blue border-opacity-80 pr-4"
+				className="mx-1 opacity-60 mb-0.5 text-sm border-b-2  w-fit border-light-blue border-opacity-80 pr-4"
 				htmlFor={id}
 			>
 				{label}
@@ -35,13 +35,9 @@ const TextInput: FC<Props> = ({
 				value={value}
 				placeholder={placeholder}
 				onInput={(e) => onInput(e)}
-				className={
-					"min-h-[1.1rem] text-brown-gray w-fit bg-white focus:bg-light-blue focus:bg-opacity-30 rounded-md box-border border-none py-0.5 px-1 ::placeholder-white" +
-					" " +
-					className
-				}
+				className={"min-h-[1.1rem] input" + " " + className}
 			/>
-		</Fragment>
+		</div>
 	);
 };
 

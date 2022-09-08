@@ -9,6 +9,8 @@ module.exports = {
 				"light-blue-focus": "#2e9daa",
 				"dark-blue": "#055a92",
 				"brown-gray": "#443849",
+				"btn-cancel": "#fd868f",
+				"btn-cancel-focus": "#fc4c5a",
 			},
 		},
 	},

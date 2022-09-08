@@ -1,28 +1,39 @@
 import React, { FC } from "react";
 
 type Props = {
-	children: React.ReactNode | string;
-	onClick: () => void;
+	children?: React.ReactNode | string;
+	placeholder?: string;
 	id: string;
 	label: string;
-	className: string;
+	onClick?: () => void;
+	onInput: (event: React.FormEvent<HTMLTextAreaElement>) => void;
+	className?: string;
+	value?: string;
 };
 
-const TextArea: FC<Props> = ({ children, onClick, id, label, className }) => {
+const TextArea: FC<Props> = ({
+	children,
+	onClick,
+	id,
+	label,
+	placeholder,
+	className,
+	onInput,
+	value,
+}) => {
 	return (
-		<>
-			<label htmlFor={id}>{label}</label>
+		<div className="flex flex-col">
+			<label className="label" htmlFor={id}>
+				{label}
+			</label>
 			<textarea
-				className={
-					"resize-none text-base p-2 border-none box-border rounded-md text-brown-gray focus:bg-off-white-focus" +
-					" " +
-					className
-				}
+				className={"input resize-none " + " " + className}
 				id={id}
-			>
-				Hello
-			</textarea>
-		</>
+				placeholder={placeholder}
+				onInput={(e) => onInput(e)}
+				value={value}
+			/>
+		</div>
 	);
 };
 
