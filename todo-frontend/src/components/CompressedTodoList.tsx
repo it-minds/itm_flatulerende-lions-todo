@@ -1,10 +1,10 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { TodoListModel } from '../Models/TodoListModel'
 import { TbTrash } from 'react-icons/tb';
+import { TodoList } from '../utils/todoTypes';
 
 type Props = {
-    todoList: TodoListModel
+    todoList: TodoList
 }
 
 const CompressedTodoList:FC<Props> = ({todoList}) => {

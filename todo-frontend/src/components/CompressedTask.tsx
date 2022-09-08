@@ -1,9 +1,9 @@
 import React, { FC, useEffect, useState } from 'react'
 import { TbTrash } from 'react-icons/tb'
-import { TaskModel } from '../Models/TaskModel'
+import { TodoTask } from '../utils/todoTypes'
 
 type Props = {
-    task: TaskModel
+    task: TodoTask
 }
 
 const CompressedTask:FC<Props> = ({task}) => {
