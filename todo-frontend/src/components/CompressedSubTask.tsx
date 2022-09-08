@@ -26,12 +26,6 @@ const CompressedSubTask:FC<Props> = ({subTask}) => {
         console.log("Deletion cancelled");
       };
 
-    const handleEditButtonClick = () => {
-        // Open task modal
-        console.log("Opening task modal");
-        
-    }
-
     return (
         <div className="m-1 py-2 px-4 font-medium text-left text-black rounded-lg bg-zinc-50 hover:bg-zinc-100 active:bg-zinc-200 border-b border-gray-500 cursor-pointer ">
             <div className='flex w-full items-center'>
@@ -43,8 +37,6 @@ const CompressedSubTask:FC<Props> = ({subTask}) => {
                 <div className='w-8' onClick={handleDeleteIconClick}><TbTrash size={35}/></div>
             </div>
         </div>
-        
-        // subtasks der skal renderes conditionelt på baggrund af showsubtask state
     )
 }
 
