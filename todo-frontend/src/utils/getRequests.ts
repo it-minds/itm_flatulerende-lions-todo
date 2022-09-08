@@ -1,3 +1,5 @@
+import { useFetch } from "../Hooks/useFetch";
+
 const BASE_PATH = "https://localhost:7277";
 export default BASE_PATH;
 
@@ -15,6 +17,10 @@ export async function seedDB() {
 }
 
 //* GET REQUESTS
+
+const getTodosHook = () => {
+	const {data, loading, error} = useFetch({url: `${BASE_PATH}/todoitems`});
+}
 
 export async function getTodos() {
 	const response = await fetch(`${BASE_PATH}/todoitems`);

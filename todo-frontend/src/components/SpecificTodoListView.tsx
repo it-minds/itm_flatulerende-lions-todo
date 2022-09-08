@@ -2,6 +2,10 @@ import React from 'react'
 import { getTasksDummy } from '../dummy-data';
 import CompressedTask from './CompressedTask';
 
+// Skal rimelig sikkert have en prop med der er et todo-liste-objekt
+// Der fetches alle tasks fra backenden ud fra det id todo-listen har
+// (Det er sådan det er sat op i backend)
+
 const SpecificTodoListView = () => {
     let tasks = getTasksDummy();
 

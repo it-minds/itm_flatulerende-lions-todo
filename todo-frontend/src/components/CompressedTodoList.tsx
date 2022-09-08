@@ -12,15 +12,6 @@ const CompressedTodoList:FC<Props> = ({todoList}) => {
     const navigate = useNavigate();
     const [checkBoxState, setCheckBoxState] = useState(false);
 
-    const deletionStatus = () => {
-        if (!todoList.todoListDeleted) {
-            return "Active";
-        }
-        else {
-            return "Deleted";
-        }
-    }
-
     function handleGotoButtonClick() {
         navigate(`/TodoList/${todoList.todoListId}`);
     }
@@ -48,7 +39,7 @@ const CompressedTodoList:FC<Props> = ({todoList}) => {
             </label>
             <div className="col-span-3">{todoList.todoListName}</div>
             <div className="col-span-3">{todoList.todoListDesc}</div>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded col-span-2" onClick={handleGotoButtonClick}>Go to list.</button>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded col-span-2" onClick={handleGotoButtonClick}>Go to list</button>
             <div className="col-span-1 content-around ml-2" onClick={handleDeleteIconClick}><TbTrash size={35}/></div>
         </div>
     </div>
