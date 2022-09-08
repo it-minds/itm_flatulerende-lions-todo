@@ -17,6 +17,7 @@ const Button: FC<Props> = ({ children, onClick, className, disabled }) => {
 	} else {
 		return (
 			<button
+				disabled
 				className={"btn-disabled" + " " + className}
 				onClick={() => onClick()}
 			>

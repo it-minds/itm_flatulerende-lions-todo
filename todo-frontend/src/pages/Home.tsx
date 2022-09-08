@@ -10,7 +10,7 @@ import { SubTask, TodoList, TodoTask } from "../utils/todoTypes";
 const TestTodoTasks: TodoTask[] = [TEST_TASK, TEST_TASK, TEST_TASK];
 
 const Home = () => {
-	const [modalOpen, setModalOpen] = useState(true); //*! <--- change to false to hide modal
+	const [modalOpen, setModalOpen] = useState(false);
 	// let todoLists = getTodoListsDummy();
 
 	const handleTodoAdded = (todo: TodoList) => {
@@ -20,6 +20,7 @@ const Home = () => {
 	return (
 		<div className="p-2.5 flex flex-col justify-center items-center pt-16 bg-off-white w-full min-h-[100vh]">
 			<h1 className="text-3xl font-semibold pb-2">Todo-lists:</h1>
+			<Button onClick={() => setModalOpen(true)}>Add Todo List</Button>
 			<HomepageTodoListView />
 			<div>
 				<Link to="/">Tilbage til forsiden</Link>
@@ -27,7 +28,6 @@ const Home = () => {
 			<button>
 				<Link to="/TodoList">Til TodoLists!</Link>
 			</button>
-			<Button onClick={() => setModalOpen(true)}>Open Modal</Button>
 			<Modal
 				className="fade "
 				isOpen={modalOpen}

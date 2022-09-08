@@ -32,8 +32,6 @@ const Modal: FC<Modal> = (props) => {
 		);
 		/*eslint-enable */
 		return () => {
-			console.log("portalElement is", portalElement);
-
 			setMounted(false);
 		};
 	}, []);

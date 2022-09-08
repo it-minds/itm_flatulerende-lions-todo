@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
-import { TodoList, TodoTask } from "../utils/todoTypes";
+import { TodoList } from "../utils/todoTypes";
 import Button from "./UI/Button";
-import Modal from "./UI/Modal";
 import TextArea from "./UI/TextArea";
 import TextInput from "./UI/TextInput";
 
@@ -9,11 +8,19 @@ type Props = {
 	header: string;
 	onAddTask: (task: TodoList) => void;
 	onClose: () => void;
+	name?: string;
+	desc?: string;
 };
 
-const AddTodo: FC<Props> = ({ header, onAddTask, onClose }) => {
-	const [taskName, setTaskName] = useState<string>("");
-	const [description, setDescription] = useState<string>("");
+const TaskDetailed: FC<Props> = ({
+	header,
+	onAddTask,
+	onClose,
+	name,
+	desc,
+}) => {
+	const [taskName, setTaskName] = useState<string>(name || "");
+	const [description, setDescription] = useState<string>(desc || "");
 	const [canAdd, setCanAdd] = useState<boolean>(taskName.length > 0);
 
 	useEffect(() => {
@@ -73,4 +80,4 @@ const AddTodo: FC<Props> = ({ header, onAddTask, onClose }) => {
 	);
 };
 
-export default AddTodo;
+export default TaskDetailed;
