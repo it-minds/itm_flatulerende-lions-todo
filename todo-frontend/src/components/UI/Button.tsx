@@ -8,15 +8,21 @@ type Props = {
 };
 
 const Button: FC<Props> = ({ children, onClick, className, disabled }) => {
-	return (
-		<button
-			disabled={disabled}
-			className={"btn" + " " + className}
-			onClick={() => onClick()}
-		>
-			{children}
-		</button>
-	);
+	if (!disabled) {
+		return (
+			<button className={"btn" + " " + className} onClick={() => onClick()}>
+				{children}
+			</button>
+		);
+	} else {
+		return (
+			<button
+				className={"btn-disabled" + " " + className}
+				onClick={() => onClick()}
+			>
+				{children}
+			</button>
+		);
+	}
 };
-
 export default Button;

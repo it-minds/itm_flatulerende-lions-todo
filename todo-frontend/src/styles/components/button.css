@@ -3,6 +3,10 @@
 		@apply w-32 h-16 bg-light-blue bg-opacity-90 text-slate-800 rounded-lg text-lg font-medium hover:bg-light-blue-focus active:scale-95;
 	}
 
+	.btn-disabled {
+		@apply w-32 h-16 bg-light-blue bg-opacity-30 text-slate-800 rounded-lg text-lg font-medium cursor-not-allowed;
+	}
+
 	.click-bounce {
 		@apply animate-ping duration-150;
 	}

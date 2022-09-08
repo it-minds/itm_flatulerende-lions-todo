@@ -9,6 +9,7 @@ type Props = {
 	onInput: (event: React.FormEvent<HTMLTextAreaElement>) => void;
 	className?: string;
 	value?: string;
+	rows?: number;
 };
 
 const TextArea: FC<Props> = ({
@@ -20,6 +21,7 @@ const TextArea: FC<Props> = ({
 	className,
 	onInput,
 	value,
+	rows,
 }) => {
 	return (
 		<div className="flex flex-col">
@@ -27,6 +29,7 @@ const TextArea: FC<Props> = ({
 				{label}
 			</label>
 			<textarea
+				rows={rows || 4}
 				className={"input resize-none " + " " + className}
 				id={id}
 				placeholder={placeholder}
