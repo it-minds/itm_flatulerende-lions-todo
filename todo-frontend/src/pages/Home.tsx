@@ -4,7 +4,6 @@ import AddTodo from "../components/AddTodo";
 import HomepageTodoListView from "../components/HomepageTodoListView";
 import Button from "../components/UI/Button";
 import Modal from "../components/UI/Modal";
-import { getTodoLists } from "../dummy-data";
 import { TEST_TASK } from "../utils/postRequests";
 import { SubTask, TodoList, TodoTask } from "../utils/todoTypes";
 
@@ -12,7 +11,7 @@ const TestTodoTasks: TodoTask[] = [TEST_TASK, TEST_TASK, TEST_TASK];
 
 const Home = () => {
 	const [modalOpen, setModalOpen] = useState(true); //*! <--- change to false to hide modal
-	let todoLists = getTodoLists();
+	// let todoLists = getTodoListsDummy();
 
 	const handleTodoAdded = (todo: TodoList) => {
 		console.log(todo);
