@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from "react";
-import { SubTask } from "../utils/todoTypes";
+import { SubTask } from "../../utils/todoTypes";
 import SubTaskItem from "./SubTaskItem";
 import { BsFillPlusSquareFill } from "react-icons/bs";
 

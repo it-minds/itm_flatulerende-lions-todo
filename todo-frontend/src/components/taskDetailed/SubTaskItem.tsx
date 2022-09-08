@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
-import TextInput from "./UI/TextInput";
+import TextInput from "../UI/TextInput";
 import { TbTrash } from "react-icons/tb";
-import { SubTask } from "../utils/todoTypes";
+import { SubTask } from "../../utils/todoTypes";
 
 type Props = {
 	description: string;

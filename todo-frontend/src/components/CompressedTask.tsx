@@ -4,7 +4,7 @@ import { useFetch } from "../Hooks/useFetch";
 import BASE_PATH from "../utils/getRequests";
 import { SubTask, TodoTask } from "../utils/todoTypes";
 import CompressedSubTask from "./CompressedSubTask";
-import TaskDetailed from "./TaskDetailed";
+import TaskDetailed from "./taskDetailed/TaskDetailed";
 import Modal from "./UI/Modal";
 
 type Props = {
@@ -41,11 +41,6 @@ const CompressedTask: FC<Props> = ({ task }) => {
 		console.log("Deletion cancelled");
 	};
 
-	const handleEditButtonClick = () => {
-		// Open task modal
-		console.log("Opening task modal");
-	};
-
 	const handleTaskClick = () => {
 		// Fold out subtasks
 		console.log("Fold out subtasks");
@@ -71,18 +66,21 @@ const CompressedTask: FC<Props> = ({ task }) => {
 					onClick={handleTaskClick}
 				>
 					<div className="w-1/2">{task.taskName}</div>
-					<div className="w-1/2">{task.taskDesc}</div>
+					{/* Very crude conditional rendering :P */}
+					<div className="md:w-1/2 md:opacity-100 opacity-0 w-0">
+						{task.taskDesc}
+					</div>
 				</div>
 				<div className="w-20">
 					<button
-						className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded col-span-1"
-						onClick={handleEditButtonClick}
+						className="bg-blue-500 hover:bg-blue-700 text-white md:font-bold p-2 md:py-2  rounded col-span-1"
+						onClick={() => setModalOpen(true)}
 					>
 						Edit task
 					</button>
 				</div>
-				<div className="w-8" onClick={handleDeleteIconClick}>
-					<TbTrash size={35} />
+				<div className="w-fit" onClick={handleDeleteIconClick}>
+					<TbTrash className="text-4xl" />
 				</div>
 			</div>
 			<div className="ml-6">
@@ -90,7 +88,7 @@ const CompressedTask: FC<Props> = ({ task }) => {
 					data?.map((subTask) => <CompressedSubTask subTask={subTask} />)}
 			</div>
 			<Modal
-				className="fade"
+				className="fade "
 				isOpen={modalOpen}
 				onClose={() => setModalOpen(false)}
 			>

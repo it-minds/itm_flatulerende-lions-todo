@@ -18,16 +18,18 @@ const Home = () => {
 	};
 
 	return (
-		<div className="p-2.5 flex flex-col justify-center items-center pt-16 bg-off-white w-full min-h-[100vh]">
-			<h1 className="text-3xl font-semibold pb-2">Todo-lists:</h1>
+		<div className="p-2.5 flex flex-col justify-center items-center pt-16 bg-off-white w-full min-h-[100vh] pb-24">
+			<h1 className="text-3xl font-semibold pb-2">Todo-lists</h1>
 			<Button onClick={() => setModalOpen(true)}>Add Todo List</Button>
 			<HomepageTodoListView />
-			<div>
+			{/* Er det ikke okay at fjerne det her ?  */}
+
+			{/* <div>
 				<Link to="/">Tilbage til forsiden</Link>
 			</div>
 			<button>
 				<Link to="/TodoList">Til TodoLists!</Link>
-			</button>
+			</button> */}
 			<Modal
 				className="fade "
 				isOpen={modalOpen}

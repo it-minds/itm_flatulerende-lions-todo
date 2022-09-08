@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useState } from "react";
-import { deleteSubTask } from "../utils/deleteRequest";
-import { getSubTasks } from "../utils/getRequests";
-import { SubTask, TodoList } from "../utils/todoTypes";
+import { deleteSubTask } from "../../utils/deleteRequest";
+import { getSubTasks } from "../../utils/getRequests";
+import { SubTask, TodoList } from "../../utils/todoTypes";
 import SubTaskItem from "./SubTaskItem";
 import SubTasks from "./SubTasks";
-import Button from "./UI/Button";
-import TextArea from "./UI/TextArea";
-import TextInput from "./UI/TextInput";
+import Button from "../UI/Button";
+import TextArea from "../UI/TextArea";
+import TextInput from "../UI/TextInput";
 
 const dummySubtasks: SubTask[] = [
 	{
@@ -85,7 +85,7 @@ const TaskDetailed: FC<Props> = ({
 	}, [taskName]);
 
 	return (
-		<div className="flex flex-col w-full md:w-[30vw] h-full bg-off-white p-2 gap-y-1 md:gap-y-8">
+		<div className="flex flex-col w-full md:w-[60vw] lg:w-[50vw] xl:w-[40vw] h-full bg-off-white p-2 gap-y-1 md:gap-y-8">
 			<h1 className="text-xl md:text-4xl text-brown-gray self-center">
 				{header}
 			</h1>
