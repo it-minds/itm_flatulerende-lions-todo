@@ -3,4 +3,5 @@ export type TodoListModel = {
         todoListName: string;
         todoListDesc: string;
         todoListDeleted: boolean;
+        
 }

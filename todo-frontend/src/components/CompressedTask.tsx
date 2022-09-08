@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { TbTrash } from 'react-icons/tb'
 import { TaskModel } from '../Models/TaskModel'
 
@@ -9,6 +9,10 @@ type Props = {
 const CompressedTask:FC<Props> = ({task}) => {
     
     const [checkBoxState, setCheckBoxState] = useState(false);
+
+    useEffect(() => {
+
+    },[])
 
     function handleCheckBoxClick() {
         setCheckBoxState(!checkBoxState);
@@ -39,7 +43,8 @@ const CompressedTask:FC<Props> = ({task}) => {
                 </label>
                 <div className="col-span-3">{task.taskName}</div>
                 <div className="col-span-3">{task.taskDesc}</div>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded col-span-2" onClick={handleEditButtonClick}>Edit task</button>
+                <div className="col-span-1"></div>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded col-span-1" onClick={handleEditButtonClick}>Edit task</button>
                 <div className="col-span-1 content-around ml-2" onClick={handleDeleteIconClick}><TbTrash size={35}/></div>
             </div>
         </div>
