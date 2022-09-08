@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import HomepageTodoListView from "../components/HomepageTodoListView";
 import Button from "../components/UI/Button";
 import Modal from "../components/UI/Modal";
-import { getTodoLists } from "../dummy-data";
+import { getTodoListsDummy } from "../dummy-data";
 
 const Home = () => {
 	const [modalOpen, setModalOpen] = useState(false);
-	let todoLists = getTodoLists();
+	let todoLists = getTodoListsDummy();
 
 	return (
 		<div className="p-2.5 flex flex-col justify-center items-center pt-16 bg-off-white min-h-[100vh]">
