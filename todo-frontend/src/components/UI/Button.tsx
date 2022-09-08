@@ -8,7 +8,7 @@ type Props = {
 const Button: FC<Props> = ({ children, onClick }) => {
 	return (
 		<button
-			className="w-32 h-16 bg-light-blue text-slate-600 rounded-lg text-lg font-medium"
+			className="btn"
 			onClick={() => onClick()}
 		>
 			Open modal

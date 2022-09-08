@@ -19,12 +19,6 @@ const Home = () => {
 			<button>
 				<Link to="/TodoList">Til TodoLists!</Link>
 			</button>
-			{/* <button
-				className="w-32 h-16 bg-light-blue text-slate-600 rounded-lg text-lg font-medium"
-				onClick={() => setModalOpen(true)}
-			>
-				Open modal
-			</button> */}
 			<Button onClick={() => setModalOpen(true)}>Open Modal</Button>
 			<Modal
 				className="fade "

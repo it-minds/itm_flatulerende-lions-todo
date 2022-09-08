@@ -38,6 +38,7 @@ const Modal: FC<Modal> = (props) => {
 		};
 	}, []);
 
+	// mounted probably only necessary for ssr
 	if (props.isOpen && mounted) {
 		return (
 			<>
