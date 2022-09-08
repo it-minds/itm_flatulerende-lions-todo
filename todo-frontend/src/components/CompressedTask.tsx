@@ -63,7 +63,11 @@ const CompressedTask: FC<Props> = ({ task }) => {
 					<TbTrash size={35} />
 				</div>
 			</div>
-			<Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+			<Modal
+				className="fade"
+				isOpen={modalOpen}
+				onClose={() => setModalOpen(false)}
+			>
 				<TaskDetailed
 					onAddTask={() => console.log("Task added")}
 					header={task.taskName}

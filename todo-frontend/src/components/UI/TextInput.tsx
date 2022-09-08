@@ -4,7 +4,7 @@ type Props = {
 	children?: React.ReactNode | string;
 	placeholder?: string;
 	id: string;
-	label: string;
+	label?: string;
 	onClick?: () => void;
 	onInput: (event: React.FormEvent<HTMLInputElement>) => void;
 	className?: string;
@@ -22,13 +22,15 @@ const TextInput: FC<Props> = ({
 	value,
 }) => {
 	return (
-		<div className="flex flex-col">
-			<label
-				className="mx-1 opacity-60 mb-0.5 text-sm border-b-2  w-fit border-light-blue border-opacity-80 pr-4"
-				htmlFor={id}
-			>
-				{label}
-			</label>
+		<div className="flex flex-col w-full">
+			{label && (
+				<label
+					className="mx-1 opacity-60 mb-0.5 text-sm border-b-2  w-fit border-light-blue border-opacity-80 pr-4"
+					htmlFor={id}
+				>
+					{label}
+				</label>
+			)}
 			<input
 				name={id}
 				type="input"
