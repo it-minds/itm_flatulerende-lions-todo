@@ -1,13 +1,15 @@
 import { useState } from "react";
 import "./index.css";
 import reactLogo from "./assets/react.svg";
-import { Outlet, Link } from "react-router-dom";
+import Modal from "./components/UI/Modal";
+import { Link } from "react-router-dom";
 
 function App() {
 	const [count, setCount] = useState(0);
+	const [modalOpen, setModalOpen] = useState(false);
 
 	return (
-		<div className="bg">
+		<div className="app-root">
 			<div>
 				<a href="https://vitejs.dev" target="_blank">
 					<img src="/vite.svg" className="logo" alt="Vite logo" />
@@ -18,7 +20,7 @@ function App() {
 			</div>
 			<h1>Vite + React</h1>
 			<div className="card bg-slate-200">
-				<button onClick={() => (4)}>Get Todos!</button>
+				<button onClick={() => setModalOpen(true)}>Open Modal!</button>
 				<p>
 					Edit <code>src/App.tsx</code> and save to test HMR
 				</p>
@@ -26,6 +28,16 @@ function App() {
 			<p className="read-the-docs">
 				Click on the Vite and React logos to learn more - Heeeeeej
 			</p>
+			<Modal
+				isOpen={modalOpen}
+				onClose={() => {
+					console.log("closing modal");
+					setModalOpen(false);
+				}}
+				className="fade"
+			>
+				<h1></h1>
+			</Modal>
 			<nav>
 				<Link to="/">Home</Link>
 			</nav>
