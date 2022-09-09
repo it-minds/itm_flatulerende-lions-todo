@@ -37,7 +37,7 @@ const TextInput: FC<Props> = ({
 				value={value}
 				placeholder={placeholder}
 				onInput={(e) => onInput(e)}
-				className={"min-h-[1.1rem] input" + " " + className}
+				className={`min-h-[1.1rem] input ${className}`}
 			/>
 		</div>
 	);

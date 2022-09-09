@@ -37,8 +37,8 @@ const CompressedTodoList: FC<Props> = ({ todoList }) => {
 				checkBoxState ? "opacity-50" : ""
 			}`}
 		>
-			<div className="grid grid-cols-11 gap-4">
-				<label className="flex items-center col-span-1 md:col-span-2 text-sm">
+			<div className="grid grid-cols-11 gap-4 place-start">
+				<label className="flex items-center justify-start justify-self-start gap-2 col-span-1 md:col-span-2 text-sm">
 					<p className="w-0 opacity-0 md:w-full md:opacity-100">Complete: </p>
 					<input
 						type="checkbox"

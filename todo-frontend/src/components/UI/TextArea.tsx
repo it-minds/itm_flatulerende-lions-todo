@@ -30,7 +30,7 @@ const TextArea: FC<Props> = ({
 			</label>
 			<textarea
 				rows={rows || 4}
-				className={"input resize-none " + " " + className}
+				className={`input resize-none ${className}`}
 				id={id}
 				placeholder={placeholder}
 				onInput={(e) => onInput(e)}

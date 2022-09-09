@@ -10,7 +10,7 @@ type Props = {
 const Button: FC<Props> = ({ children, onClick, className, disabled }) => {
 	if (!disabled) {
 		return (
-			<button className={"btn" + " " + className} onClick={() => onClick()}>
+			<button className={`btn ${className}`} onClick={() => onClick()}>
 				{children}
 			</button>
 		);
@@ -18,7 +18,7 @@ const Button: FC<Props> = ({ children, onClick, className, disabled }) => {
 		return (
 			<button
 				disabled
-				className={"btn-disabled" + " " + className}
+				className={`btn-disabled ${className}`}
 				onClick={() => onClick()}
 			>
 				{children}

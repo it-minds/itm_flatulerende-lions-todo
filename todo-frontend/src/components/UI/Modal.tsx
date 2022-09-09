@@ -67,7 +67,7 @@ const Backdrop: FC<Backdrop> = (props) => {
 
 const Overlay: FC<Overlay> = (props) => {
 	return (
-		<div className={"modal " + " " + props.className}>
+		<div className={`modal ${props.className}`}>
 			{props.children || props.bodyText || "No Text Has Been Set"}
 		</div>
 	);
