@@ -1,4 +1,5 @@
 import { useFetch } from "../Hooks/useFetch";
+import { SubTask } from "./todoTypes";
 
 const BASE_PATH = "https://localhost:7277";
 export default BASE_PATH;
@@ -19,8 +20,8 @@ export async function seedDB() {
 //* GET REQUESTS
 
 const getTodosHook = () => {
-	const {data, loading, error} = useFetch({url: `${BASE_PATH}/todoitems`});
-}
+	const { data, loading, error } = useFetch({ url: `${BASE_PATH}/todoitems` });
+};
 
 export async function getTodos() {
 	const response = await fetch(`${BASE_PATH}/todoitems`);
@@ -51,7 +52,7 @@ export async function getTasks() {
 	const data: JSON = await response.json();
 
 	if (response.ok) {
-		console.log(data);
+		// console.log(data);
 
 		return data;
 	}
@@ -64,7 +65,7 @@ export async function getTodoTasks(todoId: number) {
 	const data: JSON = await response.json();
 
 	if (response.ok) {
-		console.log(data);
+		// console.log(data);
 
 		return data;
 	}
@@ -77,7 +78,7 @@ export async function getAllSubTasks() {
 	const data: JSON = await response.json();
 
 	if (response.ok) {
-		console.log(data);
+		// console.log(data);
 
 		return data;
 	}
@@ -87,9 +88,9 @@ export async function getAllSubTasks() {
 export async function getSubTasks(taskId: number) {
 	const response: Response = await fetch(`${BASE_PATH}/subtasks/${taskId}`);
 
-	const data: JSON = await response.json();
+	const data: SubTask[] = await response.json();
 
-	console.log("data", data);
+	// console.log("data", data);
 
 	if (response.ok) {
 		console.log(data);

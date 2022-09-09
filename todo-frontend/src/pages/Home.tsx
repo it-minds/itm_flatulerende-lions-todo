@@ -19,12 +19,12 @@ const Home = () => {
 	const { data, loading, error } = useFetch<TodoList[]>({
 		url: `${BASE_PATH}/todoitems`,
 		init: {},
-		flipper: flipper
+		flipper: flipper,
 	});
 
 	const handleTodoAdded = async (todo: TodoList) => {
 		await addTodoList(todo);
-		
+
 		setFlipper(!flipper);
 	};
 
@@ -37,7 +37,7 @@ const Home = () => {
 					Loading......
 				</div>
 			)}
-			<HomepageTodoListView todoLists={data}/>
+			<HomepageTodoListView todoLists={data} />
 			<Modal
 				className="fade "
 				isOpen={modalOpen}

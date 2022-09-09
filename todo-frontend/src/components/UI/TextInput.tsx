@@ -1,6 +1,7 @@
 import React, { FC, Fragment, useState } from "react";
 
 type Props = {
+	onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 	children?: React.ReactNode | string;
 	placeholder?: string;
 	id: string;
@@ -12,6 +13,7 @@ type Props = {
 };
 
 const TextInput: FC<Props> = ({
+	onBlur,
 	children,
 	onClick,
 	id,
@@ -32,6 +34,7 @@ const TextInput: FC<Props> = ({
 				</label>
 			)}
 			<input
+				onBlur={onBlur}
 				name={id}
 				type="input"
 				value={value}

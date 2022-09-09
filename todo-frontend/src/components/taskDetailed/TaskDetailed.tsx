@@ -63,11 +63,11 @@ const TaskDetailed: FC<Props> = ({
 	const [taskName, setTaskName] = useState<string>(name || "");
 	const [description, setDescription] = useState<string>(desc || "");
 	const [canAdd, setCanAdd] = useState<boolean>(taskName.length > 0);
-
+	const [subTaskList, setSubTaskList] = useState<SubTask[]>(subTasks || []);
 	useEffect(() => {
 		fetchSubTasks(taskId);
-		console.log(taskId);
-	}, []);
+		// console.log(taskId);
+	}, [subTaskList]);
 
 	const fetchSubTasks = async (id: number) => {
 		const subs = await getSubTasks(taskId);
@@ -109,21 +109,22 @@ const TaskDetailed: FC<Props> = ({
 			</div>
 			<div className="flex flex-col gap-1 w-full h-fit">
 				<SubTasks
+					updated={() => fetchSubTasks(taskId)}
 					onAddSubTask={(subTask: SubTask) => console.log(subTask)}
 					onRemoveSubTask={(subId: number) => handleRemoveSubTask(subId)}
 					onSubTaskCompleted={(subId: number) => console.log(subId)}
 					onDescriptionChange={(subId: number, desc: string) =>
 						console.log(subId, desc)
 					}
-					subTasks={subTasks || dummySubtasks}
+					subTasks={subTaskList || dummySubtasks}
 				/>
 			</div>
-			<div className="flex justify-between mt-5">
-				<Button disabled={!canAdd} onClick={() => ({})}>
+			<div className="flex justify-end mt-5">
+				{/* <Button disabled={!canAdd} onClick={() => ({})}>
 					Save
-				</Button>
+				</Button> */}
 				<Button
-					className="bg-btn-cancel hover:bg-btn-cancel-focus "
+					className="bg-btn-cancel hover:bg-btn-cancel-focus"
 					onClick={() => onClose()}
 				>
 					Cancel
