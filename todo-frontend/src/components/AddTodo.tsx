@@ -1,4 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
+import { useFetch } from "../Hooks/useFetch";
+import BASE_PATH from "../utils/getRequests";
 import { TodoList, TodoTask } from "../utils/todoTypes";
 import Button from "./UI/Button";
 import Modal from "./UI/Modal";
@@ -9,15 +11,20 @@ type Props = {
 	header: string;
 	onAddTask: (task: TodoList) => void;
 	onClose: () => void;
+	update: () => void;
 };
 
-const AddTodo: FC<Props> = ({ header, onAddTask, onClose }) => {
+const AddTodo: FC<Props> = ({ header, onAddTask, onClose, update }) => {
 	const [taskName, setTaskName] = useState<string>("");
 	const [description, setDescription] = useState<string>("");
 	const [canAdd, setCanAdd] = useState<boolean>(taskName.length > 0);
 
+	const { data, loading, error } = useFetch<TodoList[]>({
+		url: `${BASE_PATH}/todoitems`,
+	});
+
 	useEffect(() => {
-		setCanAdd(taskName.length > 0);
+		
 	}, [taskName]);
 
 	const handleAddTask = () => {
@@ -29,9 +36,11 @@ const AddTodo: FC<Props> = ({ header, onAddTask, onClose }) => {
 			todoTasks: [],
 		};
 		onAddTask(newTask);
-		// probably not necessary because of close
-		// setTaskName("");
-		// setDescription("");
+
+		// post newTask
+
+		update();
+
 		onClose();
 	};
 
@@ -59,7 +68,9 @@ const AddTodo: FC<Props> = ({ header, onAddTask, onClose }) => {
 				/>
 			</div>
 			<div className="flex justify-between">
-				<Button disabled={!canAdd} onClick={handleAddTask}>
+				<Button 
+				// disabled={!canAdd}
+				onClick={handleAddTask}>
 					Save
 				</Button>
 				<Button

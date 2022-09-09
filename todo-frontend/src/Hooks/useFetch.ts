@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 type RequestProps = {
     url: RequestInfo;
     init?: RequestInit;
+    flipper?: boolean;
 }
 
-export const useFetch = <T>({ url, init }: RequestProps) => {
+export const useFetch = <T>({ url, init, flipper }: RequestProps) => {
     
     // Response state
     const [data, setData] = useState<T>();
@@ -13,9 +14,11 @@ export const useFetch = <T>({ url, init }: RequestProps) => {
     const [error, setError] = useState<unknown>();
 
     // Stringifying objects
-    const [stringifiedUrl, stringifiedInit] = [JSON.stringify(url), JSON.stringify(init)];
+    const [stringifiedUrl, stringifiedInit, stringifiedFlipper] = [JSON.stringify(url), JSON.stringify(init), JSON.stringify(flipper)];
 
     useEffect(() => {
+        console.log("refetched");
+        
         const fetchApi = async () => {
             try {
                 // Fetch data
@@ -39,7 +42,7 @@ export const useFetch = <T>({ url, init }: RequestProps) => {
 
         // Call async function
         fetchApi();
-    }, [stringifiedUrl, stringifiedInit]);
+    }, [stringifiedUrl, stringifiedInit, stringifiedFlipper]);
 
     return {data, loading, error};
 };

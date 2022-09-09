@@ -2,6 +2,8 @@ import React, { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TbTrash } from "react-icons/tb";
 import { TodoList } from "../utils/todoTypes";
+import { useFetch } from "../Hooks/useFetch";
+import BASE_PATH from "../utils/getRequests";
 
 type Props = {
 	todoList: TodoList;
@@ -11,6 +13,7 @@ const CompressedTodoList: FC<Props> = ({ todoList }) => {
 	const navigate = useNavigate();
 	const [checkBoxState, setCheckBoxState] = useState(false);
 	const completeOpacity: string = " opacity-25";
+
 	function handleGotoButtonClick() {
 		navigate(`/TodoList/${todoList.todoListId}`);
 	}

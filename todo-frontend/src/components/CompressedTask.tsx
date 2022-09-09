@@ -28,8 +28,6 @@ const CompressedTask: FC<Props> = ({ task }) => {
 		url: `${BASE_PATH}/subtasks/${task.todoTaskId}`,
 	});
 
-	useEffect(() => {}, []);
-
 	const handleDeleteIconClick = async () => {
 		const result = await confirm(
 			`Are you sure you want to delete ${task.taskName} (Id: ${task.todoTaskId})?`
