@@ -33,7 +33,7 @@ const Home = () => {
 			<h1 className="text-3xl font-semibold pb-2">Todo-lists</h1>
 			<Button onClick={() => setModalOpen(true)}>Add Todo List</Button>
 			{loading && (
-				<div className="text-white flex items-center justify-center p-3">
+				<div className="text-black flex items-center justify-center p-3">
 					Loading......
 				</div>
 			)}

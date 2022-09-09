@@ -37,8 +37,6 @@ const AddTodo: FC<Props> = ({ header, onAddTask, onClose, update }) => {
 		};
 		onAddTask(newTask);
 
-		// post newTask
-
 		update();
 
 		onClose();

@@ -27,7 +27,7 @@ const CompressedSubTask:FC<Props> = ({subTask}) => {
       };
 
     return (
-        <div className="m-1 py-2 px-4 font-medium text-left text-black rounded-lg bg-zinc-50 hover:bg-zinc-100 active:bg-zinc-200 border-b border-gray-500 cursor-pointer ">
+        <div className="m-1 py-2 px-4 font-medium text-left text-black rounded-lg bg-blue-200 hover:bg-blue-400 border-b border-gray-500 cursor-pointer ">
             <div className='flex w-full items-center'>
                 <div className='w-28'>Complete: <input type="checkbox" checked={checkBoxState} onChange={handleCheckBoxClick}/></div>
                 <div className='flex flex-1 items-center w-12'>
