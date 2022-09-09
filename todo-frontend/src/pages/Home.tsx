@@ -6,7 +6,7 @@ import Button from "../components/UI/Button";
 import Modal from "../components/UI/Modal";
 import { useFetch } from "../Hooks/useFetch";
 import BASE_PATH from "../utils/getRequests";
-import { TEST_TASK } from "../utils/postRequests";
+import { addTodoList, TEST_TASK } from "../utils/postRequests";
 import { SubTask, TodoList, TodoTask } from "../utils/todoTypes";
 
 const TestTodoTasks: TodoTask[] = [TEST_TASK, TEST_TASK, TEST_TASK];
@@ -22,9 +22,9 @@ const Home = () => {
 		flipper: flipper
 	});
 
-	const handleTodoAdded = (todo: TodoList) => {
-		// post kald der tilføjer ny todo-liste
-
+	const handleTodoAdded = async (todo: TodoList) => {
+		await addTodoList(todo);
+		
 		setFlipper(!flipper);
 	};
 
@@ -37,7 +37,7 @@ const Home = () => {
 					Loading......
 				</div>
 			)}
-			<HomepageTodoListView todoLists={data} />
+			<HomepageTodoListView todoLists={data}/>
 			<Modal
 				className="fade "
 				isOpen={modalOpen}
