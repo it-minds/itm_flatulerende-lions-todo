@@ -1,1 +1,10 @@
 <p>todolist works!</p>
+
+<ul class="flex flex-col items-center w-[100]">
+  <li
+    *ngFor="let todo of todoList"
+    class="flex flex-col items-center bg-white border-2 border-black text-xl font-medium min-w-[300px]"
+  >
+    {{ todo.todoListName }} - {{ todo.todoTasks?.length }}
+  </li>
+</ul>
