@@ -1,0 +1,9 @@
+@layer components {
+	.input {
+		@apply text-brown-gray bg-off-white focus:bg-light-blue focus:bg-opacity-10 rounded-md box-border border-opacity-30 border-[1px] md:w-fit md:pr-4 border-none py-0.5 px-1 focus-visible:outline-none shadow-sm shadow-slate-400 md:shadow-sm md:shadow-slate-300;
+	}
+
+	.label {
+		@apply opacity-60 mx-1 mb-0.5 text-sm border-b-2 w-fit border-light-blue border-opacity-80 pr-4;
+	}
+}

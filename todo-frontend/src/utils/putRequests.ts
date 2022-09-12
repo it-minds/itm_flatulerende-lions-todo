@@ -52,11 +52,9 @@ export async function updateSubTask(subTask: SubTask): Promise<boolean> {
 		body: JSON.stringify(subTask),
 	});
 
-	const data: JSON = await response.json();
+	console.log(response);
 
 	if (response.ok) {
-		console.log(data);
-
 		return true;
 	}
 	return false;
