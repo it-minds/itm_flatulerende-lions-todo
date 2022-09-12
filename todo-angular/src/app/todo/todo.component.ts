@@ -7,7 +7,9 @@ import { TodoService } from './todo.service';
   styleUrls: ['./todo.component.scss'],
 })
 export class TodoComponent implements OnInit {
-  constructor(private readonly todoService: TodoService) {}
+  constructor(private readonly todoService: TodoService) {
+    this.getTodos();
+  }
 
   ngOnInit(): void {}
 
