@@ -1,9 +1,31 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata;
+using System.Threading.Tasks;
+using todo_backend;
+using todo_backend.Models;
+
 var builder = WebApplication.CreateBuilder(args);
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy(name: MyAllowSpecificOrigins,
+					  policy =>
+					  {
+						  policy.WithOrigins("http://localhost:5173",
+											  "http://www.contoso.com")
+												.AllowAnyHeader()
+												.AllowAnyMethod();
+					  });
+});
 
 var app = builder.Build();
 
@@ -14,30 +36,224 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(MyAllowSpecificOrigins);
+
+
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+// Add data context
+using var db = new ListContext();
+// Note: This sample requires the database to be created before running.
+Console.WriteLine($"Database path: {db.DbPath}.");
 
-app.MapGet("/weatherforecast", () =>
+app.MapGet("/seedLists", () =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateTime.Now.AddDays(index),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+    SeedLists.SeedTodoLists(db);
+});
+
+app.MapGet("/todoitems", async () =>
+    await db.TodoList.ToListAsync());
+
+app.MapGet("/todoitems/{todoId}", async (int todoId) =>
+await db.TodoList.FindAsync(todoId) 
+	is TodoList todoList 
+	? Results.Ok(todoList) 
+	: Results.NotFound());
+
+app.MapGet("/tasks", async () =>
+    await db.TodoTask.ToListAsync());
+
+app.MapGet("/tasks/{todoId}", async (int todoId) =>
+{
+    var tasks = await db.TodoTask
+        .Where(t => t.TodoListId == todoId)
+        .ToListAsync();
+
+    if (tasks.Count < 1)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(tasks);
+});
+
+app.MapGet("/subtasks", async () =>
+    await db.SubTask.ToListAsync());
+
+app.MapGet("/subtasks/{taskId}", async (int taskId) =>
+{
+    var subtasks = await db.SubTask
+        .Where(t => t.TodoTaskId == taskId)
+        .ToListAsync();
+
+    if (subtasks.Count < 1)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(subtasks);
+});
+
+app.MapPost("/todoitems", async (TodoList todoList) =>
+{
+    db.TodoList.Add(todoList);
+    await db.SaveChangesAsync();
+
+    return Results.Created($"/todoitems/{todoList.TodoListId}", todoList);
+});
+
+// Skal blot modtage et TodoListId og ikke et helt object
+app.MapPost("/tasks", async (TodoTask task) =>
+{
+
+	try
+	{
+		db.TodoTask.Add(task);
+	}
+	catch
+	{
+		Console.WriteLine("Couldn't add task");
+	}
+	
+    await db.SaveChangesAsync();
+
+    return Results.Created($"/todoitems/{task.TodoTaskId}", task);
+
+});
+
+// Skal blot modtage et TodoTaskId og ikke et helt object
+app.MapPost("/subtasks", async (SubTask subtask) =>
+{
+    db.SubTask.Add(subtask);
+    await db.SaveChangesAsync();
+
+    return Results.Created($"/todoitems/{subtask.SubTaskId}", subtask);
+});
+
+app.MapPut("/todoitems/{todoId}", async (TodoList inputTodoList) =>
+{
+	var todoList = await db.TodoList.FindAsync(inputTodoList.TodoListId);
+
+	if (todoList is null)
+	{
+		return Results.NotFound();
+	}
+
+	todoList.TodoListName = inputTodoList.TodoListName;
+	todoList.TodoListDesc = inputTodoList.TodoListDesc;
+	todoList.TodoListDeleted = inputTodoList.TodoListDeleted;
+
+    await db.SaveChangesAsync();
+
+	return Results.NoContent();
+});
+
+app.MapPut("/tasks/{taskId}", async (TodoTask inputTask) =>
+{
+    var task = await db.TodoTask.FindAsync(inputTask.TodoTaskId);
+
+    if (task is null)
+    {
+        return Results.NotFound();
+    }
+
+    task.TaskName = inputTask.TaskName;
+    task.TaskDesc = inputTask.TaskDesc;
+    task.TaskComplete = inputTask.TaskComplete;
+    task.TaskDeleted = inputTask.TaskDeleted;
+    task.TaskDeadline = inputTask.TaskDeadline;
+    task.TaskCompletionTime = inputTask.TaskCompletionTime;
+
+    await db.SaveChangesAsync();
+
+    return Results.NoContent();
+});
+
+app.MapPut("/subtasks/{subId}", async (SubTask inputSubtask) =>
+{
+    var subtask = await db.SubTask.FindAsync(inputSubtask.SubTaskId);
+
+    if (subtask is null)
+    {
+        return Results.NotFound();
+    }
+
+    subtask.SubName = inputSubtask.SubName;
+    subtask.SubDesc = inputSubtask.SubDesc;
+    subtask.SubComplete = inputSubtask.SubComplete;
+    subtask.SubDeleted = inputSubtask.SubDeleted;
+    subtask.SubDeadline = inputSubtask.SubDeadline;
+    subtask.SubCompletionTime = inputSubtask.SubCompletionTime;
+
+    await db.SaveChangesAsync();
+
+    return Results.NoContent();
+});
+
+
+
+app.MapDelete("/todoitems/{todoId}", async (int todoId) =>
+{
+
+	if (await db.TodoList.FindAsync(todoId) is TodoList todoList)
+	{
+		int taskId = -1;
+		db.TodoList.Remove(todoList);
+
+		// Deleting all Tasks on list
+		await db.TodoTask.ForEachAsync(t =>
+		{
+			if (t.TodoListId == todoId) {
+				taskId = t.TodoTaskId;
+				db.TodoTask.Remove(t);
+			};
+		});
+
+		// Deleting all subtasks on task
+		await db.SubTask.ForEachAsync(st =>
+		{
+			if (st.TodoTaskId == taskId) db.SubTask.Remove(st);
+		});
+
+		await db.SaveChangesAsync();
+		return Results.Ok(todoList);
+	}
+	return Results.NotFound();
+});
+
+app.MapDelete("/tasks/{taskId}", async (int taskId) =>
+{
+
+	if (await db.TodoTask.FindAsync(taskId) is TodoTask todoTask)
+	{
+		db.TodoTask.Remove(todoTask);
+
+		await db.SubTask.ForEachAsync(st =>
+		{
+			if (st.TodoTaskId == taskId) db.SubTask.Remove(st);
+		});
+		await db.SaveChangesAsync();
+
+		return Results.Ok(todoTask);
+	}
+	return Results.NotFound();
+});
+
+app.MapDelete("/subtasks/{subId}", async (int subId) =>
+{
+	
+	if (await db.SubTask.FindAsync(subId) is SubTask subTask)
+	{
+		db.SubTask.Remove(subTask);
+		await db.SaveChangesAsync();
+		return Results.Ok(subTask);
+	}
+		return Results.NotFound();
+});
 
 app.Run();
 
-record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+/*
+ * Eventuelt validering (Model validation - se docs)
+ * Det var nok en god ide at bruge DTO til tasks og subtasks
+ * Eventuelt antal af tasks på de forskellige todolister og antal subtasks for en task i database-modellen
+ * Tjek op på cascade-delete om det er nemmere end den måde der deletes på nu
+ */

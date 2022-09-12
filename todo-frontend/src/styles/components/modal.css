@@ -1,0 +1,86 @@
+.fade {
+	animation: fade-in-top;
+	animation-duration: 0.35s;
+}
+
+.modal {
+	/*--height: clamp(15%, fit, 70%);*/
+	--height: clamp(0, 500px, 50%);
+	--responsive-top: calc(var(--height) - 1000);
+	@apply bg-gray-400 px-8 py-10 fixed z-30 justify-center h-fit min-h-[30vh] top-[15%] translate-x-[-50%]  max-h-[70%] overflow-auto w-fit min-w-[70%] md:min-w-[50%] max-w-[95%];
+	left: 50%;
+	width: clamp(50%, 80vw, calc(98% - 200px));
+	border-radius: 14px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+
+	/** Why no work? */
+	&-left {
+		animation: fade-in-left;
+		animation-duration: 0.4s;
+	}
+	&-right {
+		animation: fade-in-right;
+		animation-duration: 0.4s;
+	}
+	&-top {
+		animation: fade-in-top;
+		animation-duration: 0.4s;
+	}
+	&-bottom {
+		animation: fade-in-bottom;
+		animation-duration: 0.4s;
+	}
+}
+
+.backdrop {
+	@apply fixed top-0 left-0 w-full h-full z-20 bg-black opacity-50;
+}
+
+@keyframes fade-in-top {
+	0% {
+		opacity: 0;
+		left: 50%;
+		transform: translate(-50%, -7rem);
+	}
+	100% {
+		left: 50%;
+		opacity: 1;
+		transform: translate(-50%, 0);
+	}
+}
+@keyframes fade-in-bottom {
+	0% {
+		opacity: 0;
+		left: 50%;
+		transform: translate(-50%, 70vh);
+	}
+	100% {
+		left: 50%;
+		opacity: 1;
+		transform: translate(-50%, 0);
+	}
+}
+@keyframes fade-in-left {
+	0% {
+		left: 50%;
+		transform: translate(-100%, 0);
+		opacity: 0;
+	}
+	100% {
+		left: 50%;
+		transform: translate(-50%, 0);
+		opacity: 1;
+	}
+}
+@keyframes fade-in-right {
+	0% {
+		left: 50%;
+		transform: translate(0, 0);
+		opacity: 0;
+	}
+	100% {
+		left: 50%;
+		transform: translate(-50%, 0);
+		opacity: 1;
+	}
+}
