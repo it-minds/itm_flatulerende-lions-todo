@@ -8,11 +8,9 @@ import { TodoService } from './../todo.service';
   styleUrls: ['./todolist.component.scss'],
 })
 export class TodolistComponent implements OnInit {
-  todoList: Array<TodoModel>;
+  todoList: TodoModel[] = [];
 
-  constructor(private readonly todoService: TodoService) {
-    this.todoList = new Array<TodoModel>();
-  }
+  constructor(private readonly todoService: TodoService) {}
 
   getTodos() {
     this.todoService.getTodos().subscribe({
