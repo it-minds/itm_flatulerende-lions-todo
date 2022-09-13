@@ -18,6 +18,16 @@ export class TodoService {
       .pipe(catchError(this.handleError<TodoModel[]>('getTodos', [])));
   }
 
+  addTodo(newTodo: TodoModel): Observable<TodoModel> {
+    return this.http
+      .post<TodoModel>(`${this.todosUrl}/todoitems`, {
+        todoListName: 'test',
+        todoListDesc: 'test',
+        todoListDeleted: false,
+      })
+      .pipe(catchError(this.handleError<TodoModel>('addTodo')));
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure

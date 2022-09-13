@@ -7,15 +7,16 @@ import { TodoModule } from './todo/todo.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    TodoModule,
-    HttpClientModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    TodoModule,
     MatButtonModule,
   ],
   providers: [],

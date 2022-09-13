@@ -8,10 +8,12 @@ import { TodoService } from './todo.service';
 })
 export class TodoComponent implements OnInit {
   constructor(private readonly todoService: TodoService) {
-    this.getTodos();
+    // this.getTodos();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getTodos();
+  }
 
   getTodos() {
     this.todoService.getTodos().subscribe({
