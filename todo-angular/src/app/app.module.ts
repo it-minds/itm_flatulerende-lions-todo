@@ -7,10 +7,9 @@ import { TodoModule } from './todo/todo.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
-import { TaskComponent } from './task/task.component';
 
 @NgModule({
-  declarations: [AppComponent, TaskComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
