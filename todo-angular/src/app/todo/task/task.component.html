@@ -1,1 +1,7 @@
-<p>task works!</p>
+<div class="flex text-black">
+    <span>{{task.todoTaskId}}</span>  
+    <span>{{task.taskName}}</span>
+    <span>{{task.taskDesc}}</span>
+    <span>{{task.todoListId}}</span>
+    <mat-checkbox [checked]="checkboxState" class="example-margin">Completed</mat-checkbox>
+</div>

@@ -8,7 +8,7 @@ import { TaskModel } from 'src/Models/TodoModel';
 })
 export class TaskComponent implements OnInit {
 
-  @Input() task: TaskModel | undefined = {
+  @Input() task: TaskModel = {
     todoTaskId: 0,
     taskName: '',
     taskDesc: '',
@@ -19,6 +19,8 @@ export class TaskComponent implements OnInit {
     todoListId: 0,
     subTasks: null
   };
+
+  @Input() checkboxState:boolean = false;
 
   constructor() { }
 
