@@ -23,7 +23,7 @@ export class TaskComponent implements OnInit {
   };
   @Input() checkboxState: boolean = false;
 
-  @Output() checkedChangedEvent = new EventEmitter<boolean>();
+  @Output() checkedChangedEvent = new EventEmitter<TaskModel>();
 
   constructor(private readonly todoService: TodoService) { }
 
@@ -40,7 +40,7 @@ export class TaskComponent implements OnInit {
     
     this.todoService.putUpdateTask(this.task.todoTaskId, this.task).subscribe({
       next: () => {
-        this.checkedChangedEvent.emit(this.checkboxState);
+        this.checkedChangedEvent.emit(this.task);
       }
     });
   }

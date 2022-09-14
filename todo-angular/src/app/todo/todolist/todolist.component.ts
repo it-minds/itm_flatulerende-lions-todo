@@ -32,7 +32,8 @@ export class TodolistComponent implements OnInit {
     console.log(`Fetched data for specific todolist ${id}`);
   }
 
-  onCheckboxChanged(isComplete: boolean) {
+  onCheckboxChanged(task: TaskModel) {
     console.log("parent reacts to checkbox check!");
+    this.todoService.putUpdateTask(task.todoTaskId, task).subscribe();
   }
 }
