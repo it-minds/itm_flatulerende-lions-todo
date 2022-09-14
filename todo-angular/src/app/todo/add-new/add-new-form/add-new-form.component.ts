@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, EventEmitter, Output } from '@angular/core';
 import { TodoModel } from 'src/Models/TodoModel';
 import { TodoService } from './../../todo.service';
 
@@ -16,12 +16,14 @@ export interface NewTodoForm {
   styleUrls: ['./add-new-form.component.scss'],
 })
 export class AddNewFormComponent implements OnInit {
-  constructor(private readonly todoService: TodoService) {}
+  constructor() {}
 
   form: NewTodoForm = {
     todoName: '',
     todoDescription: '',
   };
+
+  @Output() addTodo: EventEmitter<TodoModel> = new EventEmitter<TodoModel>();
 
   onSubmit(): void {
     const newTodo: TodoModel = {
@@ -31,8 +33,9 @@ export class AddNewFormComponent implements OnInit {
       todoListDeleted: false,
       todoTasks: null,
     };
+    console.log(newTodo);
 
-    this.todoService.addTodo(newTodo);
+    this.addTodo.emit(newTodo);
   }
 
   ngOnInit(): void {}

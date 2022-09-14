@@ -1,4 +1,4 @@
-<div class="w-24 h-12 font-medium text-xl bg-red-700 bg-opacity-60">
+<div>
   <button mat-raised-button (click)="openDialog()">Open Modal</button>
-  <add-new-dialog></add-new-dialog>
+  <add-new-dialog class="hidden" (addTodo)="quickTest()"></add-new-dialog>
 </div>

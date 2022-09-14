@@ -1,4 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Inject,
+  Output,
+  EventEmitter,
+  Input,
+} from '@angular/core';
 import { TodoModel } from 'src/Models/TodoModel';
 import { TodoService } from './../../todo.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -9,6 +16,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { NewTodoForm } from '../add-new-form/add-new-form.component';
+import { TodoModule } from '../../todo.module';
 
 export interface TodoDialogData {
   title: string;
@@ -21,17 +29,17 @@ export interface TodoDialogData {
   styleUrls: ['./add-new-dialog.component.scss'],
 })
 export class AddNewDialogComponent implements OnInit {
-  constructor() {}
-  data: TodoDialogData = {
-    title: 'Add New Todo',
-    form: {
-      todoName: '',
-      todoDescription: '',
-    },
-  };
+  title: string = 'Add New Todo';
+  constructor(public dialogRef: MatDialogRef<AddNewDialogComponent>) {}
 
-  testToConsole(): void {
-    console.log(this.data);
+  @Output() newTodo: EventEmitter<any> = new EventEmitter<any>();
+
+  onAddTodo(newTodo: TodoModel): void {
+    console.log(this.title);
+    console.log(newTodo);
+    console.log(this.newTodo);
+
+    this.dialogRef.close(newTodo);
   }
 
   ngOnInit(): void {}

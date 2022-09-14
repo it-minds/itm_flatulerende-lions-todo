@@ -6,10 +6,14 @@ import { TodoComponent } from './todo.component';
 import { TodolistComponent } from './todolist/todolist.component';
 import { MatButtonModule } from '@angular/material/button';
 import { AddNewComponent } from './add-new/add-new.component';
-import { MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
+import {
+  MatDialogConfig,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddNewFormComponent } from './add-new/add-new-form/add-new-form.component';
 import { AddNewDialogComponent } from './add-new/add-new-dialog/add-new-dialog.component';
@@ -31,6 +35,13 @@ import { AddNewDialogComponent } from './add-new/add-new-dialog/add-new-dialog.c
     ReactiveFormsModule,
     MatNativeDateModule,
     MatFormFieldModule,
+    MatInputModule,
+  ],
+  providers: [
+    {
+      provide: MatDialogRef,
+      useValue: {},
+    },
   ],
 })
 export class TodoModule {}

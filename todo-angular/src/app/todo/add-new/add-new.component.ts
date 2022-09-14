@@ -29,23 +29,29 @@ export class AddNewComponent {
   name: string = '';
   description: string = '';
 
+  onNewTodoAdded(todo: any): void {
+    console.log(todo);
+
+    this.todoService.addTodo(todo).subscribe({
+      next: (todo) => {
+        console.log(todo);
+      },
+    });
+  }
+
+  quickTest(): void {
+    console.log('quick test');
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(AddNewDialogComponent, {
-      width: '40vw',
+      width: 'dialog-responsive',
       data: { name: this.name, description: this.description },
     });
 
-    dialogRef.afterClosed().subscribe((result: DialogData) => {
-      if (result) {
-        const newTodo: TodoModel = {
-          todoListId: 1,
-          todoListName: result.name,
-          todoListDesc: result.description,
-          todoListDeleted: false,
-          todoTasks: null,
-        };
-        console.log(newTodo);
-        this.todoService.addTodo(newTodo);
+    dialogRef.afterClosed().subscribe((result: TodoModel | undefined) => {
+      if (result !== undefined) {
+        this.onNewTodoAdded(result);
       }
     });
   }

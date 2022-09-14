@@ -1,15 +1,9 @@
-<h1 mat-dialog-title>{{ data.title }}</h1>
-<div mat-dialog-content>
-  <!-- <add-new-form name="TestName" description="Test Description"></add-new-form> -->
+<div class="w-full md:p-1">
+  <h1 mat-dialog-title>{{ title }}</h1>
+  <div mat-dialog-content>
+    <add-new-form (addTodo)="this.onAddTodo($event)"></add-new-form>
+  </div>
 </div>
-<div mat-dialog-actions>
+<!-- <div mat-dialog-actions>
   <button mat-button [mat-dialog-close]>Go Away</button>
-  <button
-    mat-button
-    cdkFocusInitial
-    [mat-dialog-close]
-    (click)="this.testToConsole()"
-  >
-    Ok
-  </button>
-</div>
+</div> -->
