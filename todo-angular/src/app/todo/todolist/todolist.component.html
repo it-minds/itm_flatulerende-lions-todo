@@ -1,16 +1,9 @@
 <p>todolist works!</p>
 
-<!-- <ul class="flex flex-col items-center w-[100]">
-  <li
-    *ngFor="let task of todoListTasks"
-    class="flex flex-col items-center bg-white border-2 border-black text-xl font-medium min-w-[300px]"
-  >
-    <app-task [task] = "task"></app-task>
-  </li>
-</ul> -->
+<add-new-todo></add-new-todo>
 
 <mat-list>
-  <mat-list-item 
+<mat-list-item 
   *ngFor="let tasks of todoListTasks"
   >
     <app-task [task] = "tasks" [checkboxState]="tasks.taskComplete" (checkedChangedEvent)="onCheckboxChanged($event)"></app-task>

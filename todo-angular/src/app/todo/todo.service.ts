@@ -18,6 +18,13 @@ export class TodoService {
       .pipe(catchError(this.handleError<TodoModel[]>('getTodos', [])));
   }
 
+  addTodo(newTodo: TodoModel): Observable<TodoModel> {
+    const { todoListId, ...rest } = newTodo;
+    return this.http
+      .post<TodoModel>(`${this.todosUrl}/todoitems`, rest)
+      .pipe(catchError(this.handleError<TodoModel>('addTodo')));
+  }
+  
   getSpecificTodo(todoId: string | null): Observable<TaskModel[]> {
     return this.http
       .get<TaskModel[]>(`${this.todosUrl}/tasks/${todoId}`)

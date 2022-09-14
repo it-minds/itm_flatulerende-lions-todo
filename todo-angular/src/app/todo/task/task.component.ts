@@ -38,11 +38,7 @@ export class TaskComponent implements OnInit {
     
     console.log(this.task.todoTaskId, this.task);
     
-    this.todoService.putUpdateTask(this.task.todoTaskId, this.task).subscribe({
-      next: () => {
-        this.checkedChangedEvent.emit(this.task);
-      }
-    });
+    this.checkedChangedEvent.emit(this.task);
   }
 
 }
