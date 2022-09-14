@@ -33,7 +33,7 @@ export class TaskComponent implements OnInit {
   onCheckedChange(isChecked: boolean) {
     this.checkboxState = isChecked;
     
-    console.log(`Calls onCheckedChange with id: ${this.task.todoTaskId} and ${this.checkboxState}!`);
+    console.log(`Calls onCheckedChange with id: ${this.task.todoTaskId} and ${this.checkboxState}!!`);
     this.task.taskComplete = this.checkboxState;
     
     console.log(this.task.todoTaskId, this.task);
