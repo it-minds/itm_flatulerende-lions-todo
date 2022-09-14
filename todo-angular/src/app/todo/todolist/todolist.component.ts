@@ -31,4 +31,9 @@ export class TodolistComponent implements OnInit {
     });
     console.log(`Fetched data for specific todolist ${id}`);
   }
+
+  oncheckboxChanged(isComplete: boolean) {
+    console.log("parent reacts to checkbox check!");
+    
+  }
 }

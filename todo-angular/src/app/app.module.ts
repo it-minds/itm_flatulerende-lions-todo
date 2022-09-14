@@ -16,7 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
     TodoModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatButtonModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent],
