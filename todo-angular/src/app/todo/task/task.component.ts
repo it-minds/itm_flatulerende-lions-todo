@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { TaskModel } from 'src/Models/TodoModel';
+import { TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-task',
@@ -23,21 +24,25 @@ export class TaskComponent implements OnInit {
   @Input() checkboxState: boolean = false;
 
   @Output() checkedChangedEvent = new EventEmitter<boolean>();
-  // @Output() taskCompletedEvent = new EventEmitter<TaskModel>();
 
-  constructor() { }
+  constructor(private readonly todoService: TodoService) { }
 
   ngOnInit(): void {
   }
 
   onCheckedChange(isChecked: boolean) {
-    const newState = !this.checkboxState;
-    this.checkedChangedEvent.emit(newState);
-    console.log("Calls onCheckedChange!");
+    this.checkboxState = isChecked;
+    
+    console.log(`Calls onCheckedChange with id: ${this.task.todoTaskId} and ${this.checkboxState}!`);
+    this.task.taskComplete = this.checkboxState;
+    
+    console.log(this.task.todoTaskId, this.task);
+    
+    this.todoService.putUpdateTask(this.task.todoTaskId, this.task).subscribe({
+      next: () => {
+        this.checkedChangedEvent.emit(this.checkboxState);
+      }
+    });
   }
-
-  // taskCompleteChanged(task: TaskModel) {
-  //   this.taskCompletedEvent.emit(task);
-  // }
 
 }

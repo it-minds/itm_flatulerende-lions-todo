@@ -13,6 +13,6 @@
   <mat-list-item 
   *ngFor="let tasks of todoListTasks"
   >
-    <app-task [task] = "tasks" [checkboxState]="tasks.taskComplete" (checkedChangedEvent)="oncheckboxChanged($event)"></app-task>
+    <app-task [task] = "tasks" [checkboxState]="tasks.taskComplete" (checkedChangedEvent)="onCheckboxChanged($event)"></app-task>
   </mat-list-item>
  </mat-list>

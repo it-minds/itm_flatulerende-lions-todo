@@ -24,6 +24,11 @@ export class TodoService {
       .pipe(catchError(this.handleError<TaskModel[]>('getSpecificTodo', [])));
   }
 
+  putUpdateTask(taskId: number | string, body: TaskModel) {
+    console.log("Starting put");
+    return this.http.put<any>(`${this.todosUrl}/tasks/${taskId}`, body);
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure
