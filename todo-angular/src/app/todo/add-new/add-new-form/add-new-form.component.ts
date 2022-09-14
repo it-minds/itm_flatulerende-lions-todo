@@ -3,7 +3,6 @@ import { TodoModel } from 'src/Models/TodoModel';
 import { TodoService } from './../../todo.service';
 
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData } from '../add-new.component';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 export interface NewTodoForm {
@@ -18,22 +17,25 @@ export interface NewTodoForm {
 })
 export class AddNewFormComponent implements OnInit {
   constructor() {}
-
   @Output() addTodo: EventEmitter<TodoModel> = new EventEmitter<TodoModel>();
 
-  todoName = new FormControl('');
-  todoDescription = new FormControl('');
+  form = new FormGroup({
+    todoName: new FormControl<string>('', { nonNullable: true }),
+    todoDescription: new FormControl<string>('', { nonNullable: true }),
+  });
 
   onSubmit(): void {
+    const { todoName, todoDescription } = this.form.getRawValue();
+
+    this.form.getRawValue().todoName;
+
     const newTodo: TodoModel = {
       todoListId: 1,
-      todoListName: this.todoName.value as string,
-      todoListDesc: this.todoDescription.value as string,
+      todoListName: todoName,
+      todoListDesc: todoDescription,
       todoListDeleted: false,
       todoTasks: null,
     };
-
-    console.log(newTodo);
 
     this.addTodo.emit(newTodo);
   }

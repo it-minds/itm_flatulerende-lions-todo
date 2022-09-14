@@ -18,11 +18,6 @@ import {
 import { NewTodoForm } from '../add-new-form/add-new-form.component';
 import { TodoModule } from '../../todo.module';
 
-export interface TodoDialogData {
-  title: string;
-  form: NewTodoForm;
-}
-
 @Component({
   selector: 'add-new-dialog',
   templateUrl: './add-new-dialog.component.html',
@@ -35,10 +30,6 @@ export class AddNewDialogComponent implements OnInit {
   @Output() newTodo: EventEmitter<any> = new EventEmitter<any>();
 
   onAddTodo(newTodo: any): void {
-    console.log(this.title);
-    console.log(newTodo);
-    console.log(this.newTodo);
-
     this.dialogRef.close(newTodo);
   }
 

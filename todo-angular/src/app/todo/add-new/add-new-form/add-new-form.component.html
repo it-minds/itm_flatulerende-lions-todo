@@ -1,12 +1,16 @@
 <div class="flex flex-col gap-2">
   <mat-form-field appearance="fill">
     <mat-label class="text-white">Name of your todo</mat-label>
-    <input [formControl]="todoName" matInput class="text-white font-medium" />
+    <input
+      [formControl]="form.controls.todoName"
+      matInput
+      class="text-white font-medium"
+    />
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label class="text-white">Add a description for your list</mat-label>
     <input
-      [formControl]="todoDescription"
+      [formControl]="form.controls.todoDescription"
       matInput
       class="text-white font-medium"
     />

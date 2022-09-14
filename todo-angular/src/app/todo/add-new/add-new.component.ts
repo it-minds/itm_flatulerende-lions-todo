@@ -1,20 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { TodoModel } from 'src/Models/TodoModel';
 import { TodoService } from './../todo.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddNewDialogComponent } from './add-new-dialog/add-new-dialog.component';
 
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-  _closeDialogVia,
-} from '@angular/material/dialog';
-
-export interface DialogData {
-  name: string;
-  description: string;
-}
+import { MatDialog, _closeDialogVia } from '@angular/material/dialog';
 
 @Component({
   selector: 'add-new-todo',
@@ -27,10 +17,12 @@ export class AddNewComponent {
     private readonly todoService: TodoService
   ) {}
 
+  @Output() newTodo: EventEmitter<TodoModel> = new EventEmitter<TodoModel>();
+
   onNewTodoAdded(todo: any): void {
     this.todoService.addTodo(todo).subscribe({
       next: (todo) => {
-        console.log(todo);
+        this.newTodo.emit(todo);
       },
     });
   }
