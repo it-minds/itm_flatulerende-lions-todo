@@ -26,27 +26,17 @@ export class AddNewComponent {
     public dialog: MatDialog,
     private readonly todoService: TodoService
   ) {}
-  name: string = '';
-  description: string = '';
 
   onNewTodoAdded(todo: any): void {
-    console.log(todo);
-
     this.todoService.addTodo(todo).subscribe({
       next: (todo) => {
         console.log(todo);
       },
     });
   }
-
-  quickTest(): void {
-    console.log('quick test');
-  }
-
   openDialog(): void {
     const dialogRef = this.dialog.open(AddNewDialogComponent, {
-      width: 'dialog-responsive',
-      data: { name: this.name, description: this.description },
+      minWidth: '350px',
     });
 
     dialogRef.afterClosed().subscribe((result: TodoModel | undefined) => {

@@ -34,7 +34,7 @@ export class AddNewDialogComponent implements OnInit {
 
   @Output() newTodo: EventEmitter<any> = new EventEmitter<any>();
 
-  onAddTodo(newTodo: TodoModel): void {
+  onAddTodo(newTodo: any): void {
     console.log(this.title);
     console.log(newTodo);
     console.log(this.newTodo);

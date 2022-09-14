@@ -19,14 +19,22 @@ export class TodoService {
   }
 
   addTodo(newTodo: TodoModel): Observable<TodoModel> {
+    console.log('newTodo', newTodo);
+
     return this.http
       .post<TodoModel>(`${this.todosUrl}/todoitems`, {
-        todoListName: 'test',
-        todoListDesc: 'test',
+        todoListName: newTodo.todoListName,
+        todoListDesc: newTodo.todoListDesc,
         todoListDeleted: false,
       })
       .pipe(catchError(this.handleError<TodoModel>('addTodo')));
   }
+
+  // addTodo(newTodo: TodoModel): Observable<TodoModel> {
+  //   return this.http
+  //     .post<TodoModel>(`${this.todosUrl}/todoitems`, newTodo)
+  //     .pipe(catchError(this.handleError<TodoModel>('addTodo')));
+  // }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
