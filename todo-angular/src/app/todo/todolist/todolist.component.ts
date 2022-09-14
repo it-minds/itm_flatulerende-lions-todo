@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TodoModel } from 'src/Models/TodoModel';
+import { TaskModel, TodoModel } from 'src/Models/TodoModel';
 import { TodoService } from './../todo.service';
 
 @Component({
@@ -8,16 +8,13 @@ import { TodoService } from './../todo.service';
   styleUrls: ['./todolist.component.scss'],
 })
 export class TodolistComponent implements OnInit {
-  todoList: TodoModel[] = [];
+  currentTask: TaskModel | undefined;
 
   constructor(private readonly todoService: TodoService) {}
 
   getTodos() {
-    this.todoService.getTodos().subscribe({
-      next: (todos) => {
-        this.todoList = todos;
-      },
-    });
+    console.log("get specific todolist");
+    
   }
 
   ngOnInit(): void {
