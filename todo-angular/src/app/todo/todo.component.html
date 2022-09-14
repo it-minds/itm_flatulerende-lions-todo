@@ -3,6 +3,7 @@
 <button mat-button color="primary" (click)="getTodos()">
   Click Me to Fetch Todos
 </button>
+<!-- Above button is deprecated - data fetches onInit now (kept for testing purposes) -->
 
 <button mat-raised-button color="secondary">Primary</button>
 
@@ -11,7 +12,10 @@
     *ngFor="let todo of todoList"
     class="flex flex-col items-center bg-white border-2 border-black text-xl font-medium min-w-[300px]"
   >
-    <p>tester</p>
+    <span>{{todo.todoListId}}</span>
+    <span>{{todo.todoListName}}</span>
+    <span>{{todo.todoListDesc}}</span>
+    <span>{{todo.todoTasks}}</span>
     <a routerLink="/todo/todolist/{{todo.todoListId}}"><button>Go to Todolist</button></a>
   </li>
 </ul>
