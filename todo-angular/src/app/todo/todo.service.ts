@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TodoComponent } from './todo.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { TodoModel } from 'src/Models/TodoModel';
+import { TaskModel, TodoModel } from 'src/Models/TodoModel';
 import { catchError, Observable, of } from 'rxjs';
 
 @Injectable({
@@ -16,6 +16,12 @@ export class TodoService {
     return this.http
       .get<TodoModel[]>(`${this.todosUrl}/todoitems`)
       .pipe(catchError(this.handleError<TodoModel[]>('getTodos', [])));
+  }
+
+  getSpecificTodo(todoId: string | null): Observable<TaskModel[]> {
+    return this.http
+      .get<TaskModel[]>(`${this.todosUrl}/tasks/${todoId}`)
+      .pipe(catchError(this.handleError<TaskModel[]>('getSpecificTodo', [])));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

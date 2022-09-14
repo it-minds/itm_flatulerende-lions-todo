@@ -15,7 +15,6 @@
     <span>{{todo.todoListId}}</span>
     <span>{{todo.todoListName}}</span>
     <span>{{todo.todoListDesc}}</span>
-    <span>{{todo.todoTasks}}</span>
-    <a routerLink="/todo/todolist/{{todo.todoListId}}"><button>Go to Todolist</button></a>
+    <a [routerLink]="['todolist', todo.todoListId]" Router><button>Go to Todolist</button></a>
   </li>
 </ul>
