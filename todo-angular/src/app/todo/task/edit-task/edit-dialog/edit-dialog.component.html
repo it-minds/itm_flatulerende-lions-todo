@@ -1,1 +1,9 @@
-<edit-form></edit-form>
+<div class="flex flex-col w-full md:p-1">
+  <h1 mat-dialog-title>Edit Your Task</h1>
+  <div mat-dialog-content>
+    <edit-form
+      (updateTask)="onUpdatedTask($event)"
+      [task]="this.task"
+    ></edit-form>
+  </div>
+</div>

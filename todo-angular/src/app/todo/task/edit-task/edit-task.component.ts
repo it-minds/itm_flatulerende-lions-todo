@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TaskModel } from 'src/Models/TodoModel';
 import { TodoService } from '../../todo.service';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { EditTaskForm } from './edit-form/edit-form.component';
 
 @Component({
   selector: 'edit-task',
@@ -16,7 +17,8 @@ export class EditTaskComponent implements OnInit {
   ) {}
 
   @Input() taskItem?: TaskModel;
-  @Output() newTask: EventEmitter<TaskModel> = new EventEmitter<TaskModel>();
+  @Output() newTask = new EventEmitter<TaskModel>();
+  @Output() updatedTask = new EventEmitter<TaskModel>();
 
   ngOnInit(): void {}
 
@@ -26,23 +28,25 @@ export class EditTaskComponent implements OnInit {
       data: this.taskItem,
     });
 
-    dialogRef.afterClosed().subscribe((result: TaskModel | undefined) => {
+    dialogRef.afterClosed().subscribe((result: EditTaskForm | undefined) => {
       if (result === undefined) return;
 
-      // const newTask: TaskModel = {
-      //   todoTaskId: 0,
-      //   taskName: result?.taskName,
-      //   taskDesc: result?.taskDescription,
-      //   taskComplete: false,
-      //   taskDeleted: false,
-      //   todoListId: Number(this.todoId),
-      // };
+      const updatedTask: TaskModel = {
+        todoTaskId: this.taskItem!.todoTaskId,
+        taskName: result.taskName,
+        taskDesc: result.taskDescription,
+        taskComplete: this.taskItem!.taskComplete,
+        taskDeleted: this.taskItem!.taskDeleted,
+        todoListId: this.taskItem!.todoListId,
+        subTasks: result.subTasks,
+      };
 
-      // this.todoService.addTask(newTask).subscribe({
-      //   next: (task) => {
-      //     this.newTask.emit(task);
-      //   },
-      // });
+      this.todoService
+        .updateTask(this.taskItem!.todoTaskId, updatedTask)
+        .subscribe({
+          next: () => {},
+        });
+      this.updatedTask.emit(updatedTask);
     });
   }
 }

@@ -1,0 +1,38 @@
+<h3 class="text-xl md:text-2xl mb-0">Subtasks</h3>
+<div
+  *ngIf="this.hasSubTasks"
+  class="flex flex-col gap-1 md:gap-2 items-center justify-center md:border border-t-2 border-b-2 border-opacity-70 border-gray-900 md:rounded-lg py-2 m-0 md:p-5 h-fit md:min-h-[80px]"
+>
+  <div
+    class="md:text-lg flex h-6 w-full py-5 px-3 justify-between gap-5 rounded-md items-center bg-gray-700 text-white border border-black"
+    *ngFor="let subtask of this.subTasks"
+  >
+    <span class="text-left">{{ subtask.subName }}</span>
+    <mat-checkbox color="accent" class="example-margin"></mat-checkbox>
+  </div>
+</div>
+<div class="flex justify-center w-full mt-2">
+  <form
+    class="flex flex-col h-full w-full gap-1 items-end"
+    (submit)="onSubTaskAdded()"
+  >
+    <mat-form-field class="h-[80%] w-full md:text-lg">
+      <mat-label class="text-white h-2">Add a subtask</mat-label>
+      <input
+        [formControl]="this.newSubTaskName"
+        matInput
+        class="text-white font-medium h-4"
+      />
+    </mat-form-field>
+    <button
+      type="submit"
+      mat-raised-button
+      class="grid place-content-center rounded-xl h-8 w-12 mb-3"
+      color="primary"
+      cdkFocusInitial
+      [disabled]="!this.newSubTaskName.valid"
+    >
+      Add
+    </button>
+  </form>
+</div>

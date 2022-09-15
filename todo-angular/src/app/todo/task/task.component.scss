@@ -1,20 +1,11 @@
 :host {
   width: 100%;
   display: flex;
-  justify-content: space-between;
-}
-.mat-list-item-content {
-  display: flex !important;
-  justify-content: space-between !important;
-  width: 100% !important;
+  justify-content: center;
 }
 
-.mat-ripple mat-list-item-ripple {
-  display: flex !important;
-  background-color: red;
-}
-::ng-deep {
-  display: flex !important;
-  justify-content: space-between !important;
-  width: 100% !important;
+@media screen and (min-width: 480px) {
+  :host {
+    justify-content: start;
+  }
 }

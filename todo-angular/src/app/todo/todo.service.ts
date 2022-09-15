@@ -33,7 +33,7 @@ export class TodoService {
 
   addTask(newTask: TaskModel): Observable<TaskModel> {
     const { todoTaskId, ...rest } = newTask;
-    console.log('Adding task', rest);
+    // console.log('Adding task', rest);
     return this.http
       .post<TaskModel>(`${this.todosUrl}/tasks`, rest)
       .pipe(catchError(this.handleError<TaskModel>('addTask')));

@@ -1,6 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NewTaskForm } from '../../add-task/add-task-form/add-task-form.component';
+import { SubTaskModel, TaskModel } from 'src/Models/TodoModel';
+
+export type EditTaskForm = {
+  taskName: string;
+  taskDescription: string;
+  subTasks: SubTaskModel[];
+};
 
 @Component({
   selector: 'edit-form',
@@ -10,8 +16,10 @@ import { NewTaskForm } from '../../add-task/add-task-form/add-task-form.componen
 export class EditFormComponent implements OnInit {
   constructor() {}
 
-  @Output() addTask: EventEmitter<NewTaskForm> =
-    new EventEmitter<NewTaskForm>();
+  @Input() task?: TaskModel;
+
+  @Output() updateTask: EventEmitter<EditTaskForm> =
+    new EventEmitter<EditTaskForm>();
   form = new FormGroup({
     taskName: new FormControl<string>('', {
       nonNullable: true,
@@ -20,18 +28,28 @@ export class EditFormComponent implements OnInit {
     taskDescription: new FormControl<string>('', { nonNullable: true }),
   });
 
+  onSubTasksUpdated(subTasks: SubTaskModel[]) {
+    this.task!.subTasks = subTasks;
+  }
+
   onSubmit(): void {
     const { taskName, taskDescription } = this.form.getRawValue();
 
     this.form.getRawValue().taskName;
 
-    const newtask: NewTaskForm = {
+    const updatedTask: EditTaskForm = {
       taskName: taskName,
       taskDescription: taskDescription,
+      subTasks: this.task?.subTasks || [],
     };
 
-    this.addTask.emit(newtask);
+    this.updateTask.emit(updatedTask);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.form.patchValue({
+      taskName: this.task?.taskName,
+      taskDescription: this.task?.taskDesc,
+    });
+  }
 }

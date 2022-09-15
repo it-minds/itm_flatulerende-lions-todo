@@ -4,34 +4,44 @@
     (newTask)="onNewTaskAdded($event)"
   ></add-task>
 
-  <!-- Dette kan vel godt slettes? -->
-
-  <!-- <mat-list>
-    <mat-list-item> </mat-list-item>
-  </mat-list> -->
-  <!-- -------------- -->
-
   <mat-accordion class="flex flex-col content-between w-full m-0">
+    <!-- Et forsøg på at give en overskrift til accordionen vv -->
+
+    <!-- <mat-expansion-panel disabled class="p-0 flex flex-col content-between">
+      <mat-expansion-panel-header
+        class="flex items-center pl-40 px-2 md:px-4 bg-slate-600 h-6 text-white"
+      >
+        <div class="flex justify-between w-[90%]">
+          <span>Name</span>
+          <span *ngIf="this.getScreenWidth > this.mdScreenSize"
+            >Description</span
+          >
+        </div>
+      </mat-expansion-panel-header>
+    </mat-expansion-panel> -->
+
     <mat-expansion-panel
       [disabled]="noSubTasks"
       *ngFor="let task of todoListTasks"
       class="p-0 flex flex-col content-between"
     >
-      <mat-expansion-panel-header class="flex justify-between px-2 md:px-4">
-        <mat-panel-title class="flex text-sm justify-end">
+      <mat-expansion-panel-header
+        class="flex justify-between px-2 md:px-4 h-12 md:h-16"
+      >
+        <mat-panel-title class="flex text-sm md:text-lg justify-end">
           <app-task
             [task]="task"
             (checkedChangedEvent)="onCheckboxChanged($event)"
           ></app-task>
         </mat-panel-title>
-        <mat-panel-description
+        <!-- <mat-panel-description
           class="text-sm text-white text-opacity-100"
           *ngIf="this.getScreenWidth > mdScreenSize"
         >
           {{ task.taskDesc }}
-        </mat-panel-description>
+        </mat-panel-description> -->
       </mat-expansion-panel-header>
-      <div *ngIf="task.subTasks && task.subTasks.length > 0">
+      <div class="pt-5" *ngIf="task.subTasks && task.subTasks.length > 0">
         <div *ngFor="let subtask of task.subTasks">
           <span>{{ subtask.subName }}</span>
           <span>{{ subtask.subDesc }}</span>
@@ -39,7 +49,7 @@
       </div>
       <div
         *ngIf="!task.subTasks || task.subTasks.length < 0"
-        class="flex justify-center text-xl"
+        class="flex justify-center text-2xl pt-5"
       >
         No Subtasks
       </div>
