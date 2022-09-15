@@ -1,0 +1,20 @@
+:host {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.mat-list-item-content {
+  display: flex !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+}
+
+.mat-ripple mat-list-item-ripple {
+  display: flex !important;
+  background-color: red;
+}
+::ng-deep {
+  display: flex !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+}

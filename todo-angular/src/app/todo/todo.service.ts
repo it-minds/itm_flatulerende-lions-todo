@@ -24,15 +24,23 @@ export class TodoService {
       .post<TodoModel>(`${this.todosUrl}/todoitems`, rest)
       .pipe(catchError(this.handleError<TodoModel>('addTodo')));
   }
-  
+
   getSpecificTodo(todoId: string | null): Observable<TaskModel[]> {
     return this.http
       .get<TaskModel[]>(`${this.todosUrl}/tasks/${todoId}`)
       .pipe(catchError(this.handleError<TaskModel[]>('getSpecificTodo', [])));
   }
 
+  addTask(newTask: TaskModel): Observable<TaskModel> {
+    const { todoTaskId, ...rest } = newTask;
+    console.log('Adding task', rest);
+    return this.http
+      .post<TaskModel>(`${this.todosUrl}/tasks`, rest)
+      .pipe(catchError(this.handleError<TaskModel>('addTask')));
+  }
+
   updateTask(taskId: number | string, body: TaskModel) {
-    console.log("Starting put");
+    console.log('Starting put');
     return this.http.put<any>(`${this.todosUrl}/tasks/${taskId}`, body);
   }
 

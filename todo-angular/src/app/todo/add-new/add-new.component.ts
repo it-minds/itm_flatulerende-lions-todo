@@ -21,8 +21,8 @@ export class AddNewComponent {
 
   onNewTodoAdded(todo: TodoModel): void {
     this.todoService.addTodo(todo).subscribe({
-      next: (todo) => {
-        this.newTodo.emit(todo);
+      next: (result) => {
+        this.newTodo.emit(result);
       },
     });
   }

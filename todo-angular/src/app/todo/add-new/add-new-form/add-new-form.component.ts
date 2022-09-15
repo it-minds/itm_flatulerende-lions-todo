@@ -1,7 +1,13 @@
 import { Component, OnInit, Inject, EventEmitter, Output } from '@angular/core';
 import { TodoModel } from 'src/Models/TodoModel';
 
-import { FormControl, FormGroup } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  MinLengthValidator,
+  MinValidator,
+  Validators,
+} from '@angular/forms';
 
 export interface NewTodoForm {
   todoName: string;
@@ -18,7 +24,9 @@ export class AddNewFormComponent implements OnInit {
   @Output() addTodo: EventEmitter<TodoModel> = new EventEmitter<TodoModel>();
 
   form = new FormGroup({
-    todoName: new FormControl<string>('', { nonNullable: true }),
+    todoName: new FormControl<string>('', {
+      nonNullable: true,
+    }),
     todoDescription: new FormControl<string>('', { nonNullable: true }),
   });
 

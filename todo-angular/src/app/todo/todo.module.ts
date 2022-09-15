@@ -6,8 +6,8 @@ import { TodoComponent } from './todo.component';
 import { TodolistComponent } from './todolist/todolist.component';
 import { MatButtonModule } from '@angular/material/button';
 import { TaskComponent } from './task/task.component';
-import {MatListModule} from '@angular/material/list';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatListModule } from '@angular/material/list';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { AddNewComponent } from './add-new/add-new.component';
 import {
@@ -21,7 +21,10 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddNewFormComponent } from './add-new/add-new-form/add-new-form.component';
 import { AddNewDialogComponent } from './add-new/add-new-dialog/add-new-dialog.component';
-import { AddEditTaskDialogComponent } from './task/add-edit-task-dialog/add-edit-task-dialog.component';
+import { AddTaskComponent } from './task/add-task/add-task.component';
+import { EditTaskComponent } from './task/edit-task/edit-task.component';
+import { AddTaskDialogComponent } from './task/add-task/add-task-dialog/add-task-dialog.component';
+import { AddTaskFormComponent } from './task/add-task/add-task-form/add-task-form.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,10 @@ import { AddEditTaskDialogComponent } from './task/add-edit-task-dialog/add-edit
     AddNewFormComponent,
     AddNewDialogComponent,
     TaskComponent,
-    AddEditTaskDialogComponent
+    AddTaskComponent,
+    EditTaskComponent,
+    AddTaskDialogComponent,
+    AddTaskFormComponent,
   ],
   imports: [
     CommonModule,
@@ -44,7 +50,7 @@ import { AddEditTaskDialogComponent } from './task/add-edit-task-dialog/add-edit
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ],
   providers: [
     {

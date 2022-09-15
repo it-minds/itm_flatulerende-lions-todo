@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AddTaskComponent } from '../task/add-task/add-task.component';
 import { TaskModel, TodoModel } from 'src/Models/TodoModel';
 import { TODO_LIST_ID } from '../todo-routing.module';
 import { TodoService } from './../todo.service';
@@ -10,16 +11,23 @@ import { TodoService } from './../todo.service';
   styleUrls: ['./todolist.component.scss'],
 })
 export class TodolistComponent implements OnInit {
-
   todoListTasks: TaskModel[] = [];
-
-  constructor(private readonly todoService: TodoService, private readonly route: ActivatedRoute) {}
+  todoListId: string | null = '';
+  constructor(
+    private readonly todoService: TodoService,
+    private readonly route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    const todoListId = this.route.snapshot.paramMap.get(TODO_LIST_ID); // Læser parameteren "TODO_LIST_ID" fra URL'en (sat i todo-routing module)
+    this.todoListId = this.route.snapshot.paramMap.get(TODO_LIST_ID); // Læser parameteren "TODO_LIST_ID" fra URL'en (sat i todo-routing module)
 
-    console.log(todoListId);
-    this.getSpecificTodos(todoListId);
+    this.getSpecificTodos(this.todoListId);
+  }
+
+  onNewTaskAdded(newTask: TaskModel) {
+    console.log(newTask);
+
+    this.todoListTasks.push(newTask);
   }
 
   getSpecificTodos(id: string | null) {
@@ -27,13 +35,13 @@ export class TodolistComponent implements OnInit {
       next: (tasks) => {
         this.todoListTasks = tasks;
         console.log(this.todoListTasks);
-      }
+      },
     });
     console.log(`Fetched data for specific todolist ${id}`);
   }
 
   onCheckboxChanged(task: TaskModel) {
-    console.log("parent reacts to checkbox check!");
+    console.log('parent reacts to checkbox check!');
     this.todoService.updateTask(task.todoTaskId, task).subscribe();
   }
 }

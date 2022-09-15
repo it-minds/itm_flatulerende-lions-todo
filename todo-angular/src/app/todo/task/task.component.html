@@ -1,13 +1,14 @@
-<div *ngIf="task" class="flex text-black">
-    <span>{{task.todoTaskId}}</span>  
-    <span>{{task.taskName}}</span>
-    <span>{{task.taskDesc}}</span>
-    <span>{{task.todoListId}}</span>
+<div *ngIf="task" class="flex text-black gap-3 justify-between">
+  <span>{{ task.todoTaskId }}</span>
+  <span>{{ task.taskName }}</span>
+  <span>{{ task.taskDesc }}</span>
+  <span>{{ task.todoListId }}</span>
+  <span class="justify-self-end">
     <mat-checkbox
-        [checked]="task.taskComplete"
-        (change)="onCheckedChange($event.checked)"
-        class="example-margin"
+      [checked]="task.taskComplete"
+      (change)="onCheckedChange($event.checked)"
+      class="example-margin"
     >
-        Completed!
     </mat-checkbox>
+  </span>
 </div>

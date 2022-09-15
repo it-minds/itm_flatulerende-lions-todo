@@ -1,11 +1,17 @@
-<p>todolist works!</p>
-
-<add-new-todo></add-new-todo>
-
-<mat-list>
-<mat-list-item 
-  *ngFor="let task of todoListTasks"
-  >
-    <app-task [task]="task" (checkedChangedEvent)="onCheckboxChanged($event)"></app-task>
-  </mat-list-item>
- </mat-list>
+<div class="flex justify-center pt-[8vh] gap-5 w-[90vw] md:w-[45vw]">
+  <add-task
+    [todoId]="this.todoListId"
+    (newTask)="onNewTaskAdded($event)"
+  ></add-task>
+  <mat-list class="bg-slate-400 rounded-lg flex flex-col gap-2">
+    <mat-list-item
+      *ngFor="let task of todoListTasks"
+      class="flex justify-between"
+    >
+      <app-task
+        [task]="task"
+        (checkedChangedEvent)="onCheckboxChanged($event)"
+      ></app-task>
+    </mat-list-item>
+  </mat-list>
+</div>
