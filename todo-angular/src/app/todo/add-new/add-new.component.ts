@@ -19,7 +19,7 @@ export class AddNewComponent {
 
   @Output() newTodo: EventEmitter<TodoModel> = new EventEmitter<TodoModel>();
 
-  onNewTodoAdded(todo: any): void {
+  onNewTodoAdded(todo: TodoModel): void {
     this.todoService.addTodo(todo).subscribe({
       next: (todo) => {
         this.newTodo.emit(todo);

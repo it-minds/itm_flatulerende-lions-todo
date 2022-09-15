@@ -21,6 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddNewFormComponent } from './add-new/add-new-form/add-new-form.component';
 import { AddNewDialogComponent } from './add-new/add-new-dialog/add-new-dialog.component';
+import { AddEditTaskDialogComponent } from './task/add-edit-task-dialog/add-edit-task-dialog.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { AddNewDialogComponent } from './add-new/add-new-dialog/add-new-dialog.c
     AddNewComponent,
     AddNewFormComponent,
     AddNewDialogComponent,
-    TaskComponent
+    TaskComponent,
+    AddEditTaskDialogComponent
   ],
   imports: [
     CommonModule,
