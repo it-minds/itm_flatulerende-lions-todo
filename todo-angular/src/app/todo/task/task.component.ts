@@ -10,17 +10,7 @@ import { TodoService } from '../todo.service';
 })
 export class TaskComponent implements OnInit {
 
-  @Input() task?: TaskModel = {
-    todoTaskId: 0,
-    taskName: '',
-    taskDesc: '',
-    taskComplete: false,
-    taskDeleted: false,
-    taskDeadline: null,
-    taskCompletionTime: null,
-    todoListId: 0,
-    subTasks: null
-  };
+  @Input() task?: TaskModel;
 
   @Output() checkedChangedEvent = new EventEmitter<TaskModel>();
 
@@ -29,12 +19,12 @@ export class TaskComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onCheckedChange(isChecked: boolean) {
+  onCheckedChange() {
     if (this.task === undefined) {
       return;
     }
 
-    this.task.taskComplete = isChecked;
+    // this.task.taskComplete = isChecked;
     this.checkedChangedEvent.emit(this.task);
   }
 
