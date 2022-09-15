@@ -10,11 +10,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { AddNewComponent } from './add-new/add-new.component';
-import {
-  MatDialogConfig,
-  MatDialogModule,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -28,6 +24,8 @@ import { AddTaskFormComponent } from './task/add-task/add-task-form/add-task-for
 import { EditDialogComponent } from './task/edit-task/edit-dialog/edit-dialog.component';
 import { EditFormComponent } from './task/edit-task/edit-form/edit-form.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 @NgModule({
   declarations: [
     TodoComponent,
@@ -56,6 +54,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatListModule,
     MatCheckboxModule,
     MatIconModule,
+    MatExpansionModule,
   ],
   providers: [
     {

@@ -40,7 +40,6 @@ export class TodoService {
   }
 
   updateTask(taskId: number | string, body: TaskModel) {
-    console.log('Starting put');
     return this.http.put<any>(`${this.todosUrl}/tasks/${taskId}`, body);
   }
 

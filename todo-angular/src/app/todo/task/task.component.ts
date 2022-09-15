@@ -3,6 +3,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { TaskModel } from 'src/Models/TodoModel';
 import { TodoService } from '../todo.service';
 
+
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -10,17 +11,7 @@ import { TodoService } from '../todo.service';
 })
 export class TaskComponent implements OnInit {
 
-  @Input() task?: TaskModel = {
-    todoTaskId: 0,
-    taskName: '',
-    taskDesc: '',
-    taskComplete: false,
-    taskDeleted: false,
-    taskDeadline: null,
-    taskCompletionTime: null,
-    todoListId: 0,
-    subTasks: null
-  };
+  @Input() task?: TaskModel;
 
   @Output() checkedChangedEvent = new EventEmitter<TaskModel>();
 
@@ -29,17 +20,13 @@ export class TaskComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onCheckedChange(isChecked: boolean) {
+  onCheckedChange() {
+    
     if (this.task === undefined) {
       return;
     }
 
-    this.task.taskComplete = isChecked;
-    
-    console.log(`Calls onCheckedChange with id: ${this.task.todoTaskId} and ${this.task.taskComplete}!!`);
-    
-    console.log(this.task.todoTaskId, this.task);
-    
+    // this.task.taskComplete = isChecked;
     this.checkedChangedEvent.emit(this.task);
   }
 

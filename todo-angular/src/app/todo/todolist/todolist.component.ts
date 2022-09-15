@@ -13,6 +13,9 @@ import { TodoService } from './../todo.service';
 export class TodolistComponent implements OnInit {
   todoListTasks: TaskModel[] = [];
   todoListId: string | null = '';
+
+  panelOpenState = false; // Panel state (From Angular Materials)
+
   constructor(
     private readonly todoService: TodoService,
     private readonly route: ActivatedRoute
@@ -34,14 +37,19 @@ export class TodolistComponent implements OnInit {
     this.todoService.getSpecificTodo(id).subscribe({
       next: (tasks) => {
         this.todoListTasks = tasks;
-        console.log(this.todoListTasks);
       },
     });
-    console.log(`Fetched data for specific todolist ${id}`);
   }
 
   onCheckboxChanged(task: TaskModel) {
-    console.log('parent reacts to checkbox check!');
-    this.todoService.updateTask(task.todoTaskId, task).subscribe();
+    task.taskComplete = !task.taskComplete;
+    this.todoService.updateTask(task.todoTaskId, task).subscribe({
+      next: () => {
+        this.todoListTasks = [
+          ...this.todoListTasks.filter((t) => t.todoTaskId !== task.todoTaskId),
+          task,
+        ];
+      },
+    });
   }
 }

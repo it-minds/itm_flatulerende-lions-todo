@@ -3,15 +3,30 @@
     [todoId]="this.todoListId"
     (newTask)="onNewTaskAdded($event)"
   ></add-task>
-  <mat-list class="bg-slate-400 rounded-lg flex flex-col gap-2">
-    <mat-list-item
-      *ngFor="let task of todoListTasks"
-      class="flex justify-between"
-    >
-      <app-task
-        [task]="task"
-        (checkedChangedEvent)="onCheckboxChanged($event)"
-      ></app-task>
-    </mat-list-item>
+
+  <mat-list>
+    <mat-list-item> </mat-list-item>
   </mat-list>
+
+  <div>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let task of todoListTasks">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <app-task
+              [task]="task"
+              (checkedChangedEvent)="onCheckboxChanged($event)"
+            ></app-task>
+          </mat-panel-title>
+          <mat-panel-description>
+            {{ task.taskDesc }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngFor="let subtask of task.subTasks">
+          <span>{{ subtask.subName }}</span>
+          <span>{{ subtask.subDesc }}</span>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
 </div>
