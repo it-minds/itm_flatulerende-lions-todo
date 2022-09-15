@@ -1,0 +1,28 @@
+<form [formGroup]="form" class="flex flex-col gap-2">
+  <mat-form-field appearance="fill">
+    <mat-label class="text-white">Name of your todo</mat-label>
+    <input formControlName="todoName" matInput class="text-white font-medium" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label class="text-white">Add a description for your list</mat-label>
+    <input
+      formControlName="todoDescription"
+      matInput
+      class="text-white font-medium"
+    />
+  </mat-form-field>
+  <div class="flex justify-between gap-6">
+    <button
+      color="primary"
+      mat-raised-button
+      cdkFocusInitial
+      [mat-dialog-close]
+      (click)="this.onSubmit()"
+    >
+      Ok
+    </button>
+    <button color="primary" mat-raised-button [mat-dialog-close]>
+      Go Away
+    </button>
+  </div>
+</form>

@@ -1,1 +1,20 @@
 <p>todo works!</p>
+<!-- class="h-24 bg-blue-800 w-60 rounded-lg text-white" -->
+<button mat-button color="primary" (click)="getTodos()">
+  Click Me to Fetch Todos
+</button>
+<!-- Above button is deprecated - data fetches onInit now (kept for testing purposes) -->
+<add-new-todo></add-new-todo>
+<button mat-raised-button color="secondary">Primary</button>
+
+<ul class="flex flex-col items-center w-[100]">
+  <li
+    *ngFor="let todo of todoList"
+    class="flex flex-col items-center bg-white border-2 border-black text-xl font-medium min-w-[300px]"
+  >
+    <span>{{todo.todoListId}}</span>
+    <span>{{todo.todoListName}}</span>
+    <span>{{todo.todoListDesc}}</span>
+    <a [routerLink]="['todolist', todo.todoListId]" Router><button>Go to Todolist</button></a>
+  </li>
+</ul>

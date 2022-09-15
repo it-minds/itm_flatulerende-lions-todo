@@ -4,8 +4,8 @@ export type SubTask = {
 	subDesc: string;
 	subComplete: boolean;
 	subDeleted: boolean;
-	subDeadline: string;
-	subCompletionTime: string;
+	subDeadline?: Date | string | null;
+	subCompletionTime?: Date | string | null;
 	todoTaskId: number;
 };
 
@@ -15,10 +15,10 @@ export type TodoTask = {
 	taskDesc: string;
 	taskComplete: boolean;
 	taskDeleted: boolean;
-	taskDeadline: string;
-	taskCompletionTime: string;
+	taskDeadline: Date | string | null;
+	taskCompletionTime: Date | string | null;
 	todoListId: number;
-	subTasks: SubTask[];
+	subTasks: SubTask[] | null;
 };
 
 export type TodoList = {
@@ -26,5 +26,5 @@ export type TodoList = {
 	todoListName: string;
 	todoListDesc: string;
 	todoListDeleted: boolean;
-	todoTasks: TodoTask[];
+	todoTasks: TodoTask[] | null;
 };
