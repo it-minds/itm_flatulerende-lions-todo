@@ -31,7 +31,7 @@ export class TodoService {
       .pipe(catchError(this.handleError<TaskModel[]>('getSpecificTodo', [])));
   }
 
-  putUpdateTask(taskId: number | string, body: TaskModel) {
+  updateTask(taskId: number | string, body: TaskModel) {
     console.log("Starting put");
     return this.http.put<any>(`${this.todosUrl}/tasks/${taskId}`, body);
   }

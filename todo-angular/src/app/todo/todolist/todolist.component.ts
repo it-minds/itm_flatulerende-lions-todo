@@ -34,6 +34,6 @@ export class TodolistComponent implements OnInit {
 
   onCheckboxChanged(task: TaskModel) {
     console.log("parent reacts to checkbox check!");
-    this.todoService.putUpdateTask(task.todoTaskId, task).subscribe();
+    this.todoService.updateTask(task.todoTaskId, task).subscribe();
   }
 }

@@ -4,7 +4,7 @@ export interface SubTaskModel {
   subDesc: string;
   subComplete: boolean;
   subDeleted: boolean;
-  subDeadline?: Date | string | null;
+  subDeadline?: string | null;
   subCompletionTime?: Date | string | null;
   todoTaskId: number;
 }

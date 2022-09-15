@@ -1,9 +1,7 @@
 import { Component, OnInit, Inject, EventEmitter, Output } from '@angular/core';
 import { TodoModel } from 'src/Models/TodoModel';
-import { TodoService } from './../../todo.service';
 
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 export interface NewTodoForm {
   todoName: string;

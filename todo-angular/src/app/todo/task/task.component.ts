@@ -10,7 +10,7 @@ import { TodoService } from '../todo.service';
 })
 export class TaskComponent implements OnInit {
 
-  @Input() task: TaskModel = {
+  @Input() task?: TaskModel = {
     todoTaskId: 0,
     taskName: '',
     taskDesc: '',
@@ -21,20 +21,22 @@ export class TaskComponent implements OnInit {
     todoListId: 0,
     subTasks: null
   };
-  @Input() checkboxState: boolean = false;
 
   @Output() checkedChangedEvent = new EventEmitter<TaskModel>();
 
-  constructor(private readonly todoService: TodoService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
   onCheckedChange(isChecked: boolean) {
-    this.checkboxState = isChecked;
+    if (this.task === undefined) {
+      return;
+    }
+
+    this.task.taskComplete = isChecked;
     
-    console.log(`Calls onCheckedChange with id: ${this.task.todoTaskId} and ${this.checkboxState}!!`);
-    this.task.taskComplete = this.checkboxState;
+    console.log(`Calls onCheckedChange with id: ${this.task.todoTaskId} and ${this.task.taskComplete}!!`);
     
     console.log(this.task.todoTaskId, this.task);
     

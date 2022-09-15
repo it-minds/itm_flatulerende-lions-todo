@@ -27,9 +27,8 @@ export class AddNewDialogComponent implements OnInit {
   title: string = 'Add New Todo';
   constructor(public dialogRef: MatDialogRef<AddNewDialogComponent>) {}
 
-  @Output() newTodo: EventEmitter<any> = new EventEmitter<any>();
 
-  onAddTodo(newTodo: any): void {
+  onAddTodo(newTodo: TodoModel): void {
     this.dialogRef.close(newTodo);
   }
 
