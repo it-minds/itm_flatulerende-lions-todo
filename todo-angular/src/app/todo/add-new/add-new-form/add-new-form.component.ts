@@ -26,6 +26,7 @@ export class AddNewFormComponent implements OnInit {
   form = new FormGroup({
     todoName: new FormControl<string>('', {
       nonNullable: true,
+      validators: [Validators.required, Validators.minLength(1)],
     }),
     todoDescription: new FormControl<string>('', { nonNullable: true }),
   });

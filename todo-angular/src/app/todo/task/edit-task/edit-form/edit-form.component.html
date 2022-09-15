@@ -1,12 +1,12 @@
 <form [formGroup]="form" (submit)="onSubmit()" class="flex flex-col gap-2">
   <mat-form-field appearance="fill">
-    <mat-label class="text-white">Name of your todo</mat-label>
-    <input formControlName="todoName" matInput class="text-white font-medium" />
+    <mat-label class="text-white">Name of your task</mat-label>
+    <input formControlName="taskName" matInput class="text-white font-medium" />
   </mat-form-field>
   <mat-form-field appearance="fill">
-    <mat-label class="text-white">Add a description for your list</mat-label>
+    <mat-label class="text-white">Add a description to your task</mat-label>
     <input
-      formControlName="todoDescription"
+      formControlName="taskDescription"
       matInput
       class="text-white font-medium"
     />

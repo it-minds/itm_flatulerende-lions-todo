@@ -1,17 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TaskModel } from 'src/Models/TodoModel';
+import { NewTaskForm } from '../../add-task/add-task-form/add-task-form.component';
 
-export type NewTaskForm = {
-  taskName: string;
-  taskDescription: string;
-};
 @Component({
-  selector: 'app-add-task-form',
-  templateUrl: './add-task-form.component.html',
-  styleUrls: ['./add-task-form.component.scss'],
+  selector: 'app-edit-form',
+  templateUrl: './edit-form.component.html',
+  styleUrls: ['./edit-form.component.scss'],
 })
-export class AddTaskFormComponent implements OnInit {
+export class EditFormComponent implements OnInit {
   constructor() {}
 
   @Output() addTask: EventEmitter<NewTaskForm> =
@@ -20,7 +16,6 @@ export class AddTaskFormComponent implements OnInit {
     taskName: new FormControl<string>('', {
       nonNullable: true,
       validators: [Validators.required, Validators.minLength(1)],
-
     }),
     taskDescription: new FormControl<string>('', { nonNullable: true }),
   });

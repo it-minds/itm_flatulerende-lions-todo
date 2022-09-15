@@ -1,4 +1,4 @@
-<form [formGroup]="form" class="gap-2">
+<form [formGroup]="form" (submit)="onSubmit()" class="flex flex-col gap-2">
   <mat-form-field appearance="fill">
     <mat-label class="text-white">Name of your task</mat-label>
     <input formControlName="taskName" matInput class="text-white font-medium" />
@@ -17,12 +17,19 @@
       mat-raised-button
       cdkFocusInitial
       [mat-dialog-close]
-      (click)="this.onSubmit()"
+      type="submit"
+      [disabled]="!form.valid"
+
     >
       Ok
     </button>
 
-    <button color="primary" mat-raised-button [mat-dialog-close]>
+    <button
+      color="primary"
+      class="bg-red-600"
+      mat-raised-button
+      [mat-dialog-close]
+    >
       Go Away
     </button>
   </div>

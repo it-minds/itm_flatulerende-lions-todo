@@ -25,6 +25,8 @@ import { AddTaskComponent } from './task/add-task/add-task.component';
 import { EditTaskComponent } from './task/edit-task/edit-task.component';
 import { AddTaskDialogComponent } from './task/add-task/add-task-dialog/add-task-dialog.component';
 import { AddTaskFormComponent } from './task/add-task/add-task-form/add-task-form.component';
+import { EditDialogComponent } from './task/edit-task/edit-dialog/edit-dialog.component';
+import { EditFormComponent } from './task/edit-task/edit-form/edit-form.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { AddTaskFormComponent } from './task/add-task/add-task-form/add-task-for
     EditTaskComponent,
     AddTaskDialogComponent,
     AddTaskFormComponent,
+    EditDialogComponent,
+    EditFormComponent,
   ],
   imports: [
     CommonModule,
