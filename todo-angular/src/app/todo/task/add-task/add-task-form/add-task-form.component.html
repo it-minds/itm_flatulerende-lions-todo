@@ -1,16 +1,12 @@
-<div class="flex flex-col gap-2">
+<form [formGroup]="form" class="gap-2">
   <mat-form-field appearance="fill">
     <mat-label class="text-white">Name of your task</mat-label>
-    <input
-      [formControl]="form.controls.taskName"
-      matInput
-      class="text-white font-medium"
-    />
+    <input formControlName="taskName" matInput class="text-white font-medium" />
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label class="text-white">Add a description to your task</mat-label>
     <input
-      [formControl]="form.controls.taskDescription"
+      formControlName="taskDescription"
       matInput
       class="text-white font-medium"
     />
@@ -30,4 +26,4 @@
       Go Away
     </button>
   </div>
-</div>
+</form>

@@ -1,16 +1,12 @@
-<div class="flex flex-col gap-2">
+<form [formGroup]="form" class="flex flex-col gap-2">
   <mat-form-field appearance="fill">
     <mat-label class="text-white">Name of your todo</mat-label>
-    <input
-      [formControl]="form.controls.todoName"
-      matInput
-      class="text-white font-medium"
-    />
+    <input formControlName="todoName" matInput class="text-white font-medium" />
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label class="text-white">Add a description for your list</mat-label>
     <input
-      [formControl]="form.controls.todoDescription"
+      formControlName="todoDescription"
       matInput
       class="text-white font-medium"
     />
@@ -30,4 +26,4 @@
       Go Away
     </button>
   </div>
-</div>
+</form>

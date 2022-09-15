@@ -20,19 +20,6 @@ export class AddTaskComponent implements OnInit {
   @Output() newTask: EventEmitter<TaskModel> = new EventEmitter<TaskModel>();
   ngOnInit(): void {}
 
-  // onTaskAdded(newTaskInfo: NewTaskForm) {
-  //   const newTask: TaskModel = {
-  //     todoTaskId: 0,
-  //     taskName: newTaskInfo.taskName,
-  //     taskDesc: newTaskInfo.taskDescription,
-  //     taskComplete: false,
-  //     taskDeleted: false,
-  //     taskDeadline: null,
-  //     taskCompletionTime: null,
-  //     todoListId: 0,
-  //   };
-  // }
-
   openDialog(): void {
     const dialogRef = this.dialog.open(AddTaskDialogComponent, {
       minWidth: '350px',
@@ -40,8 +27,6 @@ export class AddTaskComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: NewTaskForm | undefined) => {
       if (result === undefined) return;
-
-      console.log('This.todoId: ', this.todoId);
 
       const newTask: TaskModel = {
         todoTaskId: 0,
