@@ -1,13 +1,10 @@
 <div *ngIf="task" class="flex text-black">
-    <span>{{task.todoTaskId}}</span>  
-    <span>{{task.taskName}}</span>
-    <span>{{task.taskDesc}}</span>
-    <span>{{task.todoListId}}</span>
     <mat-checkbox
         [checked]="task.taskComplete"
-        (change)="onCheckedChange()"
+        (change)="onCheckedChange($event)"
+        (click)="$event.stopPropagation()"
         class="example-margin"
-    >
-        Completed!
-    </mat-checkbox>
+    ></mat-checkbox>
+    <span>{{task.todoListId}}</span>
+    <span>{{task.taskName}}</span>
 </div>

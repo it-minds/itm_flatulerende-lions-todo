@@ -3,6 +3,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { TaskModel } from 'src/Models/TodoModel';
 import { TodoService } from '../todo.service';
 
+
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -19,7 +20,8 @@ export class TaskComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onCheckedChange() {
+  onCheckedChange(e: any) {
+    
     if (this.task === undefined) {
       return;
     }

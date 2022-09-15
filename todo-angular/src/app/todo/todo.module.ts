@@ -21,6 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddNewFormComponent } from './add-new/add-new-form/add-new-form.component';
 import { AddNewDialogComponent } from './add-new/add-new-dialog/add-new-dialog.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { AddNewDialogComponent } from './add-new/add-new-dialog/add-new-dialog.c
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatExpansionModule
   ],
   providers: [
     {

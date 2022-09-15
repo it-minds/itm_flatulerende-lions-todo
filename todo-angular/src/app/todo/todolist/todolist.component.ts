@@ -13,6 +13,8 @@ export class TodolistComponent implements OnInit {
 
   todoListTasks: TaskModel[] = [];
 
+  panelOpenState = false;   // Panel state (From Angular Materials)
+
   constructor(private readonly todoService: TodoService, private readonly route: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -30,6 +32,13 @@ export class TodolistComponent implements OnInit {
 
   onCheckboxChanged(task: TaskModel) {
     task.taskComplete = !task.taskComplete;
-    this.todoService.updateTask(task.todoTaskId, task).subscribe();
+    this.todoService.updateTask(task.todoTaskId, task).subscribe({
+      next: () => {
+        this.todoListTasks = [
+          ...this.todoListTasks.filter((t) => t.todoTaskId !== task.todoTaskId),
+          task
+        ]
+      }
+    });
   }
 }
