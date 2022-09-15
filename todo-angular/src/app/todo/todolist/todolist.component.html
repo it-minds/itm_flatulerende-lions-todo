@@ -4,9 +4,12 @@
     (newTask)="onNewTaskAdded($event)"
   ></add-task>
 
-  <mat-list>
+  <!-- Dette kan vel godt slettes? -->
+
+  <!-- <mat-list>
     <mat-list-item> </mat-list-item>
-  </mat-list>
+  </mat-list> -->
+  <!-- -------------- -->
 
   <div>
     <mat-accordion>
@@ -18,9 +21,7 @@
               (checkedChangedEvent)="onCheckboxChanged($event)"
             ></app-task>
           </mat-panel-title>
-          <mat-panel-description>
-            {{ task.taskDesc }}
-          </mat-panel-description>
+          <mat-panel-description> {{ task.taskDesc }} </mat-panel-description>
         </mat-expansion-panel-header>
         <div *ngFor="let subtask of task.subTasks">
           <span>{{ subtask.subName }}</span>

@@ -3,5 +3,6 @@
     fontIcon="edit"
     class="hover:scale-110 cursor-pointer text-white outline-1 opacity-60 hover:text-[#69f0ae] hover:opacity-100"
     (click)="openDialog()"
+    (click)="$event.stopPropagation()"
   ></mat-icon>
 </div>
