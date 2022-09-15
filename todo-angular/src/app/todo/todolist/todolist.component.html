@@ -21,7 +21,10 @@
                 {{task.taskDesc}}
             </mat-panel-description>
         </mat-expansion-panel-header>
-        <p>This is the primary content of the panel.</p>
+        <div *ngFor="let subtask of task.subTasks">
+          <span>{{subtask.subName}}</span>
+          <span>{{subtask.subDesc}}</span>
+        </div>
     </mat-expansion-panel>
   </mat-accordion>
 </div>

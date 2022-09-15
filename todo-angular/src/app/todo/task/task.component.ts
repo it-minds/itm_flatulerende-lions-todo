@@ -20,7 +20,7 @@ export class TaskComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onCheckedChange(e: any) {
+  onCheckedChange() {
     
     if (this.task === undefined) {
       return;
