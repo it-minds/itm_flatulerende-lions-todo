@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center pt-[8vh] gap-5 w-[90vw] md:w-[45vw]">
+<div class="flex flex-col items-center pt-[8vh] gap-5 w-[90vw] md:w-[75vw]">
   <add-task
     [todoId]="this.todoListId"
     (newTask)="onNewTaskAdded($event)"
@@ -11,23 +11,38 @@
   </mat-list> -->
   <!-- -------------- -->
 
-  <div>
-    <mat-accordion>
-      <mat-expansion-panel *ngFor="let task of todoListTasks">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <app-task
-              [task]="task"
-              (checkedChangedEvent)="onCheckboxChanged($event)"
-            ></app-task>
-          </mat-panel-title>
-          <mat-panel-description> {{ task.taskDesc }} </mat-panel-description>
-        </mat-expansion-panel-header>
+  <mat-accordion class="flex flex-col content-between w-full m-0">
+    <mat-expansion-panel
+      [disabled]="noSubTasks"
+      *ngFor="let task of todoListTasks"
+      class="p-0 flex flex-col content-between"
+    >
+      <mat-expansion-panel-header class="flex justify-between px-2 md:px-4">
+        <mat-panel-title class="flex text-sm justify-end">
+          <app-task
+            [task]="task"
+            (checkedChangedEvent)="onCheckboxChanged($event)"
+          ></app-task>
+        </mat-panel-title>
+        <mat-panel-description
+          class="text-sm text-white text-opacity-100"
+          *ngIf="this.getScreenWidth > mdScreenSize"
+        >
+          {{ task.taskDesc }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div *ngIf="task.subTasks && task.subTasks.length > 0">
         <div *ngFor="let subtask of task.subTasks">
           <span>{{ subtask.subName }}</span>
           <span>{{ subtask.subDesc }}</span>
         </div>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </div>
+      </div>
+      <div
+        *ngIf="!task.subTasks || task.subTasks.length < 0"
+        class="flex justify-center text-xl"
+      >
+        No Subtasks
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>

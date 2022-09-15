@@ -1,4 +1,7 @@
-<div *ngIf="task" class="flex text-black">
+<div
+  *ngIf="task"
+  class="flex text-white gap-2 md:gap-4 items-center justify-center"
+>
   <mat-checkbox
     [checked]="task.taskComplete"
     (change)="onCheckedChange()"
@@ -7,6 +10,6 @@
   ></mat-checkbox>
   <edit-task></edit-task>
 
-  <span>{{ task.todoListId }}</span>
-  <span>{{ task.taskName }}</span>
+  <!-- <span>{{ task.todoListId }}</span> -->
+  <span class="mt-1">{{ task.taskName }}</span>
 </div>
