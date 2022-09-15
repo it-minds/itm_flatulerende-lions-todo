@@ -17,8 +17,6 @@ export class TodolistComponent implements OnInit {
 
   ngOnInit(): void {
     const todoListId = this.route.snapshot.paramMap.get(TODO_LIST_ID); // Læser parameteren "TODO_LIST_ID" fra URL'en (sat i todo-routing module)
-
-    console.log(todoListId);
     this.getSpecificTodos(todoListId);
   }
 
@@ -26,14 +24,11 @@ export class TodolistComponent implements OnInit {
     this.todoService.getSpecificTodo(id).subscribe({
       next: (tasks) => {
         this.todoListTasks = tasks;
-        console.log(this.todoListTasks);
       }
     });
-    console.log(`Fetched data for specific todolist ${id}`);
   }
 
   onCheckboxChanged(task: TaskModel) {
-    console.log("parent reacts to checkbox check!");
     this.todoService.updateTask(task.todoTaskId, task).subscribe();
   }
 }

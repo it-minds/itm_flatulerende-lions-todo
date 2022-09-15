@@ -35,11 +35,6 @@ export class TaskComponent implements OnInit {
     }
 
     this.task.taskComplete = isChecked;
-    
-    console.log(`Calls onCheckedChange with id: ${this.task.todoTaskId} and ${this.task.taskComplete}!!`);
-    
-    console.log(this.task.todoTaskId, this.task);
-    
     this.checkedChangedEvent.emit(this.task);
   }
 

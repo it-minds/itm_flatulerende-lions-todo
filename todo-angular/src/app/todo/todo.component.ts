@@ -24,7 +24,5 @@ export class TodoComponent implements OnInit {
         this.todoList = todos;
       },
     });
-    console.log("Fetched data for all todolists");
-    
   }
 }
