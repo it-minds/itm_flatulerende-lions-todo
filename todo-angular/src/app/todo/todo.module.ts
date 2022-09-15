@@ -27,7 +27,7 @@ import { AddTaskDialogComponent } from './task/add-task/add-task-dialog/add-task
 import { AddTaskFormComponent } from './task/add-task/add-task-form/add-task-form.component';
 import { EditDialogComponent } from './task/edit-task/edit-dialog/edit-dialog.component';
 import { EditFormComponent } from './task/edit-task/edit-form/edit-form.component';
-
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     TodoComponent,
@@ -55,6 +55,7 @@ import { EditFormComponent } from './task/edit-task/edit-form/edit-form.componen
     MatInputModule,
     MatListModule,
     MatCheckboxModule,
+    MatIconModule,
   ],
   providers: [
     {

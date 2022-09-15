@@ -1,9 +1,13 @@
-<div *ngIf="task" class="flex text-black gap-3 justify-between">
+<div
+  *ngIf="task"
+  class="flex text-black gap-3 justify-between justify-self-end"
+>
   <span>{{ task.todoTaskId }}</span>
   <span>{{ task.taskName }}</span>
   <span>{{ task.taskDesc }}</span>
   <span>{{ task.todoListId }}</span>
-  <span class="justify-self-end">
+  <span class="flex gap-2 justify-self-end">
+    <edit-task></edit-task>
     <mat-checkbox
       [checked]="task.taskComplete"
       (change)="onCheckedChange($event.checked)"

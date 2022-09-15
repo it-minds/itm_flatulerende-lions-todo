@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NewTaskForm } from '../../add-task/add-task-form/add-task-form.component';
 
 @Component({
-  selector: 'app-edit-form',
+  selector: 'edit-form',
   templateUrl: './edit-form.component.html',
   styleUrls: ['./edit-form.component.scss'],
 })
