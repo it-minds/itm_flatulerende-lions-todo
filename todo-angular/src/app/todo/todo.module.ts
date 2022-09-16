@@ -26,6 +26,7 @@ import { EditFormComponent } from './task/edit-task/edit-form/edit-form.componen
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { EditSubtasksComponent } from './task/edit-task/edit-subtasks/edit-subtasks.component';
+import { AggregateViewComponent } from './aggregate-view/aggregate-view.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { EditSubtasksComponent } from './task/edit-task/edit-subtasks/edit-subta
     EditDialogComponent,
     EditFormComponent,
     EditSubtasksComponent,
+    AggregateViewComponent,
   ],
   imports: [
     CommonModule,
