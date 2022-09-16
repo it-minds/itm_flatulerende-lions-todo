@@ -34,8 +34,6 @@ export class EditSubtasksComponent implements OnInit {
       }
     });
 
-    console.log('subtask to update', subTaskToUpdate);
-
     this.subTaskUpdated.emit(subTaskToUpdate);
   }
 
@@ -51,11 +49,6 @@ export class EditSubtasksComponent implements OnInit {
       return;
     }
 
-    console.log(
-      'trying to add a subtask with this name',
-      this.newSubTaskName.value
-    );
-
     const newSubTask: SubTaskModel = {
       subTaskId: 0,
       subName: this.newSubTaskName.value,
@@ -67,21 +60,11 @@ export class EditSubtasksComponent implements OnInit {
     // this.subTasks.push(newSubTask);
     this.newSubTaskName.reset();
 
-    // this.todoService.addSubTask(newSubTask).subscribe({
-    //   next: (task) => {
-    //     console.log('new subtask added', task);
-
-    //     this.subTasks?.push(task);
-    //     this.subTasksUpdated.emit(this.subTasks);
-    //   },
-    // });
-
     this.subTaskAdded.emit(newSubTask);
     this.hasSubTasks = true;
   }
 
   ngOnInit(): void {
-    console.log('subtasks', this.subTasks);
     if (!this.subTasks) this.subTasks = [];
     if (this.subTasks && this.subTasks.length > 0) this.hasSubTasks = true;
   }

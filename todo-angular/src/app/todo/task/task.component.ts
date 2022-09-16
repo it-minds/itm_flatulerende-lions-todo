@@ -17,7 +17,6 @@ export class TaskComponent implements OnInit {
   constructor() {}
 
   onTaskUpdate(updatedTask: TaskModel) {
-    console.log('updatedTask in task.component', updatedTask);
 
     this.task = updatedTask;
     this.updatedTask.emit(updatedTask);

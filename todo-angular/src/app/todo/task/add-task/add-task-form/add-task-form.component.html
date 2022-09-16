@@ -5,11 +5,12 @@
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label class="text-white">Add a description to your task</mat-label>
-    <input
+    <textarea
+      rows="3"
       formControlName="taskDescription"
       matInput
       class="text-white font-medium"
-    />
+    ></textarea>
   </mat-form-field>
   <div class="flex justify-between gap-6">
     <button
@@ -19,7 +20,6 @@
       [mat-dialog-close]
       type="submit"
       [disabled]="!form.valid"
-
     >
       Ok
     </button>

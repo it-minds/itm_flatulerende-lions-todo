@@ -22,11 +22,13 @@ export class TodolistComponent implements OnInit {
     private readonly todoService: TodoService,
     private readonly route: ActivatedRoute
   ) {}
+  name?: string;
 
   ngOnInit(): void {
     this.todoListId = this.route.snapshot.paramMap.get(TODO_LIST_ID); // Læser parameteren "TODO_LIST_ID" fra URL'en (sat i todo-routing module)
     this.getScreenWidth = window.innerWidth;
     this.getSpecificTodos(this.todoListId);
+    this.getName();
   }
 
   onNewTaskAdded(newTask: TaskModel) {
@@ -43,6 +45,20 @@ export class TodolistComponent implements OnInit {
         this.todoListTasks = tasks;
       },
     });
+  }
+
+  getName() {
+    // this.todoService.getTodos().subscribe({
+    //   next: (todos) => {
+    //     console.log('TODOS', todos);
+    //     todos.forEach((todo) => {
+    //       if (todo.todoListId == Number(this.todoListId)) {
+    //         this.name = todo.todoListName;
+    //         console.log(this.name);
+    //       }
+    //     });
+    //   },
+    // });
   }
 
   @HostListener('window:resize', ['$event'])

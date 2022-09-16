@@ -41,7 +41,6 @@ export class TodoService {
 
   addSubTask(newSubTask: SubTaskModel): Observable<SubTaskModel> {
     const { subTaskId, ...rest } = newSubTask;
-    console.log('Adding subtask', rest);
 
     return this.http
       .post<SubTaskModel>(`${this.todosUrl}/subtasks`, rest)

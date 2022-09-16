@@ -32,10 +32,6 @@ export class EditFormComponent implements OnInit {
   onSubTaskUpdated(subTask: SubTaskModel) {
     if (this.task === undefined) return;
 
-    // this.task.subTasks = !this.task.subTasks ? [] : [...this.task.subTasks];
-
-    console.log('subTask in edit-form.component', subTask);
-
     this.todoService.updateSubTask(subTask.subTaskId, subTask).subscribe({
       next: () => {
         if (this.task?.subTasks === undefined) return;

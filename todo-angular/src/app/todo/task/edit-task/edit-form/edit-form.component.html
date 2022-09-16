@@ -5,15 +5,21 @@
 >
   <mat-form-field appearance="fill">
     <mat-label class="text-white">Name of your task</mat-label>
-    <input formControlName="taskName" matInput class="text-white font-medium" />
+    <input
+      formControlName="taskName"
+      matInput
+      class="text-white font-medium md:text-xl"
+    />
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label class="text-white">Add a description to your task</mat-label>
-    <input
+    <textarea
       formControlName="taskDescription"
       matInput
-      class="text-white font-medium"
-    />
+      rows="3"
+      resize="none"
+      class="text-white font-medium md:text-lg"
+    ></textarea>
   </mat-form-field>
   <div class="flex flex-col gap-9">
     <div class="flex flex-col h-fit">
