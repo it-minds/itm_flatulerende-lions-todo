@@ -27,6 +27,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { EditSubtasksComponent } from './task/edit-task/edit-subtasks/edit-subtasks.component';
 import { AggregateViewComponent } from './aggregate-view/aggregate-view.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
 
 @NgModule({
   declarations: [
@@ -59,6 +61,7 @@ import { AggregateViewComponent } from './aggregate-view/aggregate-view.componen
     MatCheckboxModule,
     MatIconModule,
     MatExpansionModule,
+    MatToolbarModule
   ],
   providers: [
     {
