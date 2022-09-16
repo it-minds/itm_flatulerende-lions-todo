@@ -1,12 +1,12 @@
-<p>aggregate-view works!</p>
+<mat-label>Search for Todo Lists</mat-label>
+<input matInput type="string" [(ngModel)]="searchBarValue" (ngModelChange)="onSearchInputChange($event)" placeholder="Ex. Pizza" >
 
-<form class="example-form text-black bg-gray-600">
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Search for Todo Lists</mat-label>
-      <input matInput placeholder="Ex. Pizza" value={{searchBarValue}}>
-    </mat-form-field>
-  </form>
+<div class="text-black">
+{{searchBarValue}} and some more
+</div>
 
-  <div class="text-black">
-    {{searchBarValue}} and some more
-  </div>
+<div *ngFor="let task of aggregateTasks" class="bg-gray-500">
+    <app-task [task]="task"
+    (checkedChangedEvent)="onCheckboxChanged($event)">
+</app-task>
+</div>

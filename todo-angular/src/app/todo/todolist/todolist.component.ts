@@ -46,6 +46,7 @@ export class TodolistComponent implements OnInit {
   onWindowResize() {
     this.getScreenWidth = window.innerWidth;
   }
+  
   onCheckboxChanged(task: TaskModel) {
     task.taskComplete = !task.taskComplete;
     this.todoService.updateTask(task.todoTaskId, task).subscribe({
