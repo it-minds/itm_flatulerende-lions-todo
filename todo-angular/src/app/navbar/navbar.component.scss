@@ -1,6 +1,12 @@
-  .mat-button{
-     color: white;
-  }
-  .spacer{
-    flex: 1 1 auto;
-  }
+.mat-button {
+  color: white;
+}
+.spacer {
+  flex: 1 1 auto;
+}
+
+:host {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+}
