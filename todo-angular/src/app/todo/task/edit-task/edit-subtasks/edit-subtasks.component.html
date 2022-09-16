@@ -1,4 +1,4 @@
-<h3 class="text-xl md:text-2xl mb-0">Subtasks</h3>
+<h3 *ngIf="this.hasSubTasks" class="text-xl md:text-2xl mb-0">Subtasks</h3>
 <div
   *ngIf="this.hasSubTasks"
   class="flex flex-col gap-1 md:gap-2 items-center justify-center md:border border-t-2 border-b-2 border-opacity-70 border-gray-900 md:rounded-lg py-2 m-0 md:p-5 h-fit md:min-h-[80px]"
@@ -8,7 +8,12 @@
     *ngFor="let subtask of this.subTasks"
   >
     <span class="text-left">{{ subtask.subName }}</span>
-    <mat-checkbox color="accent" class="example-margin"></mat-checkbox>
+    <mat-checkbox
+      color="accent"
+      class="example-margin"
+      [checked]="subtask.subComplete"
+      (change)="onSubTaskCompleted(subtask.subTaskId)"
+    ></mat-checkbox>
   </div>
 </div>
 <div class="flex justify-center w-full mt-2">

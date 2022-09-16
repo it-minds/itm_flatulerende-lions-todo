@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { provideProtractorTestingSupport } from '@angular/platform-browser';
+import { TodoService } from 'src/app/todo/todo.service';
 import { SubTaskModel } from 'src/Models/TodoModel';
 
 @Component({
@@ -8,42 +10,52 @@ import { SubTaskModel } from 'src/Models/TodoModel';
   styleUrls: ['./edit-subtasks.component.scss'],
 })
 export class EditSubtasksComponent implements OnInit {
-  constructor() {}
+  constructor(private todoService: TodoService) {}
   hasSubTasks = false;
   @Input() subTasks?: SubTaskModel[];
   @Input() taskId?: number = 0;
-  @Output() subTasksUpdated: EventEmitter<SubTaskModel[]> = new EventEmitter<
-    SubTaskModel[]
-  >();
+  @Output() subTaskUpdated = new EventEmitter<SubTaskModel>();
+  @Output() subTaskAdded = new EventEmitter<SubTaskModel>();
 
-  newSubTaskName = new FormControl('', {
+  newSubTaskName = new FormControl<string>('', {
     nonNullable: true,
     validators: [Validators.minLength(1)],
   });
 
-  onSubTaskCompleted(subTask: SubTaskModel) {
-    console.log('subtask completed', subTask);
+  onSubTaskCompleted(id: number) {
+    if (this.subTasks === undefined) return;
 
-    const subTaskIndex = this.subTasks?.findIndex(
-      (subTask) => subTask.subTaskId === subTask.subTaskId
-    );
-    if (subTaskIndex !== undefined) {
-      this.subTasks![subTaskIndex].subComplete = !subTask.subComplete;
-      this.subTasksUpdated.emit(this.subTasks!);
-    }
+    let subTaskToUpdate;
+
+    this.subTasks.forEach((subTask) => {
+      if (subTask.subTaskId === id) {
+        subTask.subComplete = !subTask.subComplete;
+        subTaskToUpdate = subTask;
+      }
+    });
+
+    console.log('subtask to update', subTaskToUpdate);
+
+    this.subTaskUpdated.emit(subTaskToUpdate);
   }
 
   onSubTaskDeleted(subTask: SubTaskModel) {
     this.subTasks = this.subTasks?.filter(
       (s) => s.subTaskId !== subTask.subTaskId
     );
-    this.subTasksUpdated.emit(this.subTasks || []);
+    this.subTaskUpdated.emit(subTask);
   }
 
   onSubTaskAdded() {
     if (this.subTasks === undefined) {
       return;
     }
+
+    console.log(
+      'trying to add a subtask with this name',
+      this.newSubTaskName.value
+    );
+
     const newSubTask: SubTaskModel = {
       subTaskId: 0,
       subName: this.newSubTaskName.value,
@@ -52,9 +64,19 @@ export class EditSubtasksComponent implements OnInit {
       todoTaskId: this.taskId!,
     };
 
-    this.subTasks.push(newSubTask);
+    // this.subTasks.push(newSubTask);
     this.newSubTaskName.reset();
-    this.subTasksUpdated.emit(this.subTasks);
+
+    // this.todoService.addSubTask(newSubTask).subscribe({
+    //   next: (task) => {
+    //     console.log('new subtask added', task);
+
+    //     this.subTasks?.push(task);
+    //     this.subTasksUpdated.emit(this.subTasks);
+    //   },
+    // });
+
+    this.subTaskAdded.emit(newSubTask);
     this.hasSubTasks = true;
   }
 

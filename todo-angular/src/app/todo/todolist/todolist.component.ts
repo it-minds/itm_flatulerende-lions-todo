@@ -15,7 +15,7 @@ export class TodolistComponent implements OnInit {
   todoListId: string | null = '';
   getScreenWidth!: number;
   mdScreenSize: number = 768;
-  noSubTasks: boolean = false;
+  noSubTasks: boolean = this.todoListTasks.length > 1;
   panelOpenState = false; // Panel state (From Angular Materials)
 
   constructor(
@@ -27,11 +27,14 @@ export class TodolistComponent implements OnInit {
     this.todoListId = this.route.snapshot.paramMap.get(TODO_LIST_ID); // Læser parameteren "TODO_LIST_ID" fra URL'en (sat i todo-routing module)
     this.getScreenWidth = window.innerWidth;
     this.getSpecificTodos(this.todoListId);
-    if (this.todoListTasks.length === 0) this.noSubTasks = true;
   }
 
   onNewTaskAdded(newTask: TaskModel) {
     this.todoListTasks.push(newTask);
+  }
+
+  onTaskUpdated(task: TaskModel) {
+    this.todoService.updateTask(task.todoTaskId, task).subscribe({});
   }
 
   getSpecificTodos(id: string | null) {
@@ -50,10 +53,11 @@ export class TodolistComponent implements OnInit {
     task.taskComplete = !task.taskComplete;
     this.todoService.updateTask(task.todoTaskId, task).subscribe({
       next: () => {
-        this.todoListTasks = [
-          ...this.todoListTasks.filter((t) => t.todoTaskId !== task.todoTaskId),
-          task,
-        ];
+        this.todoListTasks.forEach((t) => {
+          if (t.todoTaskId === task.todoTaskId) {
+            t.taskComplete = task.taskComplete;
+          }
+        });
       },
     });
   }

@@ -44,9 +44,12 @@ export class EditTaskComponent implements OnInit {
       this.todoService
         .updateTask(this.taskItem!.todoTaskId, updatedTask)
         .subscribe({
-          next: () => {},
+          next: () => {
+            console.log('updatedTask in edit-task.component', updatedTask);
+            this.updatedTask.emit(updatedTask);
+          },
         });
-      this.updatedTask.emit(updatedTask);
+      console.log('updatedTask', updatedTask);
     });
   }
 }

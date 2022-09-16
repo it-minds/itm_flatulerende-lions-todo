@@ -21,7 +21,7 @@
     </mat-expansion-panel> -->
 
     <mat-expansion-panel
-      [disabled]="noSubTasks"
+      [disabled]="!task.subTasks || task.subTasks.length < 1"
       *ngFor="let task of todoListTasks"
       class="p-0 flex flex-col content-between"
     >
@@ -30,6 +30,7 @@
       >
         <mat-panel-title class="flex text-sm md:text-lg justify-end">
           <app-task
+            (updatedTask)="onTaskUpdated($event)"
             [task]="task"
             (checkedChangedEvent)="onCheckboxChanged($event)"
           ></app-task>
@@ -41,12 +42,37 @@
           {{ task.taskDesc }}
         </mat-panel-description> -->
       </mat-expansion-panel-header>
-      <div class="pt-5" *ngIf="task.subTasks && task.subTasks.length > 0">
-        <div *ngFor="let subtask of task.subTasks">
-          <span>{{ subtask.subName }}</span>
-          <span>{{ subtask.subDesc }}</span>
+      <div
+        class="flex flex-col items-center pt-5 gap-1"
+        *ngIf="task.subTasks && task.subTasks.length > 0"
+      >
+        <!-- <div
+          *ngFor="let subtask of task.subTasks"
+          class="flex flex-col items-center md:w-[50%] gap-1"
+        >
+          <!-- <span class="flex w-[50%] justify-center md:text-lg">
+            {{ subtask.subName }}</span
+          >
+          <mat-checkbox
+            color="accent"
+            class="example-margin"
+            [checked]="subtask.subComplete"
+          ></mat-checkbox> -->
+        -->
+        <div
+          class="md:text-lg flex h-6 w-full py-3 px-3 justify-between gap-5 rounded-md items-center bg-gray-700 text-white border border-black"
+          *ngFor="let subtask of task.subTasks"
+        >
+          <span class="text-left">{{ subtask.subName }}</span>
+          <mat-checkbox
+            color="accent"
+            class="example-margin"
+            [checked]="subtask.subComplete"
+          ></mat-checkbox>
+          <!-- (change)="onSubTaskCompleted(subtask.subTaskId)" -->
         </div>
       </div>
+      <!-- </div> -->
       <div
         *ngIf="!task.subTasks || task.subTasks.length < 0"
         class="flex justify-center text-2xl pt-5"

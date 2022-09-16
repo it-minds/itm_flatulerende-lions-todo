@@ -12,19 +12,21 @@ export class TaskComponent implements OnInit {
   @Input() task?: TaskModel;
 
   @Output() checkedChangedEvent = new EventEmitter<TaskModel>();
+  @Output() updatedTask = new EventEmitter<TaskModel>();
 
   constructor() {}
 
   onTaskUpdate(updatedTask: TaskModel) {
+    console.log('updatedTask in task.component', updatedTask);
+
     this.task = updatedTask;
+    this.updatedTask.emit(updatedTask);
   }
 
   ngOnInit(): void {}
 
   onCheckedChange() {
-    if (this.task === undefined) {
-      return;
-    }
+    if (this.task === undefined) return;
 
     // this.task.taskComplete = isChecked;
     this.checkedChangedEvent.emit(this.task);

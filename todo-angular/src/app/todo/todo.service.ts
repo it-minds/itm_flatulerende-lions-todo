@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TodoComponent } from './todo.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { TaskModel, TodoModel } from 'src/Models/TodoModel';
+import { SubTaskModel, TaskModel, TodoModel } from 'src/Models/TodoModel';
 import { catchError, Observable, of } from 'rxjs';
 
 @Injectable({
@@ -39,8 +39,21 @@ export class TodoService {
       .pipe(catchError(this.handleError<TaskModel>('addTask')));
   }
 
+  addSubTask(newSubTask: SubTaskModel): Observable<SubTaskModel> {
+    const { subTaskId, ...rest } = newSubTask;
+    console.log('Adding subtask', rest);
+
+    return this.http
+      .post<SubTaskModel>(`${this.todosUrl}/subtasks`, rest)
+      .pipe(catchError(this.handleError<SubTaskModel>('addSubTask')));
+  }
+
   updateTask(taskId: number | string, body: TaskModel) {
     return this.http.put<any>(`${this.todosUrl}/tasks/${taskId}`, body);
+  }
+
+  updateSubTask(subTaskId: number | string, body: SubTaskModel) {
+    return this.http.put<any>(`${this.todosUrl}/subtasks/${subTaskId}`, body);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
