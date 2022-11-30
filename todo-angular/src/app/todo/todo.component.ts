@@ -8,14 +8,16 @@ import { TodoService } from './todo.service';
   styleUrls: ['./todo.component.scss'],
 })
 export class TodoComponent implements OnInit {
-
   todoList: TodoModel[] = [];
 
-  constructor(private readonly todoService: TodoService) {
-  }
+  constructor(private readonly todoService: TodoService) {}
 
   ngOnInit(): void {
     this.getTodos();
+  }
+
+  onNewTodoReceived(newTodo: TodoModel) {
+    this.todoList.push(newTodo);
   }
 
   getTodos() {

@@ -1,0 +1,6 @@
+<div class="w-full md:p-1">
+  <h1 mat-dialog-title>{{ title }}</h1>
+  <div mat-dialog-content>
+    <app-add-task-form (addTask)="onNewTask($event)"></app-add-task-form>
+  </div>
+</div>

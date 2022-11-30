@@ -1,0 +1,11 @@
+:host {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (min-width: 480px) {
+  :host {
+    justify-content: start;
+  }
+}

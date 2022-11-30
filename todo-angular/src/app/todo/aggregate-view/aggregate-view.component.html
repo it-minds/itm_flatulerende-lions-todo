@@ -1,0 +1,17 @@
+<div class="grid place-items-center w-[700px] mt-24">
+  <mat-form-field class="bg-gray-500 mb-4 w-[30%]" appearance="fill">
+    <mat-label>Search for Todo Lists</mat-label>
+    <input
+      matInput
+      type="string"
+      [(ngModel)]="searchBarValue"
+      (ngModelChange)="onSearchInputChange($event)"
+      placeholder="Ex. yolo"
+    />
+  </mat-form-field>
+</div>
+
+<div *ngFor="let task of aggregateTasks" class="bg-gray-500">
+  <app-task [task]="task" (checkedChangedEvent)="onCheckboxChanged($event)">
+  </app-task>
+</div>

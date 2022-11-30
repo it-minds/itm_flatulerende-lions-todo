@@ -1,0 +1,55 @@
+<form
+  [formGroup]="form"
+  (submit)="onSubmit()"
+  class="flex flex-col gap-2 h-fit w-full md:w-[50vw] lg:w-[650px] lg:h-[550px]"
+>
+  <mat-form-field appearance="fill">
+    <mat-label class="text-white">Name of your task</mat-label>
+    <input
+      formControlName="taskName"
+      matInput
+      class="text-white font-medium md:text-xl"
+    />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label class="text-white">Add a description to your task</mat-label>
+    <textarea
+      formControlName="taskDescription"
+      matInput
+      rows="3"
+      resize="none"
+      class="text-white font-medium md:text-lg"
+    ></textarea>
+  </mat-form-field>
+  <div class="flex flex-col gap-9">
+    <div class="flex flex-col h-fit">
+      <edit-subtasks
+        (subTaskUpdated)="onSubTaskUpdated($event)"
+        [subTasks]="this.task?.subTasks"
+        [taskId]="this.task?.todoTaskId"
+        (subTaskAdded)="onSubTaskAdded($event)"
+      ></edit-subtasks>
+    </div>
+    <div class="flex justify-end gap-6 h-fit max-h-[180px]">
+      <button
+        color="primary"
+        mat-raised-button
+        cdkFocusInitial
+        [mat-dialog-close]
+        type="submit"
+        [disabled]="!form.valid"
+      >
+        Ok
+      </button>
+
+      <!-- <button
+        color="primary"
+        class="bg-red-600"
+        mat-raised-button
+        [mat-dialog-close]
+      >
+        Go Away
+      </button> -->
+    </div>
+  </div>
+</form>

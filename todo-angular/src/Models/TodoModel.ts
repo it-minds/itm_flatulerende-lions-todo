@@ -1,7 +1,7 @@
 export interface SubTaskModel {
   subTaskId: number;
   subName: string;
-  subDesc: string;
+  subDesc?: string;
   subComplete: boolean;
   subDeleted: boolean;
   subDeadline?: string | null;
@@ -15,10 +15,10 @@ export interface TaskModel {
   taskDesc: string;
   taskComplete: boolean;
   taskDeleted: boolean;
-  taskDeadline: Date | string | null;
-  taskCompletionTime: Date | string | null;
+  taskDeadline?: Date | string | null;
+  taskCompletionTime?: Date | string | null;
   todoListId: number;
-  subTasks: SubTaskModel[] | null;
+  subTasks?: SubTaskModel[];
 }
 
 export interface TodoModel {

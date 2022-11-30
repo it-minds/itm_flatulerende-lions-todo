@@ -1,10 +1,32 @@
-<div *ngIf="task" class="flex text-black">
+<div
+  *ngIf="task"
+  class="flex text-white gap-6 md:gap-4 items-center justify-start w-full"
+>
+  <div
+    class="flex md:w-fit md:max-w-[12%] justify-center items-center gap-5 justify-self-start px-2 mt-2"
+  >
     <mat-checkbox
-        [checked]="task.taskComplete"
-        (change)="onCheckedChange()"
-        (click)="$event.stopPropagation()"
-        class="example-margin"
+      color="accent"
+      [checked]="task.taskComplete"
+      (change)="onCheckedChange()"
+      (click)="$event.stopPropagation()"
+      class="example-margin justify-self-start"
     ></mat-checkbox>
-    <span>{{task.todoListId}}</span>
-    <span>{{task.taskName}}</span>
+    <edit-task
+      [taskItem]="this.task"
+      (updatedTask)="onTaskUpdate($event)"
+    ></edit-task>
+  </div>
+
+  <!-- <span>{{ task.todoListId }}</span> -->
+  <span class="flex grow gap-2 mt-2 w-[88%]">
+    <span
+      class="flex items-center justify-self-center justify-center md:justify-start w-full md:w-[50%] flex-nowrap"
+      >{{ task.taskName }}</span
+    >
+    <span
+      class="ml-3 items-center justify-self-center justify-start min-w-[25%] text-base font-light hidden md:flex flex-wrap max-w-[45%]"
+      >{{ task.taskDesc.substring(0, 90) }}</span
+    >
+  </span>
 </div>

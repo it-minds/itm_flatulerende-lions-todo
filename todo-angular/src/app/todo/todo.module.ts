@@ -6,22 +6,29 @@ import { TodoComponent } from './todo.component';
 import { TodolistComponent } from './todolist/todolist.component';
 import { MatButtonModule } from '@angular/material/button';
 import { TaskComponent } from './task/task.component';
-import {MatListModule} from '@angular/material/list';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatListModule } from '@angular/material/list';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { AddNewComponent } from './add-new/add-new.component';
-import {
-  MatDialogConfig,
-  MatDialogModule,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddNewFormComponent } from './add-new/add-new-form/add-new-form.component';
 import { AddNewDialogComponent } from './add-new/add-new-dialog/add-new-dialog.component';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { AddTaskComponent } from './task/add-task/add-task.component';
+import { EditTaskComponent } from './task/edit-task/edit-task.component';
+import { AddTaskDialogComponent } from './task/add-task/add-task-dialog/add-task-dialog.component';
+import { AddTaskFormComponent } from './task/add-task/add-task-form/add-task-form.component';
+import { EditDialogComponent } from './task/edit-task/edit-dialog/edit-dialog.component';
+import { EditFormComponent } from './task/edit-task/edit-form/edit-form.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { EditSubtasksComponent } from './task/edit-task/edit-subtasks/edit-subtasks.component';
+import { AggregateViewComponent } from './aggregate-view/aggregate-view.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +37,15 @@ import {MatExpansionModule} from '@angular/material/expansion';
     AddNewComponent,
     AddNewFormComponent,
     AddNewDialogComponent,
-    TaskComponent
+    TaskComponent,
+    AddTaskComponent,
+    EditTaskComponent,
+    AddTaskDialogComponent,
+    AddTaskFormComponent,
+    EditDialogComponent,
+    EditFormComponent,
+    EditSubtasksComponent,
+    AggregateViewComponent,
   ],
   imports: [
     CommonModule,
@@ -44,7 +59,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatInputModule,
     MatListModule,
     MatCheckboxModule,
-    MatExpansionModule
+    MatIconModule,
+    MatExpansionModule,
+    MatToolbarModule
   ],
   providers: [
     {
